@@ -39,7 +39,6 @@ var AppRouter = Backbone.Router.extend({
     takePic : function(user) {  
     	if(!user){ user = 'male'}
         console.log('takePic 性别为：' +user);
-    	showFrame('takebox');
     	showSubFrame('takebox','take');
     },  
     retakePic : function(id) {  
@@ -50,6 +49,9 @@ var AppRouter = Backbone.Router.extend({
         console.log('渲染步骤为: ' + step);
     	showFrame('yourmount');
         if(step == 'take'){
+        	router.navigate('yourmount/' + step , {  
+	    		trigger: true  
+			});
         	drowStar(step);
         }
     }, 
@@ -69,6 +71,7 @@ function showFrame(framename) {
 
 function showSubFrame(framename,subframename) {
 	if(!framename && !subframename) {return false;};
+	showFrame(framename);
 	$('.' + framename + ' .subframe').hide();
 	$('.' + framename + ' .' + subframename).show();
 }
@@ -83,9 +86,106 @@ function gotPic(event) {
 function drowStar(event) {
 	var stage = new Kinetic.Stage({
 		container: 'container',
-		width: 328,
-		height: 320
+		width: 300,
+		height: 280
 	});
+
+	var shapesLayer = new Kinetic.Layer();
+
+      var group = new Kinetic.Group({
+        x: 0,
+        y: 0,
+        rotationDeg: 20
+      });
+      var group2 = new Kinetic.Group({
+        x: 220,
+        y: 120,
+        rotationDeg: 20
+      });
+
+      var groundFloorX = [ 20, 23, 46, 97,110,147,153,171 ]
+      ,   groundFloorY = [123,132,125,117,100, 94, 88, 97 ]
+      ,   groundLines  = [ 
+                [ 20 ,123 , 23,132],
+                [ 20 ,123 , 23,132],
+                [ 20 ,123 , 46,125],
+                [ 20 ,123 , 97,117],
+                [ 20 ,123 ,110,132],
+                [ 20 ,123 , 23,132],
+                [ 20 ,123 , 23,132],
+                [ 20 ,123 , 23,132],
+                [ 20 ,123 , 23,132],
+                [ 20 ,123 , 23,132],
+                [ 20 ,123 , 23,132]
+      ]
+      ,   floatFloorX  = [ 30, 68,114,133,121,150]
+      ,   floatFloorY  = [ 45, 74, 35, 71, 54, 55];
+      if ( groundFloorX.length == groundFloorY.length){
+        for(var n = 0; n < groundFloorX.length; n++) {
+          // anonymous function to induce scope
+          (function() {
+            var i = n;
+            var box = new Kinetic.Circle({
+              x: groundFloorX[i],
+              y: groundFloorY[i],
+              radius: 2,
+              //name: colors[i],
+              fillRGB: {r:230,g:230,b:230},
+              shadowColorRGB: {r:255,g:255,b:255},
+              shadowBlur: 4,
+              //lineJoin:miter,
+              //stroke: 'black',
+              strokeWidth: 0
+            });
+            console.log(groundFloorX[i]);
+            group.add(box);
+          })();
+        }
+        for (var n = 0; n < groundLines.length; n++) {
+        	
+        };
+      }
+
+      shapesLayer.add(group);
+      shapesLayer.add(group2);
+      stage.add(shapesLayer);
+
+      var amplitude = 150;
+      var period = 2000;
+      // in ms
+      var centerY = stage.getWidth() / 2;
+
+      var pointsNew = {};
+
+      var lineLayer = new Kinetic.Layer();
+      var anim = new Kinetic.Animation(function(frame) {
+        var newYpoint= amplitude * Math.sin(frame.time * 2 * Math.PI / period) + centerY;
+        group.setY(newYpoint);
+        lineLayer.remove();
+        lineLayer = new Kinetic.Layer();
+        // simple line
+        var line = new Kinetic.Line({
+          x: 0,
+          y: 0,
+          points: [73, 70, 340, newYpoint],
+          stroke: 'white',
+          opacity:0.4
+        });
+
+        lineLayer.add(line);
+        stage.add(lineLayer);
+        //console.log(newYpoint);
+
+      }, shapesLayer);
+
+      document.getElementById('start').addEventListener('click', function() {
+        anim.start();
+      }, false);
+      
+      document.getElementById('stop').addEventListener('click', function() {
+        anim.stop();
+      }, false);
+
 }
 
 
