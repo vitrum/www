@@ -9,45 +9,59 @@
 	</head>
 <body>
 	<header>
+		<a class="punch link_home" href="#/index">返回首页</a>
 		<h1 class="logo">LUXGEN 纳智捷</h1>
-		<a class="link_home" href="">返回首页</a>
+		
 	</header>
-	<div class="homepage">
+	<div class="frame homepage">
 		<div class="content">
-			<div class="laingpage"></div>
+			<div class="laingpage">laingpage</div>
 			<ul>
-				<li><a class="selectgender"></a></li>
-				<li><a class="awardlist"></a></li>
-				<li><a class="aboutgame"></a></li>
+				<li><a class="punch selectgender" href="#/gender">selectgender</a></li>
+				<li><a class="punch awardlist" href="#/awardlist">awardlist</a></li>
+				<li><a class="punch aboutgame" href="#/aboutgame">aboutgame</a></li>
 			</ul>
 		</div>
 	</div>
-	<div class="selectgender">
+	<div class="frame selectgender">
 		<div class="content">
-			<div class="gender"></div>
+			<div class="gender">您的性别</div>
 			<ul>
-				<li><a class="select"></a></li>
-				<li><a class="awardlist"></a></li>
+				<li><a class="punch male"  href="#/gender/male">male</a></li>
+				<li><a class="punch female"  href="#/gender/female">female</a></li>
 			</ul>
 		</div>
 	</div>
-	<div class="takebox">
+	<div class="frame takebox">
 		<div class="content">
-			<section class="take">
+			<section class="subframe take">
+				<form action="upload.php?action=upfile" method="post" name="UForm" enctype="multipart/form-data">
+					<input type="file" accept="image/*" capture="camera" id="takePictureField" name="photo">
+			        
+					<div class="imagebox">
+						<img id="yourimage" />
+						<div class="gridbox"></div>
+					</div>
+					<button type="submit">上传</button> 
+				</form>
 			</section>
-			<section class="resize">
+			<section class="subframe resize">
+				resize
 			</section>
-			<section class="send">
+			<section class="subframe send">
+				send
 			</section>
 		</div>
 	</div>
-	<div class="yourmount">
+	<div class="frame yourmount">
 		<div class="content">
-			<section class="rendering">
+			<section class="subframe rendering">
+				rendering...
+				<div id="container"></div>
 			</section>
-			<section class="result">
-				<div class="digimount"></div>
-				<div class="realmount"></div>
+			<section class="subframe result">
+				<div class="digimount">digimount</div>
+				<div class="realmount">realmount</div>
 				<nav class="mountswich">
 					<a class="pre">pre</a>
 					<a class="nex">nex</a>
@@ -55,14 +69,23 @@
 			</section>
 		</div>
 	</div>
-	<div class="awardbox">
+	<div class="frame awardbox">
 		<div class="content">
-			<section class="infofrom">
+			<section class="subframe inputfrom">
+				inputfrom
 			</section>
-			<section class="subminsuccess">
+			<section class="subframe subminsuccess">
+				subminsuccess
 			</section>
-			<section class="share">
+			<section class="subframe share">
+				share
 			</section>
+		</div>
+	</div>
+	<div class="frame aboutgame">
+		<div class="content">
+			aboutgame
+
 		</div>
 	</div>
 	<nav class="navbox">
@@ -72,12 +95,16 @@
 		<div class="replay"></div>
 		<div class="submintinfo"></div>
 		<div class="aboutgame"></div>
-		<div class="inputinfo"></div>
+		<div class="inputlink"></div>
 	</nav>
-	<script type="text/javascript" charset="utf-8" src="js/lib/zepto.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="js/lib/underscore-min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="js/lib/backbone-min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="js/lib/hammer.min.js"></script>
+	<script type="text/javascript" src="js/lib/zepto.min.js"></script>
+	<script type="text/javascript" src="js/lib/underscore-min.js"></script>
+	<script type="text/javascript" src="js/lib/backbone-min.js"></script>
+	<script type="text/javascript" src="js/lib/hammer.min.js"></script>
+	<script type="text/javascript" src="js/lib/kinetic.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/common.js"></script>
+	<script>
+
+	</script>
 </body>
 </html>
