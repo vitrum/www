@@ -52,7 +52,7 @@ var AppRouter = Backbone.Router.extend({
         	router.navigate('yourmount/' + step , {  
 	    		trigger: true  
 			});
-        	drowStar(step);
+        	drowMout(1);
         }
     }, 
     renderError : function(error) {  
@@ -83,115 +83,108 @@ function gotPic(event) {
     }
 }
 
-function drowStar(event) {
-	var stage = new Kinetic.Stage({
+function drowMout(mountid) {
+  var scale = 2
+	, stage = new Kinetic.Stage({
 		container: 'container',
 		width: 300,
 		height: 280
 	});
 
-	var shapesLayer = new Kinetic.Layer();
 
-      var group = new Kinetic.Group({
-        x: 0,
-        y: 0,
-        rotationDeg: 20
-      });
-      var group2 = new Kinetic.Group({
-        x: 220,
-        y: 120,
-        rotationDeg: 20
-      });
-
-      var groundFloorX = [ 20, 23, 46, 97,110,147,153,171 ]
-      ,   groundFloorY = [123,132,125,117,100, 94, 88, 97 ]
-      ,   groundLines  = [ 
-                [ 20 ,123 , 23,132],
-                [ 20 ,123 , 23,132],
-                [ 20 ,123 , 46,125],
-                [ 20 ,123 , 97,117],
-                [ 20 ,123 ,110,132],
-                [ 20 ,123 ,147, 94],
-                [ 20 ,123 ,153, 88],
-                [ 20 ,123 ,171, 97]
-      ]
-      ,   floatFloorX  = [ 30, 68,114,133,121,150]
-      ,   floatFloorY  = [ 45, 74, 35, 71, 54, 55];
-      if ( groundFloorX.length == groundFloorY.length){
-        for(var n = 0; n < groundFloorX.length; n++) {
-          // anonymous function to induce scope
-          (function() {
-            var i = n;
-            var box = new Kinetic.Circle({
-              x: groundFloorX[i],
-              y: groundFloorY[i],
-              radius: 2,
-              //name: colors[i],
-              fillRGB: {r:230,g:230,b:230},
-              shadowColorRGB: {r:255,g:255,b:255},
-              shadowBlur: 4,
-              //lineJoin:miter,
-              //stroke: 'black',
-              strokeWidth: 0
-            });
-            console.log(groundFloorX[i]);
-            group.add(box);
-          })();
-        }
-        for (var n = 0; n < groundLines.length; n++) {
-        	(function() {
-            var i= n;
-            var lines = new Kinetic.Line({
-              x: 0,
-              y: 0,
-              points: groundLines[i],
-              stroke: 'white',
-              opacity:0.4
-            }); 
-            group.add(lines);
-          })();
-        };
+  var stage = new Kinetic.Stage({
+    container: 'container',
+    width: 300,
+    height: 280
+  });
+  var staticLayer = new Kinetic.Layer();
+  var staticGroup = new Kinetic.Group({
+    x: 0,
+    y: 0,
+    rotationDeg: 0
+  });
+  var animLayer = new Kinetic.Layer();
+  var animGroup = new Kinetic.Group({
+    x: 0,
+    y: 0,
+    rotationDeg: 0
+  });
+  /*drow*/
+  if(!mountid){ mountid = 1;};
+  for (var i=0; i<mounts.length; i++) {
+    if (mounts[i].mid == mountid ){
+      /*drow point*/
+      var pointArr = mounts[i].points;
+      for (var n=0; n<pointArr.length; n++) {
+        //console.log(pointArr[n].ox + ","+ pointArr[n].oy);
+        (function() {
+          var k = n;
+          var newPoint = new Kinetic.Circle({
+            x: pointArr[k].ox/scale,
+            y: pointArr[k].oy/scale,
+            radius: 2,
+            fillRGB: {r:230,g:230,b:230},
+            shadowColorRGB: {r:255,g:255,b:255},
+            shadowBlur: 4,
+            strokeWidth: 0
+          });
+          if(mounts[i].type=="on"){
+            staticGroup.add(newPoint);
+          }else{
+            animGroup.add(newPoint);
+          }
+        })();
       }
-
-      shapesLayer.add(group);
-      shapesLayer.add(group2);
-      stage.add(shapesLayer);
-
-      var amplitude = 150;
-      var period = 2000;
-      // in ms
-      var centerY = stage.getWidth() / 2;
-
-      var pointsNew = {};
-
-      var lineLayer = new Kinetic.Layer();
-      var anim = new Kinetic.Animation(function(frame) {
-        var newYpoint= amplitude * Math.sin(frame.time * 2 * Math.PI / period) + centerY;
-        group2.setY(newYpoint);
-        lineLayer.remove();
-        lineLayer = new Kinetic.Layer();
-        // simple line
+      /*drow line*/
+      var linesArr =  mounts[i].lines;
+      for (var n=0; n<linesArr.length; n++) {
+        var strPoint = linesArr[n].strpid-1
+        , endPoint = linesArr[n].endpid-1
+        , PointX1 = pointArr[strPoint].ox/scale
+        , PointY1 = pointArr[strPoint].oy/scale
+        , PointX2 = pointArr[endPoint].ox/scale
+        , PointY2 = pointArr[endPoint].oy/scale;
         var line = new Kinetic.Line({
           x: 0,
           y: 0,
-          points: [73, 70, 340, newYpoint],
+          points: [PointX1,PointY1,PointX2,PointY2],
           stroke: 'white',
           opacity:0.4
         });
+          if(linesArr[n].type=="on"){
+            staticGroup.add(line);
+          }else{
+            animGroup.add(line);
+          }
+      }
+    }
+    //console.log(mountid)
+  }
 
-        lineLayer.add(line);
-        stage.add(lineLayer);
-        //console.log(newYpoint);
+  /*drow animtion*/
+  var amplitude = 150;
+  var period = 2000;
+  var anim = new Kinetic.Animation(function(frame) {
+    /**/
+    animLayer.remove();
 
-      }, shapesLayer);
 
-      document.getElementById('start').addEventListener('click', function() {
-        anim.start();
-      }, false);
-      
-      document.getElementById('stop').addEventListener('click', function() {
-        anim.stop();
-      }, false);
+    stage.add(animLayer);
+  })
+  console.log("staticGroup:" + staticGroup+"\n");
+  staticLayer.add(staticGroup);
+  stage.add(staticLayer);
+  animLayer.add(animGroup);
+  stage.add(animLayer);
+  
+
+  document.getElementById('start').addEventListener('click', function() {
+    anim.start();
+  }, false);
+  
+  document.getElementById('stop').addEventListener('click', function() {
+    anim.stop();
+  }, false);
 
 }
 
@@ -199,11 +192,11 @@ function drowStar(event) {
 var router = new AppRouter();  
 Backbone.history.start(); 
 
+
+
+
 $(document).ready(function() {
-
-
-
-    console.log('onReady');
+  console.log('onReady');
 	$("#takePictureField").on("change",gotPic);
 	//$("#yourimage").load(getSwatches);
 	desiredWidth = window.innerWidth;
@@ -211,7 +204,6 @@ $(document).ready(function() {
     if(!("url" in window) && ("webkitURL" in window)) {
         window.URL = window.webkitURL;   
     }
-	
 });
 
 
