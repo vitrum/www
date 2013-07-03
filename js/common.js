@@ -111,12 +111,9 @@ function drowStar(event) {
                 [ 20 ,123 , 46,125],
                 [ 20 ,123 , 97,117],
                 [ 20 ,123 ,110,132],
-                [ 20 ,123 , 23,132],
-                [ 20 ,123 , 23,132],
-                [ 20 ,123 , 23,132],
-                [ 20 ,123 , 23,132],
-                [ 20 ,123 , 23,132],
-                [ 20 ,123 , 23,132]
+                [ 20 ,123 ,147, 94],
+                [ 20 ,123 ,153, 88],
+                [ 20 ,123 ,171, 97]
       ]
       ,   floatFloorX  = [ 30, 68,114,133,121,150]
       ,   floatFloorY  = [ 45, 74, 35, 71, 54, 55];
@@ -142,7 +139,17 @@ function drowStar(event) {
           })();
         }
         for (var n = 0; n < groundLines.length; n++) {
-        	
+        	(function() {
+            var i= n;
+            var lines = new Kinetic.Line({
+              x: 0,
+              y: 0,
+              points: groundLines[i],
+              stroke: 'white',
+              opacity:0.4
+            }); 
+            group.add(lines);
+          })();
         };
       }
 
@@ -160,7 +167,7 @@ function drowStar(event) {
       var lineLayer = new Kinetic.Layer();
       var anim = new Kinetic.Animation(function(frame) {
         var newYpoint= amplitude * Math.sin(frame.time * 2 * Math.PI / period) + centerY;
-        group.setY(newYpoint);
+        group2.setY(newYpoint);
         lineLayer.remove();
         lineLayer = new Kinetic.Layer();
         // simple line

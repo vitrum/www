@@ -27,7 +27,8 @@ var mounts = eval(
 		"lines": [
 		    ["strpid":"1","endpid":"2","type":"on"],
 		    ["strpid":"2","endpid":"3","type":"off"]
-		]
+		],
+		"carway":"30, 68,114,133,121,150"
 	},
 	{
 		"mid": "2",
@@ -56,7 +57,8 @@ var mounts = eval(
 		"lines": [
 		    ["strpid":"1","endpid":"2","type":"on"],
 		    ["strpid":"2","endpid":"3","type":"off"]
-		]
+		],
+		"carway":"30, 68,114,133,121,150"
 	}
 ]
 );
