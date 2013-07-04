@@ -8,104 +8,104 @@
 	<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 	</head>
 <body>
-	<header>
-		<a class="punch link_home" href="#/index">返回首页</a>
-		<h1 class="logo">LUXGEN 纳智捷</h1>
-		
-	</header>
-	<div class="frame homepage">
-		<div class="content">
-			<div class="laingpage">laingpage</div>
-			<ul>
-				<li><a class="punch selectgender" href="#/gender">selectgender</a></li>
-				<li><a class="punch awardlist" href="#/awardlist">awardlist</a></li>
-				<li><a class="punch aboutgame" href="#/aboutgame">aboutgame</a></li>
-			</ul>
+	<div class="page">
+		<header>
+			<a class="punch link_home" href="#/index">返回首页</a>
+			<h1 class="logo">LUXGEN 纳智捷</h1>
+		</header>
+		<div class="frame homepage">
+			<div class="content">
+				<div class="title">title</div>
+				<ul class="menu">
+					<li class="selectgender"><a class="punch selectgender" href="#/gender">selectgender</a></li>
+					<li class="awardlist"><a class="punch awardlist" href="#/awardlist">awardlist</a></li>
+					<li class="aboutgame"><a class="punch aboutgame" href="#/aboutgame">aboutgame</a></li>
+				</ul>
+			</div>
 		</div>
-	</div>
-	<div class="frame selectgender">
-		<div class="content">
-			<div class="gender">您的性别</div>
-			<ul>
-				<li><a class="punch male"  href="#/gender/male">male</a></li>
-				<li><a class="punch female"  href="#/gender/female">female</a></li>
-			</ul>
+		<div class="frame selectgender">
+			<div class="content">
+				<div class="gender">您的性别</div>
+				<ul>
+					<li><a class="punch male"  href="#/gender/male">male</a></li>
+					<li><a class="punch female"  href="#/gender/female">female</a></li>
+				</ul>
+			</div>
 		</div>
-	</div>
-	<div class="frame takebox">
-		<div class="content">
-			<section class="subframe take">
-				<form action="upload.php?action=upfile" method="post" name="UForm" enctype="multipart/form-data">
-					<input type="file" accept="image/*" capture="camera" id="takePictureField" name="photo">
-			        
-					<div class="imagebox">
-						<img id="yourimage" />
-						<div class="gridbox"></div>
-					</div>
-					<button type="submit">上传</button> 
-				</form>
-			</section>
-			<section class="subframe resize">
-				resize
-			</section>
-			<section class="subframe send">
-				send
-			</section>
+		<div class="frame takebox">
+			<div class="content">
+				<section class="subframe take">
+					<form action="upload.php?action=upfile" method="post" name="UForm" enctype="multipart/form-data">
+						<div class="imagebox">
+							<img id="yourimage" />
+							<div class="gridbox"></div>
+						</div>
+						<!--<button type="submit">上传</button>-->
+						<input type="file" accept="image/*" capture="camera" id="takePictureField" name="photo" >
+					</form>
+				</section>
+				<section class="subframe resize">
+					resize
+				</section>
+				<section class="subframe send">
+					send
+				</section>
+			</div>
 		</div>
-	</div>
-	<div class="frame yourmount">
-		<div class="content">
-			<section class="subframe rendering">
-				rendering...
-				<div id="container"></div>
-				<div id="buttons">
-			      <input type="button" id="start" value="Start">
-			      <input type="button" id="stop" value="Stop">
-			    </div>
-			</section>
-			<section class="subframe result">
-				<div class="digimount">digimount</div>
-				<div class="realmount">realmount</div>
+		<div class="frame yourmount">
+			<div class="content">
+				<section class="subframe rendering">
+					rendering...
+					<div id="container"></div>
+					<div class="mountstxt"></div>
+					<div id="buttons">
+				      <input type="button" id="start" value="Start">
+				      <input type="button" id="stop" value="Stop">
+				    </div>
+				</section>
+				<section class="subframe real">
+					<div class="realmount">realmount</div>
+				</section>
 				<nav class="mountswich">
 					<a class="pre">pre</a>
 					<a class="nex">nex</a>
 				</nav>
-			</section>
+			</div>
 		</div>
-	</div>
-	<div class="frame awardbox">
-		<div class="content">
-			<section class="subframe inputfrom">
-				inputfrom
-			</section>
-			<section class="subframe subminsuccess">
-				subminsuccess
-			</section>
-			<section class="subframe share">
-				share
-			</section>
+		<div class="frame awardbox">
+			<div class="content">
+				<section class="subframe inputfrom">
+					inputfrom
+				</section>
+				<section class="subframe subminsuccess">
+					subminsuccess
+				</section>
+				<section class="subframe share">
+					share
+				</section>
+			</div>
 		</div>
-	</div>
-	<div class="frame aboutgame">
-		<div class="content">
-			aboutgame
+		<div class="frame aboutgame">
+			<div class="content">
+				aboutgame
 
+			</div>
 		</div>
+		<div class="horizontal">
+			<div class="content">
+				建议竖屏浏览已获得更好体验
+			</div>
+		</div>	
+		<nav class="navbox">
+			<div class="navbar takepic"><!--<a class="takepic_btn" id="takeThePic">拍摄</a>--><input type="button" class="takethepic" value="拍摄"></div>
+			<div class="navbar retakepic"><input type="button" class="retake" value="使用"><input type="button" class="takethepic" value="重新拍摄"></div>
+			<div class="navbar yourmount"><input type="button" class="youreal" value="您的专属掌纹山脉图"></div>
+			<div class="navbar replay"><input type="button" class="youreal" value="replay"></div>
+			<div class="navbar submintinfo"><input type="button" class="youreal" value="submintinfo"></div>
+			<div class="navbar aboutgame"><input type="button" class="youreal" value="aboutgame"></div>
+			<div class="navbar inputlink"><input type="button" class="youreal" value="inputlink"></div>
+		</nav>
 	</div>
-	<div class="horizontal">
-		<div class="content">
-			建议竖屏浏览已获得更好体验
-		</div>
-	</div>	
-	<nav class="navbox">
-		<div class="takepic"></div>
-		<div class="retakepic"></div>
-		<div class="yourmount"></div>
-		<div class="replay"></div>
-		<div class="submintinfo"></div>
-		<div class="aboutgame"></div>
-		<div class="inputlink"></div>
-	</nav>
 	<script type="text/javascript" src="js/lib/zepto.min.js"></script>
 	<script type="text/javascript" src="js/lib/underscore-min.js"></script>
 	<script type="text/javascript" src="js/lib/backbone-min.js"></script>
@@ -113,8 +113,5 @@
 	<script type="text/javascript" src="js/lib/kinetic.js"></script>
 	<script type="text/javascript" charset="utf-8" src="data/mount.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/common.js"></script>
-	<script>
-
-	</script>
 </body>
 </html>
