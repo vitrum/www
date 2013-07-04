@@ -162,16 +162,20 @@ function drowMout(mountid) {
   }
 
   /*drow animtion*/
-  var amplitude = 150;
-  var period = 2000;
+
+  var animLayer = new Kinetic.Layer();
   var anim = new Kinetic.Animation(function(frame) {
-    /**/
+    /*remove animlayer*/
     animLayer.remove();
+    animLayer = new Kinetic.Layer();
 
+    console.log("frame:" + frame.timeDiff + ",frame.time :" + frame.time) ;
 
+    if ( frame.time > 600 ) {anim.stop();};
     stage.add(animLayer);
+    //date1=new Date();
   })
-  console.log("staticGroup:" + staticGroup+"\n");
+  //console.log("staticGroup:" + staticGroup+"\n");
   staticLayer.add(staticGroup);
   stage.add(staticLayer);
   animLayer.add(animGroup);
