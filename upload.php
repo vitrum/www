@@ -25,7 +25,7 @@ if(file_exists($target_path)) {
  if($_SERVER["OS"]!="Windows_NT"){ 
   @chmod($target_path,0604); 
  } 
- echo '<font color="green">Succeed!</font><br /><a href="http://' .$_SERVER["SERVER_NAME"] . "/" .$target_path .'"><img src=' .$target_path .' border="0" with=300 height=400><a class="punch" href="/project/luxgen2013/www/#/yourmount">yourmount</a>';  
+ echo '<font color="green">Succeed!</font><br /><a href="http://' .$_SERVER["SERVER_NAME"] . "/" .$target_path .'"><img src=' .$target_path .' border="0" with=300 height=400><a class="punch" href="/project/luxgen2013/www/#/yourmount/take">yourmount</a>';  
 } else {  
  echo '<font color="red">Failed!</font>';  
 }  

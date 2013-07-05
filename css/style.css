@@ -25,7 +25,7 @@ small { font-size: 85%; }
 sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
 sup { top: -0.5em; }
 sub { bottom: -0.25em; }
-ul, ol { margin:0; padding: 0; }
+ul, ol,li { margin:0; padding: 0; list-style: none outside; }
 dd { margin: 0 0 0; }
 nav ul, nav ol { list-style: none; margin: 0; padding: 0; }
 img { border: 0; -ms-interpolation-mode: bicubic; }
@@ -62,82 +62,149 @@ h1,h2,h3,h4,h5,h6 { padding: 0; margin: 0; font-size: 1em;}
 }
 
 /*project luxgen 2013*/
-body { background: #3a3a3a; color: #EEEEEE;}
+html { width: 100%; min-height:400px;}
+body {  color: #EEEEEE; width: 100%; min-height: 100%; background: url(../image/bg-i.jpg) center top ;background-color:#222222 !important;}
 a { color: #EEEEEE;}
+.frame {display: none; position: relative; margin-top: 46px; padding-top: 6px; min-height: 510px; }
+.subframe {display: none;}
+.frame .subframe:first-child { display: block;}
+.subframe .title { width: 100%; height:40px; display: block;  text-indent: -9999em; overflow: hidden; margin-top: 80px;}
 
-.frame {display: none; }
-
-header { width: 100%; height: 42px; overflow: hidden; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%,  from(#000000), to(#000000), color-stop(.6,#4F4F4F))}
-header h1 { display: block; width: 120px; height: 42px; margin: 0; line-height: 42px; }
-header a { display: block; float: right; width: 80px; height: 42px;}
-
-table {color: #000;}
-
+header { width: 100%; height: 50px; overflow: hidden; background: url(../image/bg-header-i.png) repeat-x; z-index: 10; position: absolute; top: 0; left: 0; }
+header h1 { display: block; width: 120px; height: 50px; margin: 0; line-height:50px; background: url(../image/icon-header-i.png) top left no-repeat; text-indent: -9999em; overflow: hidden;}
+header a { display: block; float: right; width: 80px; height:50px;overflow: hidden;background: url(../image/icon-header-i.png) top right no-repeat; text-indent: -9999em; }
+.page { width: 100%; height: 100%; }
 a.punch {
-      display: inline-block;
-      background: #4162a8;
-      border-top: 1px solid #38538c;
-      border-right: 1px solid #1f2d4d;
-      border-bottom: 1px solid #151e33;
-      border-left: 1px solid #1f2d4d;
-      -webkit-border-radius: 4px;
-      -moz-border-radius: 4px;
-      -ms-border-radius: 4px;
-      -o-border-radius: 4px;
-      border-radius: 4px;
-      -webkit-box-shadow: inset 0 1px 10px 1px #5c8bee, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
-      -moz-box-shadow: inset 0 1px 10px 1px #5c8bee, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
-      -ms-box-shadow: inset 0 1px 10px 1px #5c8bee, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
-      -o-box-shadow: inset 0 1px 10px 1px #5c8bee, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
-      box-shadow: inset 0 1px 10px 1px #5c8bee, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
-      color: #fff;
-      font: bold 14px "helvetica neue", helvetica, arial, sans-serif;
-      line-height: 1;
-      margin: 0 auto 30px;
-      padding: 8px 0 10px 0;
-      text-align: center;
-      text-shadow: 0px -1px 1px #1e2d4d;
-      text-decoration: none;
-      width: 125px;
-      -webkit-background-clip: padding-box; }
-      a.punch:hover {
+
 }
-      a.punch:active {
- }
+.horizontal {display: none;}
+.navbox { width: 100%; height: 46px; line-height: 46px; text-align: center; position: fixed; bottom: 0px; display: none;}
+.navbox input[type='button'] , .navbox .navlink { 
+  height:46px; text-align: center;background: url(../image/bg-navbar.png); display: block;border:none;border-radius:0; color: #fff;
+  appearance:none;-moz-appearance:none;-webkit-appearance:none;
+}
+.navbox .takepic .takethepic { width: 100%;}
+.navbox .retakepic .takethepic { width: 50%; float: left;}
+.navbox .retakepic .retake { width: 50%; float: left;}
+.navbox .navlink { float: left; width: auto;}
+.navbox .subminsuccess ,.navbox .subminsuccess , .navbox .sheargame ,.navbox .yourmount .youreal , .navbox .awardsubmint , .navbox .aboutgame { width: 100%; text-decoration: none;}
+.navbox .showreal .youreal { width: 33.3%;}
+/*homepage*/
+.homepage { width: 100%;  background: url(../image/bg-homepage.jpg) no-repeat top center; }
+  .homepage .content { width: 320px; margin: 0 auto; }
+  .homepage .title { width: 100%; height: 166px; background: url(../image/home-title.png) no-repeat top center; text-indent: -9999em;}
+  .homepage .menu { width: 100%; height: 119px; margin-top: 200px; padding-top: 24px}
+    .homepage .menu li {height: 30px; margin-bottom: 1px;  }
+    .homepage .menu li a { display: block; width: 100%; height: 30px; background: url(../image/home-menu.png) no-repeat center -24px; text-indent: -9999em; overflow: hidden;}
+    .homepage .menu li a.awardlist { background-position:center -56px ;}
+    .homepage .menu li a.aboutgame { background-position:center -87px ;}
 
-
-
+/*selectgender*/
+.selectgender { width: 100%;}
+  .selectgender .gender { width: 100%; height: 22px; background: url(../image/icon-gender.png)  center top no-repeat ; text-indent: -9999em; margin-top: 156px;}
+  .selectgender ul { width: 214px; margin: 0 auto;}
+  .selectgender ul li { width: 107px; height: 154px; display: block; float: left;}
+  .selectgender ul a { display: block; width: 107px; height: 154px; background: url(../image/icon-gender.png)  -52px -22px no-repeat; text-indent: -9999em;}
+  .selectgender ul a.female { background-position: -159px -22px;}
 /*take pic*/
 .takebox .takebox_frame { display: none;}
-.takebox .take { display:block;}
-.takebox .gridbox { display: none;}
-.takebox img { width: 100%;}
+  .takebox .take { display:block;}
+  .takebox .gridbox { display: none;}
+  .takebox img { width: 100%;}
+
+  #takePictureField { display: block; }
+/*mounts*/
+.mountswich { width: 100%; }
+  .mountswich a { position: absolute; z-index: 900; top: 50%;  width: 45px; height: 45px; display: block; background: url(../image/icon-mountswich.png) no-repeat; text-indent: -9999em; overflow: hidden; display: none; margin-top: -30px;}
+  .mountswich a.pre {left: 0px;left:6px;}
+  .mountswich a.nex { right: 0px; background-position: top right; right:6px;}
+
+
+/*awardbox*/
+
+.awardbox {}
+  .awardbox .inputfrom {  }
+  .awardbox .inputfrom .title { background: url(../image/icon-form.png) center top no-repeat;}
+  .awardbox .subinfobox { text-indent: -9999em; background: url(../image/icon-form.png) center -40px no-repeat; width: 100%; height: 100px;}
+  .awardbox li { height: 30px; width: 250px; margin: 0 auto 4px;line-height: 30px; }
+  .awardbox label { width: 45px; height: 28px; background: url(../image/icon-form.png) left -150px no-repeat; text-indent: -9999em; overflow: hidden;display: inline-block;}
+  .awardbox label.forname {}
+  .awardbox label.forphone { background-position: 0 -182px;}
+  .awardbox label.forcity { background-position: 0 -212px;}
+
+  .awardbox .subminsuccess .title { background: url(../image/icon-subminsuccess.png) center top no-repeat;}
+  .awardbox .successinfobox { text-indent: -9999em; background: url(../image/icon-subminsuccess.png) center -40px no-repeat; width: 100%; height: 100px;}
+
+  .awardbox .share .title { background: url(../image/icon-share.png) center top no-repeat;}
+  .awardbox .share li { height: 50px; }
+  .awardbox .share a { height: 50px; width: 249px; display: block; text-indent: -9999em;  background: url(../image/icon-share.png) 0 -40px no-repeat;}
+  .awardbox .share a.qqweibo { background-position: 0 -90px;}
+  .awardbox .share a.renren { background-position: 0 -140px;}
 /* vertical iphone */
 @media screen and (max-width:320px) {
-
+  body { background-size: 320px 569px;}
+  header {height: 50px;}
+  header h1 { height: 50px; line-height:50px; }
+  header a { height:50px;}
+  .homepage { margin-top: 12px;}
 }
 /* vertical fat 3star */
 @media screen and (min-width:321px) and (max-width:360px) {
+  header {height: 56px;  background-image: url(../image/bg-header-a.png) no-repeat;}
+  header h1 { height: 56px; line-height:56px; background-image: url(../image/x2/icon-header-a.png) top left no-repeat; }
+  header a { height:56px;background-image: url(../image/x2/icon-header-a.png) top right no-repeat;}
 
+  .homepage { background-size: 360px 595px;}
 }
 
 /* horizontal small iphone4*/
 @media screen and (min-width:361px) and (max-width:567px) {
+  header {height: 50px; }
+  header h1 { height: 50px; line-height:50px; }
+  header a { height:50px;}
 
- }
+  .homepage { height: 100%; background-size: 400px 660px;}
+
+}
 /* horizontal large iphone5 */
 @media screen and (min-width:568px) and (max-width:639px) {
- 
+  header {height: 50px; }
+  header h1 { height: 50px; line-height:50px; }
+  header a { height:50px;}
 }
 /* horizontal fat 3star */
 @media screen and (min-width:640px) and (max-width:800px){
-
+  header {height: 50px; }
+  header h1 { height: 50px; line-height:50px; }
+  header a { height:50px;}
 }
 /* pc and ipad */
 @media screen and (min-width:801px) {
-
+  header {height: 50px; }
+  header h1 { height: 50px; line-height:50px; }
+  header a { height:50px;}
 }
+
+
 /* for high ratio icon */
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
-
+  header { background-image: url(../image/x2/bg-header-i.png) repeat-x;}
+  header h1 { background-image: url(../image/x2/icon-header-i.png) top left no-repeat; }
+  header a { background-image: url(../image/x2/icon-header-i.png) top right no-repeat; }
+  .page { background-image: url(../image/x2/bg-i.jpg) ; background-size: 320px 539px;}
+  
+  /* vertical fat 3star */
+  @media screen and (min-width:321px) and (max-width:360px) {
+    header { background-image: url(../image/x2/bg-header-a.png) repeat-x;}
+    header h1 { background-image: url(../image/x2/icon-header-a.png) top left no-repeat; }
+    header a { background-image: url(../image/x2/icon-header-a.png) top right no-repeat; }
+    .page { background-image: url(../image/x2/bg-a.jpg)}
+    
+  }
+  /* pc and ipad */
+  @media screen and (min-width:801px) {
+    header {height: 50px; }
+    header h1 { height: 50px; line-height:50px; }
+    header a { height:50px;}
+  }
 }
