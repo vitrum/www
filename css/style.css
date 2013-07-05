@@ -68,6 +68,8 @@ a { color: #EEEEEE;}
 .frame {display: none; position: relative; margin-top: 46px; padding-top: 6px; min-height: 510px; }
 .subframe {display: none;}
 .frame .subframe:first-child { display: block;}
+.subframe .title { width: 100%; height:40px; display: block;  text-indent: -9999em; overflow: hidden; margin-top: 80px;}
+
 header { width: 100%; height: 50px; overflow: hidden; background: url(../image/bg-header-i.png) repeat-x; z-index: 10; position: absolute; top: 0; left: 0; }
 header h1 { display: block; width: 120px; height: 50px; margin: 0; line-height:50px; background: url(../image/icon-header-i.png) top left no-repeat; text-indent: -9999em; overflow: hidden;}
 header a { display: block; float: right; width: 80px; height:50px;overflow: hidden;background: url(../image/icon-header-i.png) top right no-repeat; text-indent: -9999em; }
@@ -85,7 +87,7 @@ a.punch {
 .navbox .retakepic .takethepic { width: 50%; float: left;}
 .navbox .retakepic .retake { width: 50%; float: left;}
 .navbox .navlink { float: left; width: auto;}
-.navbox .subminsuccess ,.navbox .subminsuccess , .navbox .sheargame ,.navbox .yourmount .youreal  { width: 100%;}
+.navbox .subminsuccess ,.navbox .subminsuccess , .navbox .sheargame ,.navbox .yourmount .youreal , .navbox .awardsubmint , .navbox .aboutgame { width: 100%; text-decoration: none;}
 .navbox .showreal .youreal { width: 33.3%;}
 /*homepage*/
 .homepage { width: 100%;  background: url(../image/bg-homepage.jpg) no-repeat top center; }
@@ -99,23 +101,45 @@ a.punch {
 
 /*selectgender*/
 .selectgender { width: 100%;}
-.selectgender .gender { width: 100%; height: 22px; background: url(../image/icon-gender.png)  center top no-repeat ; text-indent: -9999em; margin-top: 156px;}
-.selectgender ul { width: 214px; margin: 0 auto;}
-.selectgender ul li { width: 107px; height: 154px; display: block; float: left;}
-.selectgender ul a { display: block; width: 107px; height: 154px; background: url(../image/icon-gender.png)  -52px -22px no-repeat; text-indent: -9999em;}
-.selectgender ul a.female { background-position: -159px -22px;}
+  .selectgender .gender { width: 100%; height: 22px; background: url(../image/icon-gender.png)  center top no-repeat ; text-indent: -9999em; margin-top: 156px;}
+  .selectgender ul { width: 214px; margin: 0 auto;}
+  .selectgender ul li { width: 107px; height: 154px; display: block; float: left;}
+  .selectgender ul a { display: block; width: 107px; height: 154px; background: url(../image/icon-gender.png)  -52px -22px no-repeat; text-indent: -9999em;}
+  .selectgender ul a.female { background-position: -159px -22px;}
 /*take pic*/
 .takebox .takebox_frame { display: none;}
-.takebox .take { display:block;}
-.takebox .gridbox { display: none;}
-.takebox img { width: 100%;}
+  .takebox .take { display:block;}
+  .takebox .gridbox { display: none;}
+  .takebox img { width: 100%;}
 
-#takePictureField { display: block; }
+  #takePictureField { display: block; }
 /*mounts*/
 .mountswich { width: 100%; }
-.mountswich a { position: absolute; z-index: 200; top: 240px;  width: 45px; height: 45px; display: block; background: url(../image/icon-mountswich.png) no-repeat; text-indent: -9999em; overflow: hidden; display: none;}
-.mountswich a.pre {left: 0px;left:6px;}
-.mountswich a.nex { right: 0px; background-position: top right; right:6px;}
+  .mountswich a { position: absolute; z-index: 900; top: 50%;  width: 45px; height: 45px; display: block; background: url(../image/icon-mountswich.png) no-repeat; text-indent: -9999em; overflow: hidden; display: none; margin-top: -30px;}
+  .mountswich a.pre {left: 0px;left:6px;}
+  .mountswich a.nex { right: 0px; background-position: top right; right:6px;}
+
+
+/*awardbox*/
+
+.awardbox {}
+  .awardbox .inputfrom {  }
+  .awardbox .inputfrom .title { background: url(../image/icon-form.png) center top no-repeat;}
+  .awardbox .subinfobox { text-indent: -9999em; background: url(../image/icon-form.png) center -40px no-repeat; width: 100%; height: 100px;}
+  .awardbox li { height: 30px; width: 250px; margin: 0 auto 4px;line-height: 30px; }
+  .awardbox label { width: 45px; height: 28px; background: url(../image/icon-form.png) left -150px no-repeat; text-indent: -9999em; overflow: hidden;display: inline-block;}
+  .awardbox label.forname {}
+  .awardbox label.forphone { background-position: 0 -182px;}
+  .awardbox label.forcity { background-position: 0 -212px;}
+
+  .awardbox .subminsuccess .title { background: url(../image/icon-subminsuccess.png) center top no-repeat;}
+  .awardbox .successinfobox { text-indent: -9999em; background: url(../image/icon-subminsuccess.png) center -40px no-repeat; width: 100%; height: 100px;}
+
+  .awardbox .share .title { background: url(../image/icon-share.png) center top no-repeat;}
+  .awardbox .share li { height: 50px; }
+  .awardbox .share a { height: 50px; width: 249px; display: block; text-indent: -9999em;  background: url(../image/icon-share.png) 0 -40px no-repeat;}
+  .awardbox .share a.qqweibo { background-position: 0 -90px;}
+  .awardbox .share a.renren { background-position: 0 -140px;}
 /* vertical iphone */
 @media screen and (max-width:320px) {
   body { background-size: 320px 569px;}
@@ -167,7 +191,7 @@ a.punch {
   header { background-image: url(../image/x2/bg-header-i.png) repeat-x;}
   header h1 { background-image: url(../image/x2/icon-header-i.png) top left no-repeat; }
   header a { background-image: url(../image/x2/icon-header-i.png) top right no-repeat; }
-  .page { background-image: url(../image/x2/bg-i.jpg)}
+  .page { background-image: url(../image/x2/bg-i.jpg) ; background-size: 320px 539px;}
   
   /* vertical fat 3star */
   @media screen and (min-width:321px) and (max-width:360px) {

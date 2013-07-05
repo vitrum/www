@@ -80,24 +80,29 @@
 						<p>马上填写资料，</p>
 						<p>就有机会赢得智慧天地启程之旅！</p>
 						<p class="info">*请务必留下您的真实信息，</p>
-						<p class="info">一边您中奖时，我们能及时联络。</p>
+						<p class="info">以便您中奖时，我们能及时联络。</p>
 					</div>
 					<div class="subform">
 						<ul>
-							<li><label>姓名</label><input type="text" name="uname" id="uname" /></li>
-							<li><label>手机</label><input type="number" name="phone" id="phone" /></li>
+							<li><label class="forname">姓名</label><input type="text" name="uname" id="uname" /></li>
+							<li><label class="forphone">手机</label><input type="number" name="phone" id="phone" /></li>
 							<li>
-								<label>城市</label>
-								<select/>
-								<select/>
+								<label class="forcity">城市</label>
+								<select name="city">
+								</select>
+								<select name="city2">
+								</select>
 							</li>
+						</ul>
 					</div>
 				</section>
 				<section class="subframe subminsuccess">
 					<h2 class="title">提交成功！</h2>
-					<p>获奖通知将在活动结束后的</p>
-					<p>2周内发出，您也可以再网站上</p>
-					<p>持续关注“获奖名单”</p>
+					<div class="successinfobox">
+						<p>获奖通知将在活动结束后的</p>
+						<p>2周内发出，您也可以再网站上</p>
+						<p>持续关注“获奖名单”</p>
+					</div>
 				</section>
 				<section class="subframe share">
 					<h2 class="title">分享至</h2>
@@ -111,7 +116,7 @@
 		</div>
 		<div class="frame aboutgame">
 			<div class="content">
-				aboutgame
+				活动说明
 
 			</div>
 		</div>
@@ -131,7 +136,7 @@
 			</div>
 			<div class="navbar awardlink"><a class="navlink awardsubmint" href="#/subminsuccess">确认提交</a></div>
 			<div class="navbar subminsuccess"><a class="navlink subminsuccess" href="#/awardlist">活动说明</a></div>
-			<div class="navbar aboutgame"><a class="navlink aboutgame">aboutgame</a></div>
+			<div class="navbar aboutgame"><a class="navlink aboutgame">活动说明</a></div>
 			<div class="navbar sheargame"><a class="navlink sheargame" href="#/awardlist">填写中奖信息</a></div>
 			
 		</nav>
