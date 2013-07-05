@@ -66,6 +66,8 @@ html { width: 100%; min-height:400px;}
 body {  color: #EEEEEE; width: 100%; min-height: 100%; background: url(../image/bg-i.jpg) center top ;background-color:#222222 !important;}
 a { color: #EEEEEE;}
 .frame {display: none; position: relative; margin-top: 46px; padding-top: 6px; min-height: 510px; }
+.subframe {display: none;}
+.frame .subframe:first-child { display: block;}
 header { width: 100%; height: 50px; overflow: hidden; background: url(../image/bg-header-i.png) repeat-x; z-index: 10; position: absolute; top: 0; left: 0; }
 header h1 { display: block; width: 120px; height: 50px; margin: 0; line-height:50px; background: url(../image/icon-header-i.png) top left no-repeat; text-indent: -9999em; overflow: hidden;}
 header a { display: block; float: right; width: 80px; height:50px;overflow: hidden;background: url(../image/icon-header-i.png) top right no-repeat; text-indent: -9999em; }
@@ -75,13 +77,16 @@ a.punch {
 }
 .horizontal {display: none;}
 .navbox { width: 100%; height: 46px; line-height: 46px; text-align: center; position: fixed; bottom: 0px; display: none;}
-.navbox input[type='button'] { 
+.navbox input[type='button'] , .navbox .navlink { 
   height:46px; text-align: center;background: url(../image/bg-navbar.png); display: block;border:none;border-radius:0; color: #fff;
   appearance:none;-moz-appearance:none;-webkit-appearance:none;
 }
 .navbox .takepic .takethepic { width: 100%;}
 .navbox .retakepic .takethepic { width: 50%; float: left;}
 .navbox .retakepic .retake { width: 50%; float: left;}
+.navbox .navlink { float: left; width: auto;}
+.navbox .subminsuccess ,.navbox .subminsuccess , .navbox .sheargame ,.navbox .yourmount .youreal  { width: 100%;}
+.navbox .showreal .youreal { width: 33.3%;}
 /*homepage*/
 .homepage { width: 100%;  background: url(../image/bg-homepage.jpg) no-repeat top center; }
   .homepage .content { width: 320px; margin: 0 auto; }
@@ -105,12 +110,12 @@ a.punch {
 .takebox .gridbox { display: none;}
 .takebox img { width: 100%;}
 
-#takePictureField { display: none; }
+#takePictureField { display: block; }
 /*mounts*/
 .mountswich { width: 100%; }
-.mountswich a { position: absolute; z-index: 200; top: 240px;  width: 45px; height: 45px; display: block; background: url(../image/icon-mountswich.png) no-repeat; text-indent: -9999em; overflow: hidden;}
-.mountswich a.pre {left: 8px;}
-.mountswich a.nex { right: 8px; background-position: top right;}
+.mountswich a { position: absolute; z-index: 200; top: 240px;  width: 45px; height: 45px; display: block; background: url(../image/icon-mountswich.png) no-repeat; text-indent: -9999em; overflow: hidden; display: none;}
+.mountswich a.pre {left: 0px;left:6px;}
+.mountswich a.nex { right: 0px; background-position: top right; right:6px;}
 /* vertical iphone */
 @media screen and (max-width:320px) {
   body { background-size: 320px 569px;}

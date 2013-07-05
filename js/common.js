@@ -15,7 +15,7 @@ function showSubFrame(framename,subframename) {
 }
 
 function showNavBar(barname) {
-  if(!barname){ barname = 'aboutgame'}
+  if(!barname){ $('.navbar').hide();}
   $('.navbar').hide();
   $('.navbox').show();
   $('.' + barname ).show();
@@ -33,6 +33,8 @@ function gotPic(event) {
 function postThePic(event) {
   //alert("postThePic OK!");
   router.navigate('yourmount/take');
+  showSubFrame('yourmount','rendering');
+  showNavBar('take');
   console.log('postThePic OK!');
 }
 
@@ -129,8 +131,12 @@ function drowMout(mountid) {
 
     if ( frame.time > anims.a ) {
       anim.stop();
-      showSubFrame('takebox','take');
-      showNavBar('takepic');
+      //showSubFrame('yourmount','real');
+      showNavBar('yourmount');
+      //router.navigate('yourmount/real');
+      $('.mountswich a').hide();
+      $('.mountswich .nex').show();
+
     };
     anims.b++;
     stage.add(animLayer);
@@ -164,7 +170,9 @@ var AppRouter = Backbone.Router.extend({
         'take' : 'takePic',  
         'take/:user' : 'takePic',
         'retake' : 'retakePic', 
+        'share':'shareGame',
         'awardlist' : 'awardList',
+        'subminsuccess':'subminSuccess',
         'aboutgame' : 'aboutGame',
         'yourmount' : 'yourMount',
         'yourmount/:step' : 'yourMount',
@@ -173,45 +181,64 @@ var AppRouter = Backbone.Router.extend({
     main : function() {  
         console.log('homepage');
         showFrame('homepage');
+        showNavBar();
     },  
     selectGender: function() {  
         console.log('selectGender');
         showFrame('selectgender');
+        showNavBar();
     },
     selectGenderUser: function(user) {  
     	if(!user){ user = 'male'}
         console.log('性别为：' +user );
         router.navigate('take/' + user , {  
-    		trigger: true  
-		});
+    		  trigger: true  
+		    });
     },
     awardList: function() {  
         console.log('awardlist');
-        showFrame('awardbox');
+        showSubFrame('awardbox','inputfrom');
+        showNavBar('awardlink');
     },
+    subminSuccess: function() {  
+        console.log('subminsuccess');
+        showSubFrame('awardbox','subminsuccess');
+        showNavBar('subminsuccess');
+    },
+    shareGame: function() {  
+        console.log('shearGame');
+        showSubFrame('awardbox','share');
+        showNavBar('sheargame');
+    },  
     aboutGame: function() {  
         console.log('aboutGame');
         showFrame('aboutgame');
     },  
     takePic : function(user) {  
     	if(!user){ user = 'male'}
-        console.log('takePic 性别为：' +user);
+      console.log('takePic 性别为：' +user);
     	showSubFrame('takebox','take');
       showNavBar('takepic');
     },  
     retakePic : function(id) {  
-        console.log('渲染详情方法, id为: ' + id);  
+      console.log('渲染详情方法, id为: ' + id);  
     }, 
     yourMount : function(step) {  
     	if(!step){ user = 'take'}
-        console.log('渲染步骤为: ' + step);
-    	showFrame('yourmount');
+        console.log('渲染详情方法, id为: ' + step);
+        showFrame('yourmount');
         if(step == 'take'){
         	router.navigate('yourmount/' + step , {  
-	    		trigger: true  
-			});
+	    		  trigger: true  
+          });
         	drowMout(1);
-        }
+        }else if (step == 'real'){
+          router.navigate('yourmount/real');
+          showSubFrame('yourmount','real');
+          showNavBar('submintinfo');
+          $('.mountswich a').hide();
+          $('.mountswich .pre').show();
+      }
     }, 
     renderError : function(error) {  
         console.log('URL错误, 错误信息: ' + error); 
@@ -244,19 +271,24 @@ $(document).ready(function() {
   };
   $('.mountswich .pre').die('click').live('click',function(){
     showSubFrame('yourmount','rendering');
+    router.navigate('yourmount/take');
+    showNavBar('yourmount');
     $('.mountswich a').hide();
     //if 
     $('.mountswich .nex').show();
   });
   $('.mountswich .nex').die('click').live('click',function(){
     showSubFrame('yourmount','real');
-    showNavBar('replay');
+    showNavBar('showreal');
+    router.navigate('yourmount/real');
     $('.mountswich a').hide();
     $('.mountswich .pre').show();
   });
+
   $('.navbox .youreal').die('click').live('click',function(){
     showSubFrame('yourmount','real');
-    showNavBar('replay');
+    showNavBar('showreal');
+    router.navigate('yourmount/real');
     $('.mountswich a').hide();
     $('.mountswich .pre').show();
 

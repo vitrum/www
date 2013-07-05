@@ -75,13 +75,37 @@
 		<div class="frame awardbox">
 			<div class="content">
 				<section class="subframe inputfrom">
-					inputfrom
+					<h2 class="title">参与抽奖</h2>
+					<div class="subinfobox">
+						<p>马上填写资料，</p>
+						<p>就有机会赢得智慧天地启程之旅！</p>
+						<p class="info">*请务必留下您的真实信息，</p>
+						<p class="info">一边您中奖时，我们能及时联络。</p>
+					</div>
+					<div class="subform">
+						<ul>
+							<li><label>姓名</label><input type="text" name="uname" id="uname" /></li>
+							<li><label>手机</label><input type="number" name="phone" id="phone" /></li>
+							<li>
+								<label>城市</label>
+								<select/>
+								<select/>
+							</li>
+					</div>
 				</section>
 				<section class="subframe subminsuccess">
-					subminsuccess
+					<h2 class="title">提交成功！</h2>
+					<p>获奖通知将在活动结束后的</p>
+					<p>2周内发出，您也可以再网站上</p>
+					<p>持续关注“获奖名单”</p>
 				</section>
 				<section class="subframe share">
-					share
+					<h2 class="title">分享至</h2>
+					<ul class="sharelist">
+						<li><a class="weibo">新浪微博</a></li>
+						<li><a class="qqweibo">腾讯微博</a></li>
+						<li><a class="renren">人人网</a></li>
+					</ul>
 				</section>
 			</div>
 		</div>
@@ -100,10 +124,16 @@
 			<div class="navbar takepic"><!--<a class="takepic_btn" id="takeThePic">拍摄</a>--><input type="button" class="takethepic" value="拍摄"></div>
 			<div class="navbar retakepic"><input type="button" class="retake" value="使用"><input type="button" class="takethepic" value="重新拍摄"></div>
 			<div class="navbar yourmount"><input type="button" class="youreal" value="您的专属掌纹山脉图"></div>
-			<div class="navbar replay"><input type="button" class="youreal" value="replay"></div>
-			<div class="navbar submintinfo"><input type="button" class="youreal" value="submintinfo"></div>
-			<div class="navbar aboutgame"><input type="button" class="youreal" value="aboutgame"></div>
-			<div class="navbar inputlink"><input type="button" class="youreal" value="inputlink"></div>
+			<div class="navbar showreal">
+				<a class="navlink youreal" href="#/share">即刻分享</a>
+				<a class="navlink youreal" href="#/awardlist">参与抽奖</a>
+				<a class="navlink youreal" href="#/gender">再来一次</a>
+			</div>
+			<div class="navbar awardlink"><a class="navlink awardsubmint" href="#/subminsuccess">确认提交</a></div>
+			<div class="navbar subminsuccess"><a class="navlink subminsuccess" href="#/awardlist">活动说明</a></div>
+			<div class="navbar aboutgame"><a class="navlink aboutgame">aboutgame</a></div>
+			<div class="navbar sheargame"><a class="navlink sheargame" href="#/awardlist">填写中奖信息</a></div>
+			
 		</nav>
 	</div>
 	<script type="text/javascript" src="js/lib/zepto.min.js"></script>
