@@ -9,8 +9,8 @@ var mounts = eval(
 			{ "pid":"2", "pname":"2", "ox":"270","oy":"384","type":"off","nx":"",   "ny":""  },
 			{ "pid":"3", "pname":"3", "ox":"455","oy":"346","type":"off","nx":"",   "ny":""  },
 			{ "pid":"4", "pname":"4", "ox":"331","oy":"308","type":"off","nx":"",   "ny":""  },
-			{ "pid":"5", "pname":"5", "ox":"295","oy":"327","type":"on", "nx":"295","ny":"82","tx":"","ty":""},
-			{ "pid":"6", "pname":"6", "ox":"235","oy":"207","type":"on", "nx":"235","ny":"82","tx":"","ty":""}
+			{ "pid":"5", "pname":"5", "ox":"295","oy":"327","type":"on", "nx":"295","ny":"82"},
+			{ "pid":"6", "pname":"6", "ox":"235","oy":"207","type":"on", "nx":"235","ny":"82"}
 		],
 		"lines": [
 		    {"strpid":"1", "endpid":"2", "type":"off"},

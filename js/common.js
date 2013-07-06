@@ -1,4 +1,4 @@
-
+/**/
 function showFrame(framename) {
   if(!framename){ framename = 'homepage'}
   $('.frame').hide();
@@ -139,7 +139,7 @@ function drowMout(mountid) {
   var anims = new Object();
       anims.a = 1000;
       anims.b = 1;
-      anims.c = 50;
+      anims.c = 30;
   var anim = new Kinetic.Animation(function(frame) {
     var time = frame.time,
         timeDiff = frame.timeDiff,
@@ -171,7 +171,7 @@ function drowMout(mountid) {
                 shadowBlur: 4,
                 strokeWidth: 0
               });
-          //animGroup.add(newPoint);
+          animGroup.add(newPoint);
       })();
       //console.log("number:"+n+ ":ok");
     } //thisMount.mpoint.length
@@ -196,7 +196,7 @@ function drowMout(mountid) {
               stroke: 'white',
               opacity:0.4
           });
-          console.log("move number:"+n+ "||" + ",strPoint:"  + strPoint+ ",endPoint:" + endPoint+",PointY2:" + PointY2);
+          //console.log("move number:"+n+ "||" + ",strPoint:"  + strPoint+ ",endPoint:" + endPoint+",PointY2:" + PointY2);
           animGroup.add(line);
       })();
       
@@ -207,7 +207,7 @@ function drowMout(mountid) {
     animLayer.add(animGroup);
     console.log("frame:" + frame.timeDiff + ",frame.time :" + frame.time + ",anims.b:" + anims.b ) ;
 
-    if ( frame.time > anims.a ) {
+    if ( anims.b > anims.c ) {
       anim.stop();
       //showSubFrame('yourmount','real');
       showNavBar('yourmount');
