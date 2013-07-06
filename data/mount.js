@@ -9,19 +9,22 @@ var mounts = eval(
 			{ "pid":"2", "pname":"2", "ox":"270","oy":"384","type":"off","nx":"",   "ny":""  },
 			{ "pid":"3", "pname":"3", "ox":"455","oy":"346","type":"off","nx":"",   "ny":""  },
 			{ "pid":"4", "pname":"4", "ox":"331","oy":"308","type":"off","nx":"",   "ny":""  },
-			{ "pid":"5", "pname":"5", "ox":"295","oy":"327","type":"on", "nx":"295","ny":"82"}
+			{ "pid":"5", "pname":"5", "ox":"295","oy":"327","type":"on", "nx":"295","ny":"82","tx":"","ty":""},
+			{ "pid":"6", "pname":"6", "ox":"235","oy":"207","type":"on", "nx":"235","ny":"82","tx":"","ty":""}
 		],
 		"lines": [
 		    {"strpid":"1", "endpid":"2", "type":"off"},
 		    {"strpid":"2", "endpid":"3", "type":"off"},
 		    {"strpid":"3", "endpid":"4", "type":"off"},
 		    {"strpid":"1", "endpid":"4", "type":"off"},
-		    {"strpid":"5", "endpid":"1", "type":"on" },
-		    {"strpid":"5", "endpid":"2", "type":"on" },
-		    {"strpid":"5", "endpid":"3", "type":"on" },
-		    {"strpid":"5", "endpid":"4", "type":"on" }
+		    {"strpid":"1", "endpid":"5", "type":"on" },
+		    {"strpid":"2", "endpid":"5", "type":"on" },
+		    {"strpid":"3", "endpid":"5", "type":"on" },
+		    {"strpid":"4", "endpid":"5", "type":"on" }
 		],
-		"carway":"30, 68,114,133,121,150"
+		"carway":"30, 68,114,133,121,150",
+		"mpoint":[{"pid":"5"},{"pid":"6"}],
+		"mline":[{"lid":"5"},{"lid":"6"},{"lid":"7"},{"lid":"8"}]
 	},
 	{
 		"mid": "2",
@@ -91,7 +94,9 @@ var mounts = eval(
 		    {"strpid":"16", "endpid":"25", "type":"on" },
 		    {"strpid":"17", "endpid":"26", "type":"on" }
 		],
-		"carway":"30, 68,114,133,121,150"
+		"carway":"30, 68,114,133,121,150",
+		"mpoint":"",
+		"mline":""
 	},
 	{
 		"mid": "3",
@@ -121,7 +126,9 @@ var mounts = eval(
 		    {"strpid":"1","endpid":"2","type":"on"},
 		    {"strpid":"2","endpid":"3","type":"off"}
 		],
-		"carway":"30, 68,114,133,121,150"
+		"carway":"30, 68,114,133,121,150",
+		"mpoint":"",
+		"mline":""
 	}
 ]
 );
