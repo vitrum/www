@@ -145,6 +145,16 @@ function drowMout(mountid) {
         timeDiff = frame.timeDiff,
         frameRate = frame.frameRate;
     /*remove animlayer*/
+
+    if ( anims.b > anims.c ) {
+      anim.stop();
+      //showSubFrame('yourmount','real');
+      showNavBar('yourmount');
+      //router.navigate('yourmount/real');
+      $('.mountswich a').hide();
+      $('.mountswich .nex').show();
+    };
+    
     animLayer.remove();
     animLayer = new Kinetic.Layer();
     animGroup = new Kinetic.Group({
@@ -207,15 +217,7 @@ function drowMout(mountid) {
     animLayer.add(animGroup);
     console.log("frame:" + frame.timeDiff + ",frame.time :" + frame.time + ",anims.b:" + anims.b ) ;
 
-    if ( anims.b > anims.c ) {
-      anim.stop();
-      //showSubFrame('yourmount','real');
-      showNavBar('yourmount');
-      //router.navigate('yourmount/real');
-      $('.mountswich a').hide();
-      $('.mountswich .nex').show();
 
-    };
     anims.b++;
     stage.add(animLayer);
     //date1=new Date();
