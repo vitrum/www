@@ -15,9 +15,12 @@ function showSubFrame(framename,subframename) {
 }
 
 function showNavBar(barname) {
-  if(!barname){ $('.navbar').hide();}
   $('.navbar').hide();
   $('.navbox').show();
+  if(!barname){ 
+    $('.navbox').hide();
+    $('.navbar').hide();
+  }
   $('.' + barname ).show();
   //check nav bar prostion;
 }
@@ -71,9 +74,13 @@ function drowMout(mountid) {
       /*drow point*/
       var i = mountid - 1;
       var pointArr = mounts[i].points
-      ,   thisMount = mounts[i];
+      ,   thisMount = mounts[i]
+      ,   thisMovePoint = ""
+      ,   thisMoveLine = ""
+      ,   thisMovePointArr = new Array()
+      ,   thisMoveLineArr = new Array();
       //var t=0;
-      //console.log("\n thisMount.mpoint:" + thisMount.mpoint);
+      console.log("\n thisMount.mpoint:" + thisMount.mpoint);
 
       for (var n=0; n<pointArr.length; n++) {
         //console.log(pointArr[n].ox + ","+ pointArr[n].oy);
@@ -96,6 +103,12 @@ function drowMout(mountid) {
           }else{
             
             animGroup.add(newPoint);
+            if (thisMovePoint!==""){
+              thisMovePoint = thisMovePoint + ',["pid":"'+ (k+1) +'"]'
+            } else {
+              thisMovePoint = '["pid":"'+ (k+1) +'"]'
+            }
+            
             /* add to move arry 
             thisMount.mpoint[t]='aa';//pointArr[k].pid;
             console.log("t:" + t + " pid:"+ pointArr[k].pid)
@@ -105,7 +118,8 @@ function drowMout(mountid) {
         })();
         
       }
-      console.log("\n thisMount.mpoint:" + thisMount.mpoint + " number"+ thisMount.mpoint.length );
+      thisMovePointArr = eval('(' + thisMovePoint+')');
+      console.log("\n thisMount.mpoint:" + thisMount.mpoint + " thisMovePointArr:"+ thisMovePointArr );
       /*drow line*/
       var linesArr =  mounts[i].lines;
       for (var n=0; n<linesArr.length; n++) {
@@ -187,8 +201,15 @@ function drowMout(mountid) {
             , PointY1 = pointArr[strPoint].oy/scale
             , PointX2 = pointArr[endPoint].ox/scale
             , PointY2 = pointArr[endPoint].ty/scale;
-          var newYpoint = (pointArr[endPoint].oy - (pointArr[endPoint].oy - pointArr[endPoint].ny) * anims.b / anims.c) / scale;
-          PointY2 = newYpoint;
+          console.log( 'line:' + n + '||pointArr[strPoint].type:' + pointArr[strPoint].type + '||pointArr[endPoint].type:' + pointArr[endPoint].type);
+          if (pointArr[strPoint].type =="on"){
+            var newYpointStr = (pointArr[strPoint].oy - (pointArr[strPoint].oy - pointArr[strPoint].ny) * anims.b / anims.c) / scale;
+            PointY1 = newYpointStr;
+          }
+          if (pointArr[endPoint].type =="on"){
+            var newYpointEnd = (pointArr[endPoint].oy - (pointArr[endPoint].oy - pointArr[endPoint].ny) * anims.b / anims.c) / scale;
+            PointY2 = newYpointEnd;
+          }
           var line = new Kinetic.Line({
               x: 0,
               y: 0,

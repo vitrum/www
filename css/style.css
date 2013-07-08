@@ -72,11 +72,12 @@ a { color: #EEEEEE;}
 
 header { width: 100%; height: 50px; overflow: hidden; background: url(../image/bg-header-i.png) repeat-x; z-index: 10; position: absolute; top: 0; left: 0; }
 header h1 { display: block; width: 120px; height: 50px; margin: 0; line-height:50px; background: url(../image/icon-header-i.png) top left no-repeat; text-indent: -9999em; overflow: hidden;}
-header a { display: block; float: right; width: 80px; height:50px;overflow: hidden;background: url(../image/icon-header-i.png) top right no-repeat; text-indent: -9999em; }
+header div.link_home {  float: right; width: 162px; height:50px;overflow: hidden;}
+header div.link_home a {display: block; float: left; width: 80px; height:50px;overflow: hidden; background: url(../image/icon-header-i.png) top right no-repeat; text-indent: -9999em;}
+header div.link_home a.link_home { background: url(../image/icon-header-i.png) -160px top no-repeat;  }
+header div.link_home a.book { }
 .page { width: 100%; height: 100%; }
-a.punch {
 
-}
 .horizontal {display: none;}
 .navbox { width: 100%; height: 46px; line-height: 46px; text-align: center; position: fixed; bottom: 0px; display: none;}
 .navbox input[type='button'] , .navbox .navlink { 
@@ -90,10 +91,10 @@ a.punch {
 .navbox .subminsuccess ,.navbox .subminsuccess , .navbox .sheargame ,.navbox .yourmount .youreal , .navbox .awardsubmint , .navbox .aboutgame { width: 100%; text-decoration: none;}
 .navbox .showreal .youreal { width: 33.3%;}
 /*homepage*/
-.homepage { width: 100%;  background: url(../image/bg-homepage.jpg) no-repeat top center; }
+.homepage { width: 100%;  background: #f4f4f4 url(../image/bg-homepage-01.jpg) no-repeat top center; min-height: 126px; padding-top: 400px;  }
   .homepage .content { width: 320px; margin: 0 auto; }
-  .homepage .title { width: 100%; height: 166px; background: url(../image/home-title.png) no-repeat top center; text-indent: -9999em;}
-  .homepage .menu { width: 100%; height: 119px; margin-top: 200px; padding-top: 24px}
+  .homepage .title { width: 100%; height: 166px; background: url(../image/home-title.png) no-repeat top center; text-indent: -9999em; display: none;}
+  .homepage .menu { width: 100%; height: 100px; margin-top: 0px; padding: 24px 0 0; }
     .homepage .menu li {height: 30px; margin-bottom: 1px;  }
     .homepage .menu li a { display: block; width: 100%; height: 30px; background: url(../image/home-menu.png) no-repeat center -24px; text-indent: -9999em; overflow: hidden;}
     .homepage .menu li a.awardlist { background-position:center -56px ;}
@@ -113,6 +114,11 @@ a.punch {
   .takebox img { width: 100%;}
 
   #takePictureField { display: block; }
+
+/*rendering*/
+.rendering { position: relative;}
+.caranim {}
+.carunit {}
 /*mounts*/
 .mountswich { width: 100%; }
   .mountswich a { position: absolute; z-index: 900; top: 50%;  width: 45px; height: 45px; display: block; background: url(../image/icon-mountswich.png) no-repeat; text-indent: -9999em; overflow: hidden; display: none; margin-top: -30px; cursor: pointer;}
@@ -146,7 +152,7 @@ a.punch {
   header {height: 50px;}
   header h1 { height: 50px; line-height:50px; }
   header a { height:50px;}
-  .homepage { margin-top: 12px;}
+  /*.homepage { margin-top: 12px;}*/
 }
 /* vertical fat 3star */
 @media screen and (min-width:321px) and (max-width:360px) {
@@ -192,6 +198,7 @@ a.punch {
   header h1 { background-image: url(../image/x2/icon-header-i.png) top left no-repeat; }
   header a { background-image: url(../image/x2/icon-header-i.png) top right no-repeat; }
   .page { background-image: url(../image/x2/bg-i.jpg) ; background-size: 320px 539px;}
+  .homepage { background-image: url(../image/x2/bg-homepage-01.jpg) no-repeat top center;}
   
   /* vertical fat 3star */
   @media screen and (min-width:321px) and (max-width:360px) {

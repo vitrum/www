@@ -9,8 +9,8 @@ var mounts = eval(
 			{ "pid":"2", "pname":"2", "ox":"270","oy":"384","type":"off","nx":"",   "ny":""  },
 			{ "pid":"3", "pname":"3", "ox":"455","oy":"346","type":"off","nx":"",   "ny":""  },
 			{ "pid":"4", "pname":"4", "ox":"331","oy":"308","type":"off","nx":"",   "ny":""  },
-			{ "pid":"5", "pname":"5", "ox":"295","oy":"327","type":"on", "nx":"295","ny":"82"},
-			{ "pid":"6", "pname":"6", "ox":"235","oy":"207","type":"on", "nx":"235","ny":"82"}
+			{ "pid":"5", "pname":"5", "ox":"295","oy":"300","type":"on", "nx":"295","ny":"122"},
+			{ "pid":"6", "pname":"6", "ox":"235","oy":"307","type":"on", "nx":"235","ny":"82"}
 		],
 		"lines": [
 		    {"strpid":"1", "endpid":"2", "type":"off"},
@@ -20,11 +20,14 @@ var mounts = eval(
 		    {"strpid":"1", "endpid":"5", "type":"on" },
 		    {"strpid":"2", "endpid":"5", "type":"on" },
 		    {"strpid":"3", "endpid":"5", "type":"on" },
-		    {"strpid":"4", "endpid":"5", "type":"on" }
+		    {"strpid":"4", "endpid":"5", "type":"on" },
+		    {"strpid":"6", "endpid":"5", "type":"on" },
+		    {"strpid":"1", "endpid":"6", "type":"on" },
+		    {"strpid":"2", "endpid":"6", "type":"on" }
 		],
 		"carway":"30, 68,114,133,121,150",
 		"mpoint":[{"pid":"5"},{"pid":"6"}],
-		"mline":[{"lid":"5"},{"lid":"6"},{"lid":"7"},{"lid":"8"}]
+		"mline":[{"lid":"5"},{"lid":"6"},{"lid":"7"},{"lid":"8"},{"lid":"9"},{"lid":"10"},{"lid":"11"}]
 	},
 	{
 		"mid": "2",
