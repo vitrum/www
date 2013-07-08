@@ -75,12 +75,13 @@ function drowMout(mountid) {
       var i = mountid - 1;
       var pointArr = mounts[i].points
       ,   thisMount = mounts[i]
-      ,   thisMovePoint = ""
-      ,   thisMoveLine = ""
+      ,   movePoint = 0
+      ,   moveLine = 0
       ,   thisMovePointArr = new Array()
       ,   thisMoveLineArr = new Array();
       //var t=0;
-      console.log("\n thisMount.mpoint:" + thisMount.mpoint);
+      thisMount.mpoint = new Object();
+
 
       for (var n=0; n<pointArr.length; n++) {
         //console.log(pointArr[n].ox + ","+ pointArr[n].oy);
@@ -97,17 +98,16 @@ function drowMout(mountid) {
           });
           //console.log( "pointArr" + i +":"+pointArr[n].type + "\n");
           
-          console.log("point-" + n +"-type:" + pointArr[n].type);
+          //console.log("point-" + n +"-type:" + pointArr[n].type);
           if(pointArr[n].type=="off"){
             staticGroup.add(newPoint);
           }else{
             
             animGroup.add(newPoint);
-            if (thisMovePoint!==""){
-              thisMovePoint = thisMovePoint + ',["pid":"'+ (k+1) +'"]'
-            } else {
-              thisMovePoint = '["pid":"'+ (k+1) +'"]'
-            }
+            //thisMount.mpoint[movePoint].pid = k;
+            thisMount.mpoint[movePoint] = {"pid":k};
+            console.log("\n thisMount.mpoint:" + thisMount.mpoint[movePoint].pid);
+            movePoint++;
             
             /* add to move arry 
             thisMount.mpoint[t]='aa';//pointArr[k].pid;
@@ -118,8 +118,8 @@ function drowMout(mountid) {
         })();
         
       }
-      thisMovePointArr = eval('(' + thisMovePoint+')');
-      console.log("\n thisMount.mpoint:" + thisMount.mpoint + " thisMovePointArr:"+ thisMovePointArr );
+      //thisMovePointArr = eval('(' + thisMovePoint+')');
+      //console.log("\n thisMount.mpoint:" + thisMount.mpoint + " thisMount.mpoint:"+ thisMount.mpoint[0].newId );
       /*drow line*/
       var linesArr =  mounts[i].lines;
       for (var n=0; n<linesArr.length; n++) {
@@ -142,11 +142,16 @@ function drowMout(mountid) {
             staticGroup.add(line);
           }else{
             animGroup.add(line);
+            //thisMount.moveLine[movePoint] = {"pid":k};
+            //console.log("\n thisMount.moveLine:" + thisMount.moveLine[movePoint].pid);
+            movePoint++;
           }
       }
     //}//for mounts[i].mid
     //console.log(mountid)
   //}//for mountid
+console.log( thisMount);
+console.log( ":mpoint:"+ thisMount.mpoint.length);
 
   /*drow animtion*/
 
@@ -167,7 +172,7 @@ function drowMout(mountid) {
       y: 0,
       rotationDeg: 0
     });
-    //console.log(thisMount.mpoint + ":mpoint:"+ thisMount.mpoint.length);
+    
     for (var n=0; n<thisMount.mpoint.length; n++) {
       (function() {
           var i = n;

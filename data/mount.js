@@ -26,7 +26,7 @@ var mounts = eval(
 		    {"strpid":"2", "endpid":"6", "type":"on" }
 		],
 		"carway":"30, 68,114,133,121,150",
-		"mpoint":[{"pid":"5"},{"pid":"6"}],
+		/*"mpoint":[{"pid":"5"},{"pid":"6"}],*/
 		"mline":[{"lid":"5"},{"lid":"6"},{"lid":"7"},{"lid":"8"},{"lid":"9"},{"lid":"10"},{"lid":"11"}]
 	},
 	{
@@ -34,8 +34,8 @@ var mounts = eval(
 		"copy":"这是座很高的山",
 		"pic":"http://aaa.com/a.jpg",
 		"points": [
-			{ "pid":"1", "pname":"1", "ox":"125","oy":"211","type":"off","nx":"","ny":""},
-			{ "pid":"2", "pname":"2", "ox":"225","oy":"141","type":"off","nx":"","ny":""},
+			{ "pid":"1", "pname":"1", "ox":"19","oy":"318","type":"off","nx":"","ny":""},
+			{ "pid":"2", "pname":"2", "ox":"55","oy":"287","type":"off","nx":"","ny":""},
 			{ "pid":"3", "pname":"3", "ox":"125","oy":"221","type":"off","nx":"","ny":""},
 			{ "pid":"4", "pname":"4", "ox":"325","oy":"51", "type":"off","nx":"","ny":""},
 			{ "pid":"5", "pname":"5", "ox":"194","oy":"123","type":"off","nx":"","ny":""},
