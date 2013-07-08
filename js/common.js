@@ -39,6 +39,11 @@ function postThePic(event) {
   console.log('postThePic OK!');
 }
 
+function drowCar() {
+
+
+  console.log('drowCar~');
+}
 function drowMout(mountid) {
   var scale = 2
   , stage = new Kinetic.Stage({
@@ -46,11 +51,7 @@ function drowMout(mountid) {
     width: 300,
     height: 280
   });
-  var stage = new Kinetic.Stage({
-    container: 'container',
-    width: 300,
-    height: 280
-  });
+
   var staticLayer = new Kinetic.Layer();
   var staticGroup = new Kinetic.Group({
     x: 0,
@@ -211,6 +212,7 @@ function drowMout(mountid) {
       anim.stop();
       //showSubFrame('yourmount','real');
       showNavBar('yourmount');
+      drowCar();
       //router.navigate('yourmount/real');
       $('.mountswich a').hide();
       $('.mountswich .nex').show();
@@ -235,6 +237,27 @@ function drowMout(mountid) {
     anim.stop();
   }, false);
 
+  /*
+  function drowCar() {
+    var carLayer = new Kinetic.Layer();
+    var imageObj = new Image();
+    imageObj.onload = function() {
+
+        darth = new Kinetic.Image({
+          x: 10,
+          y: 10,
+          image: imageObj,
+          draggable: true,
+          filter: Kinetic.Filters.Invert,
+          filterRadius: 20
+        });
+      
+        carLayer.add(darth);
+        stage.add(carLayer); 
+      };
+      imageObj.src = 'image/x2/car-l-i.png';
+  }//drowCar finish;
+  */
 } //drowMout finish;
 
 

@@ -115,7 +115,7 @@ a.punch {
   #takePictureField { display: block; }
 /*mounts*/
 .mountswich { width: 100%; }
-  .mountswich a { position: absolute; z-index: 900; top: 50%;  width: 45px; height: 45px; display: block; background: url(../image/icon-mountswich.png) no-repeat; text-indent: -9999em; overflow: hidden; display: none; margin-top: -30px;}
+  .mountswich a { position: absolute; z-index: 900; top: 50%;  width: 45px; height: 45px; display: block; background: url(../image/icon-mountswich.png) no-repeat; text-indent: -9999em; overflow: hidden; display: none; margin-top: -30px; cursor: pointer;}
   .mountswich a.pre {left: 0px;left:6px;}
   .mountswich a.nex { right: 0px; background-position: top right; right:6px;}
 
