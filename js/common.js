@@ -38,7 +38,7 @@ function postThePic(event) {
   router.navigate('yourmount/take');
   showSubFrame('yourmount','rendering');
   showNavBar('take');
-  drowMout(1);
+  drowMout(2);
   console.log('postThePic OK!');
 }
  function allPrpos(obj) { 
@@ -63,11 +63,11 @@ function drowCar() {
   console.log('drowCar~');
 }
 function drowMout(mountid) {
-  var scale = 2
+  var scale = 1
   , stage = new Kinetic.Stage({
     container: 'container',
-    width: 300,
-    height: 280
+    width: 640,
+    height: 400
   });
 
   var staticLayer = new Kinetic.Layer();
@@ -104,7 +104,7 @@ function drowMout(mountid) {
             radius: 2,
             fillRGB: {r:230,g:230,b:230},
             shadowColorRGB: {r:255,g:255,b:255},
-            shadowBlur: 4,
+            shadowBlur: 3,
             strokeWidth: 0
           });
           if(pointArr[n].type=="off"){
@@ -135,7 +135,7 @@ function drowMout(mountid) {
           stroke: 'white',
           opacity:0.4
         });
-        console.log("lines-" + n +"-type:" + linesArr[n].type);
+        //console.log("lines-" + n +"-type:" + linesArr[n].type);
           if(linesArr[n].type=="off"){
             staticGroup.add(line);
           }else{
@@ -172,7 +172,7 @@ function drowMout(mountid) {
       if(typeof(thisMount.mpoint[p])=="function"){ 
          thisMount.mpoint[p]();
       }else{ 
-        console.log( "pid = " + p+","+ thisMount.mpoint[p].pid);
+        //console.log( "pid = " + p+","+ thisMount.mpoint[p].pid);
         (function() {
             var i = p;
             var pointNb = thisMount.mpoint[i].pid ;
@@ -186,7 +186,7 @@ function drowMout(mountid) {
                   radius: 2,
                   fillRGB: {r:230,g:230,b:230},
                   shadowColorRGB: {r:255,g:255,b:255},
-                  shadowBlur: 4,
+                  shadowBlur: 3,
                   strokeWidth: 0
                 });
             animGroup.add(newPoint);
@@ -214,7 +214,7 @@ function drowMout(mountid) {
               , PointY1 = pointArr[strPoint].oy/scale
               , PointX2 = pointArr[endPoint].ox/scale
               , PointY2 = pointArr[endPoint].ty/scale;
-            console.log( 'line:' + n + '||pointArr[strPoint].type:' + pointArr[strPoint].type + '||pointArr[endPoint].type:' + pointArr[endPoint].type);
+            //console.log( 'line:' + n + '||pointArr[strPoint].type:' + pointArr[strPoint].type + '||pointArr[endPoint].type:' + pointArr[endPoint].type);
             if (pointArr[strPoint].type =="on"){
               var newYpointStr = (pointArr[strPoint].oy - (pointArr[strPoint].oy - pointArr[strPoint].ny) * anims.b / anims.c) / scale;
               PointY1 = newYpointStr;
@@ -244,7 +244,7 @@ function drowMout(mountid) {
 
 
     animLayer.add(animGroup);
-    console.log("frame:" + frame.timeDiff + ",frame.time :" + frame.time + ",anims.b:" + anims.b ) ;
+    //console.log("frame:" + frame.timeDiff + ",frame.time :" + frame.time + ",anims.b:" + anims.b ) ;
 
     if ( anims.b > anims.c ) {
       anim.stop();
@@ -272,7 +272,8 @@ function drowMout(mountid) {
   }, false);
   
   document.getElementById('stop').addEventListener('click', function() {
-    anim.stop();
+    //anim.stop();
+    drowMout(mountid);
   }, false);
 
   /*
@@ -370,7 +371,7 @@ var AppRouter = Backbone.Router.extend({
         	router.navigate('yourmount/' + step , {  
 	    		  trigger: true  
           });
-        	drowMout(1);
+        	drowMout(2);
         }else if (step == 'real'){
           router.navigate('yourmount/real');
           showSubFrame('yourmount','real');
