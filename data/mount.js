@@ -25,9 +25,10 @@ var mounts = eval(
 		    {"strpid":"1", "endpid":"6", "type":"on" },
 		    {"strpid":"2", "endpid":"6", "type":"on" }
 		],
-		"carway":"30, 68,114,133,121,150",
-		/*"mpoint":[{"pid":"5"},{"pid":"6"}],*/
-		"mline":[{"lid":"5"},{"lid":"6"},{"lid":"7"},{"lid":"8"},{"lid":"9"},{"lid":"10"},{"lid":"11"}]
+		"carway":"30, 68,114,133,121,150"
+		/*,
+		"mpoint":[{"pid":"5"},{"pid":"6"}],
+		"mline":[{"lid":"5"},{"lid":"6"},{"lid":"7"},{"lid":"8"},{"lid":"9"},{"lid":"10"},{"lid":"11"}]*/
 	},
 	{
 		"mid": "2",

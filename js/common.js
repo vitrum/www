@@ -41,7 +41,22 @@ function postThePic(event) {
   drowMout(1);
   console.log('postThePic OK!');
 }
-
+ function allPrpos(obj) { 
+     // 用来保存所有的属性名称和值
+     var props = "";
+     // 开始遍历
+     for(var p in obj){ 
+         // 方法
+         if(typeof(obj[p])=="function"){ 
+             obj[p]();
+         }else{ 
+             // p 为属性名称，obj[p]为对应属性的值
+             props+= p + "=" + obj[p] + "\t";
+         } 
+     } 
+     // 最后显示所有的属性
+     alert(props);
+ }
 function drowCar() {
 
 
@@ -69,22 +84,18 @@ function drowMout(mountid) {
   });
   /*drow*/
   if(!mountid){ mountid = 1;};
-  //for (var i=0; i<mounts.length; i++) {
-    //if (mounts[i].mid == mountid ){
+
       /*drow point*/
       var i = mountid - 1;
       var pointArr = mounts[i].points
       ,   thisMount = mounts[i]
       ,   movePoint = 0
-      ,   moveLine = 0
-      ,   thisMovePointArr = new Array()
-      ,   thisMoveLineArr = new Array();
+      ,   moveLine = 0;
       //var t=0;
       thisMount.mpoint = new Object();
-
+      thisMount.mline = new Object();
 
       for (var n=0; n<pointArr.length; n++) {
-        //console.log(pointArr[n].ox + ","+ pointArr[n].oy);
         (function() {
           var k = n;
           var newPoint = new Kinetic.Circle({
@@ -96,30 +107,17 @@ function drowMout(mountid) {
             shadowBlur: 4,
             strokeWidth: 0
           });
-          //console.log( "pointArr" + i +":"+pointArr[n].type + "\n");
-          
-          //console.log("point-" + n +"-type:" + pointArr[n].type);
           if(pointArr[n].type=="off"){
             staticGroup.add(newPoint);
           }else{
-            
             animGroup.add(newPoint);
-            //thisMount.mpoint[movePoint].pid = k;
             thisMount.mpoint[movePoint] = {"pid":k};
-            console.log("\n thisMount.mpoint:" + thisMount.mpoint[movePoint].pid);
             movePoint++;
-            
-            /* add to move arry 
-            thisMount.mpoint[t]='aa';//pointArr[k].pid;
-            console.log("t:" + t + " pid:"+ pointArr[k].pid)
-            t++;
-            */
+            //console.log("\n thisMount.mpoint:" + thisMount.mpoint[movePoint].pid);
           }
         })();
-        
-      }
-      //thisMovePointArr = eval('(' + thisMovePoint+')');
-      //console.log("\n thisMount.mpoint:" + thisMount.mpoint + " thisMount.mpoint:"+ thisMount.mpoint[0].newId );
+      }//for (var n=0; n<pointArr.length; n++)
+
       /*drow line*/
       var linesArr =  mounts[i].lines;
       for (var n=0; n<linesArr.length; n++) {
@@ -142,16 +140,14 @@ function drowMout(mountid) {
             staticGroup.add(line);
           }else{
             animGroup.add(line);
-            //thisMount.moveLine[movePoint] = {"pid":k};
-            //console.log("\n thisMount.moveLine:" + thisMount.moveLine[movePoint].pid);
-            movePoint++;
+            thisMount.mline[moveLine] = {"lid":n};
+            moveLine++;
           }
       }
-    //}//for mounts[i].mid
-    //console.log(mountid)
-  //}//for mountid
-console.log( thisMount);
-console.log( ":mpoint:"+ thisMount.mpoint.length);
+
+  //console.log( thisMount);
+  console.log( thisMount);
+  //allPrpos(thisMount.mpoint);
 
   /*drow animtion*/
 
@@ -172,60 +168,76 @@ console.log( ":mpoint:"+ thisMount.mpoint.length);
       y: 0,
       rotationDeg: 0
     });
-    
+    for(var p in thisMount.mpoint){ 
+      if(typeof(thisMount.mpoint[p])=="function"){ 
+         thisMount.mpoint[p]();
+      }else{ 
+        console.log( "pid = " + p+","+ thisMount.mpoint[p].pid);
+        (function() {
+            var i = p;
+            var pointNb = thisMount.mpoint[i].pid ;
+            var newYpoint = (pointArr[pointNb].oy - (pointArr[pointNb].oy - pointArr[pointNb].ny) * anims.b / anims.c) / scale;
+            pointArr[pointNb].ty = newYpoint;
+            //console.log("number:"+n+ "||newYpoint:" + newYpoint);
+            // get old and new x , (old - (old - new)*b/c)/scale , save this to temp x
+            var newPoint = new Kinetic.Circle({
+                  x: pointArr[pointNb].ox/scale,
+                  y: newYpoint,
+                  radius: 2,
+                  fillRGB: {r:230,g:230,b:230},
+                  shadowColorRGB: {r:255,g:255,b:255},
+                  shadowBlur: 4,
+                  strokeWidth: 0
+                });
+            animGroup.add(newPoint);
+        })();
+      } 
+    } //p in thisMount.mpoint
+    /*
     for (var n=0; n<thisMount.mpoint.length; n++) {
-      (function() {
-          var i = n;
-          var pointNb = thisMount.mpoint[i].pid - 1;
-          //console.log("number:"+n+ ":start" + "pid:" +pointNb + "|pointArr[pointNb]:" + pointArr[pointNb] );
-          var newYpoint = (pointArr[pointNb].oy - (pointArr[pointNb].oy - pointArr[pointNb].ny) * anims.b / anims.c) / scale;
-          pointArr[pointNb].ty = newYpoint;
-          //console.log("number:"+n+ "||newYpoint:" + newYpoint);
-          // get old and new x , (old - (old - new)*b/c)/scale , save this to temp x
-          var newPoint = new Kinetic.Circle({
-                x: pointArr[pointNb].ox/scale,
-                y: newYpoint,
-                radius: 2,
-                fillRGB: {r:230,g:230,b:230},
-                shadowColorRGB: {r:255,g:255,b:255},
-                shadowBlur: 4,
-                strokeWidth: 0
-              });
-          animGroup.add(newPoint);
-      })();
+
       //console.log("number:"+n+ ":ok");
     } //thisMount.mpoint.length
-    for (var n=0; n<thisMount.mline.length; n++) {
-      (function() {
-          var i = n;
-          var lineNb = thisMount.mline[n].lid - 1;
+    */
+    for(var p in thisMount.mline){ 
+      if(typeof(thisMount.mline[p])=="function"){ 
+         thisMount.mline[p]();
+      }else{
+        //console.log( "lid = " + p+","+ thisMount.mline[p].lid);
+        (function() {
+            var i = p;
+            var lineNb = thisMount.mline[i].lid;
 
-          var strPoint = linesArr[lineNb].strpid-1
-            , endPoint = linesArr[lineNb].endpid-1
-            , PointX1 = pointArr[strPoint].ox/scale
-            , PointY1 = pointArr[strPoint].oy/scale
-            , PointX2 = pointArr[endPoint].ox/scale
-            , PointY2 = pointArr[endPoint].ty/scale;
-          console.log( 'line:' + n + '||pointArr[strPoint].type:' + pointArr[strPoint].type + '||pointArr[endPoint].type:' + pointArr[endPoint].type);
-          if (pointArr[strPoint].type =="on"){
-            var newYpointStr = (pointArr[strPoint].oy - (pointArr[strPoint].oy - pointArr[strPoint].ny) * anims.b / anims.c) / scale;
-            PointY1 = newYpointStr;
-          }
-          if (pointArr[endPoint].type =="on"){
-            var newYpointEnd = (pointArr[endPoint].oy - (pointArr[endPoint].oy - pointArr[endPoint].ny) * anims.b / anims.c) / scale;
-            PointY2 = newYpointEnd;
-          }
-          var line = new Kinetic.Line({
-              x: 0,
-              y: 0,
-              id: "mline"+n,
-              points: [PointX1,PointY1,PointX2,PointY2],
-              stroke: 'white',
-              opacity:0.4
-          });
-          //console.log("move number:"+n+ "||" + ",strPoint:"  + strPoint+ ",endPoint:" + endPoint+",PointY2:" + PointY2);
-          animGroup.add(line);
-      })();
+            var strPoint = linesArr[lineNb].strpid-1
+              , endPoint = linesArr[lineNb].endpid-1
+              , PointX1 = pointArr[strPoint].ox/scale
+              , PointY1 = pointArr[strPoint].oy/scale
+              , PointX2 = pointArr[endPoint].ox/scale
+              , PointY2 = pointArr[endPoint].ty/scale;
+            console.log( 'line:' + n + '||pointArr[strPoint].type:' + pointArr[strPoint].type + '||pointArr[endPoint].type:' + pointArr[endPoint].type);
+            if (pointArr[strPoint].type =="on"){
+              var newYpointStr = (pointArr[strPoint].oy - (pointArr[strPoint].oy - pointArr[strPoint].ny) * anims.b / anims.c) / scale;
+              PointY1 = newYpointStr;
+            }
+            if (pointArr[endPoint].type =="on"){
+              var newYpointEnd = (pointArr[endPoint].oy - (pointArr[endPoint].oy - pointArr[endPoint].ny) * anims.b / anims.c) / scale;
+              PointY2 = newYpointEnd;
+            }
+            var line = new Kinetic.Line({
+                x: 0,
+                y: 0,
+                id: "mline"+n,
+                points: [PointX1,PointY1,PointX2,PointY2],
+                stroke: 'white',
+                opacity:0.4
+            });
+            //console.log("move number:"+n+ "||" + ",strPoint:"  + strPoint+ ",endPoint:" + endPoint+",PointY2:" + PointY2);
+            animGroup.add(line);
+        })();
+      } 
+    } //p in thisMount.mpoint 
+    for (var n=0; n<thisMount.mline.length; n++) {
+
       
     }
 
