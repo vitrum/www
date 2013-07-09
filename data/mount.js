@@ -26,13 +26,10 @@ var mounts = eval(
 		    {"strpid":"2", "endpid":"6", "type":"on" }
 		],
 		"carway":"30, 68,114,133,121,150"
-		/*,
-		"mpoint":[{"pid":"5"},{"pid":"6"}],
-		"mline":[{"lid":"5"},{"lid":"6"},{"lid":"7"},{"lid":"8"},{"lid":"9"},{"lid":"10"},{"lid":"11"}]*/
 	},
 	{
 		"mid": "2",
-		"copy":"这是座很高的山",
+		"copy":"玉龙雪山",
 		"pic":"http://aaa.com/a.jpg",
 		"points": [
 			{ "pid":"1", "pname":"1", "ox":"16","oy":"318","type":"off","nx":"","ny":""},
@@ -161,7 +158,6 @@ var mounts = eval(
 		    {"strpid":"45", "endpid":"46", "type":"on" },
 		    {"strpid":"46", "endpid":"47", "type":"on" },
 		    {"strpid":"12", "endpid":"46", "type":"on" },
-		    {"strpid":"46", "endpid":"47", "type":"on" },
 		    {"strpid":"13", "endpid":"47", "type":"on" },
 		    {"strpid":"16", "endpid":"47", "type":"on" },
 		    {"strpid":"16", "endpid":"45", "type":"on" },

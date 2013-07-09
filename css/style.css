@@ -79,9 +79,9 @@ header div.link_home a.book { }
 .page { width: 100%; height: 100%; }
 
 .horizontal {display: none;}
-.navbox { width: 100%; height: 46px; line-height: 46px; text-align: center; position: fixed; bottom: 0px; display: none;}
+.navbox { width: 100%; height: 46px; line-height: 46px; text-align: center; position: fixed; bottom: 0px; display: none;background: url(../image/bg-navbar2.png) repeat-x;}
 .navbox input[type='button'] , .navbox .navlink { 
-  height:46px; text-align: center;background: url(../image/bg-navbar.png); display: block;border:none;border-radius:0; color: #fff;
+  height:46px; text-align: center;/*background: url(../image/bg-navbar.png);*/ display: block;border:none;border-radius:0; color: #fff;background: none;
   appearance:none;-moz-appearance:none;-webkit-appearance:none;
 }
 .navbox .takepic .takethepic { width: 100%;}
@@ -116,12 +116,38 @@ header div.link_home a.book { }
   #takePictureField { display: block; }
 
 /*rendering*/
-.rendering { position: relative;}
-.caranim {}
-.carunit {}
+.rendering { position: relative; width: 100%; min-height: 520px;}
+#container {position: absolute; width: 100%; height: auto; z-index: 100;top:160px;}
+.caranimbox {position: absolute; width: 300px; height: 400px; top:160px;  z-index: 200;}
+.carunit { position: absolute;background: url(../image/x2/car-left-i.png) no-repeat; width: 40px; height: 40px; background-size: 40px 40px;
+  bottom: 300px; right: 0; opacity: 0;
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+.caranim {
+  opacity: 1;
+  -webkit-animation: caranimtion 2s;
+  -moz-animation: caranimtion 2s;
+  -ms-animation: caranimtion 2s;
+  -o-animation: caranimtion 2s;
+  animation: caranimtion 2s;
+}
+@-webkit-keyframes caranimtion {
+  0% {bottom: 300px; right: 0;} 
+  20% { bottom: 280px; right: 30px;}
+  50% {bottom: 240px; right: 80px;}
+  60% {bottom: 210px; right: 120px;}
+  70% {bottom: 190px; right: 180px;}
+  80% {bottom: 150px; right: 190px;}
+  90% {bottom: 140px; right: 260px;}
+  100% {bottom: 100px; right: 270px;}
+}
 /*mounts*/
 .mountswich { width: 100%; }
-  .mountswich a { position: absolute; z-index: 900; top: 50%;  width: 45px; height: 45px; display: block; background: url(../image/icon-mountswich.png) no-repeat; text-indent: -9999em; overflow: hidden; display: none; margin-top: -30px; cursor: pointer;}
+  .mountswich a { position: absolute; z-index: 900;  top: 50%;  width: 45px; height: 45px; display: block; background: url(../image/icon-mountswich.png) no-repeat; text-indent: -9999em; overflow: hidden; display: none; margin-top: -30px; cursor: pointer;}
   .mountswich a.pre {left: 0px;left:6px;}
   .mountswich a.nex { right: 0px; background-position: top right; right:6px;}
 

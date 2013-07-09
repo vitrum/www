@@ -35,10 +35,31 @@ function gotPic(event) {
 
 function postThePic(event) {
   //alert("postThePic OK!");
-  router.navigate('yourmount/take');
-  showSubFrame('yourmount','rendering');
-  showNavBar('take');
-  drowMout(2);
+
+  $.ajax({
+    type: 'POST',
+    url:'post.php?op=upload',
+    data: { name: 'vitrum.post' },
+    // type of data we are expecting in return:
+    dataType: 'json',
+    timeout: 300,
+    context: $('body'),
+    success: function(json){
+      // Supposing this JSON payload was received:
+      //   {"project": {"id": 42, "html": "<div>..." }}
+      // append the HTML to context object.
+      console.log('mid='+ json.data.mid +",similar"+ json.data.similar);
+      //router.navigate('yourmount/take');
+      //showSubFrame('yourmount','rendering');
+      //showNavBar('take');
+      //drowMout(2);
+    },
+    error: function(xhr, type){
+      alert('Ajax error!')
+    }
+  })
+
+  //drowMout(2);
   console.log('postThePic OK!');
 }
  function allPrpos(obj) { 
@@ -58,16 +79,17 @@ function postThePic(event) {
      alert(props);
  }
 function drowCar() {
-
+  var self = $(".carunit");
+  self.toggleClass('caranim');
 
   console.log('drowCar~');
 }
 function drowMout(mountid) {
-  var scale = 1
+  var scale = 2
   , stage = new Kinetic.Stage({
     container: 'container',
-    width: 640,
-    height: 400
+    width: 320,
+    height: 200
   });
 
   var staticLayer = new Kinetic.Layer();
@@ -96,7 +118,7 @@ function drowMout(mountid) {
       thisMount.mline = new Object();
 
       for (var n=0; n<pointArr.length; n++) {
-        (function() {
+        //(function() {
           var k = n;
           var newPoint = new Kinetic.Circle({
             x: pointArr[k].ox/scale,
@@ -104,7 +126,7 @@ function drowMout(mountid) {
             radius: 2,
             fillRGB: {r:230,g:230,b:230},
             shadowColorRGB: {r:255,g:255,b:255},
-            shadowBlur: 3,
+            shadowBlur: 4,
             strokeWidth: 0
           });
           if(pointArr[n].type=="off"){
@@ -115,7 +137,7 @@ function drowMout(mountid) {
             movePoint++;
             //console.log("\n thisMount.mpoint:" + thisMount.mpoint[movePoint].pid);
           }
-        })();
+        //})();
       }//for (var n=0; n<pointArr.length; n++)
 
       /*drow line*/
@@ -173,7 +195,7 @@ function drowMout(mountid) {
          thisMount.mpoint[p]();
       }else{ 
         //console.log( "pid = " + p+","+ thisMount.mpoint[p].pid);
-        (function() {
+        //(function() {
             var i = p;
             var pointNb = thisMount.mpoint[i].pid ;
             var newYpoint = (pointArr[pointNb].oy - (pointArr[pointNb].oy - pointArr[pointNb].ny) * anims.b / anims.c) / scale;
@@ -186,11 +208,11 @@ function drowMout(mountid) {
                   radius: 2,
                   fillRGB: {r:230,g:230,b:230},
                   shadowColorRGB: {r:255,g:255,b:255},
-                  shadowBlur: 3,
+                  shadowBlur: 4,
                   strokeWidth: 0
                 });
             animGroup.add(newPoint);
-        })();
+        //})();
       } 
     } //p in thisMount.mpoint
     /*
@@ -204,7 +226,7 @@ function drowMout(mountid) {
          thisMount.mline[p]();
       }else{
         //console.log( "lid = " + p+","+ thisMount.mline[p].lid);
-        (function() {
+        //(function() {
             var i = p;
             var lineNb = thisMount.mline[i].lid;
 
@@ -233,15 +255,9 @@ function drowMout(mountid) {
             });
             //console.log("move number:"+n+ "||" + ",strPoint:"  + strPoint+ ",endPoint:" + endPoint+",PointY2:" + PointY2);
             animGroup.add(line);
-        })();
+        //})();
       } 
     } //p in thisMount.mpoint 
-    for (var n=0; n<thisMount.mline.length; n++) {
-
-      
-    }
-
-
 
     animLayer.add(animGroup);
     //console.log("frame:" + frame.timeDiff + ",frame.time :" + frame.time + ",anims.b:" + anims.b ) ;
@@ -250,7 +266,11 @@ function drowMout(mountid) {
       anim.stop();
       //showSubFrame('yourmount','real');
       showNavBar('yourmount');
-      drowCar();
+        setTimeout(function () {
+          console.log("drowCar~~~~~~");
+            drowCar();
+        }, 800);
+      
       //router.navigate('yourmount/real');
       $('.mountswich a').hide();
       $('.mountswich .nex').show();
