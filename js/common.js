@@ -91,11 +91,36 @@ function postThePic(event) {
   //alert("postThePic OK!");
   var testCanvas = document.getElementById("postThePicCanvas");  
   var canvasData = testCanvas.toDataURL("image/png");
-  var postData = '"sex":"male","uid":"111","image":"'+ canvasData +'"';
-  console.log(postData);
-  $.ajax({type:'POST',url:'post.php?op=upload', data : postData,success:function(data){
-    console.log(data);
-  }})
+  //uid and sex need be update;
+  var postData = '"&sex=male&uid=111&image='+ canvasData;
+  //console.log(postData);
+  /*var ajax = new XMLHttpRequest();
+    ajax.open("POST",'post.php?op=upload',false);
+    ajax.onreadystatechange = function() {
+        console.log(ajax.responseText);
+    }
+    ajax.setRequestHeader('Content-Type', 'application/upload');
+    ajax.send("image="+canvasData);
+  */
+  $.ajax({type:'POST',url:'post.php?op=upload',data:postData,
+    success:function(json){
+      console.log(json);
+      var jsdata = eval('('+json+')');  
+      console.log('mid='+ jsdata.data.mid +",similar="+ jsdata.data.similar);
+      router.navigate('yourmount/'+ jsdata.data.mid , {  
+        trigger: true  
+      });
+      showSubFrame('yourmount','rendering');
+      showNavBar();
+      drowMout(Number(jsdata.data.mid));
+
+      //console.log('mid='+ jsdata.data.mid );
+    },
+    error: function(xhr, type){
+      console.log('Ajax error!')
+    }
+  })
+
   /*
   $.ajax({
     type: 'POST',
@@ -451,9 +476,9 @@ var AppRouter = Backbone.Router.extend({
     yourMount : function(step) {  
     	if(!step){ user = 'take'}
         console.log('渲染详情方法, id为: ' + step);
-        showFrame('yourmount');
+        showSubFrame('yourmount','rendering');
         if(step == 'take'){
-        	router.navigate('yourmount/' + step , {  
+        	router.navigate('yourmount/rendering' , {  
 	    		  trigger: true  
           });
         	drowMout(2);
@@ -463,7 +488,13 @@ var AppRouter = Backbone.Router.extend({
           showNavBar('submintinfo');
           $('.mountswich a').hide();
           $('.mountswich .pre').show();
-      }
+        }else{
+          router.navigate('yourmount/' + step , {  
+            trigger: true  
+          });
+          drowMout(step);
+
+        }
     }, 
     renderError : function(error) {  
         console.log('URL错误, 错误信息: ' + error); 
@@ -517,7 +548,6 @@ $(document).ready(function() {
     router.navigate('yourmount/real');
     $('.mountswich a').hide();
     $('.mountswich .pre').show();
-
   });
 });
 

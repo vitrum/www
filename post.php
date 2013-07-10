@@ -1,15 +1,17 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
+define('ROOT',dirname(__FILE__));
+
 require_once('db.php');
 $db = new DB();
 
 $op = $_GET['op'];
 if($op == 'upload'){
-    if(isset($_POST)){
+    if(count($_POST)>0){
         
         $sex = $_POST['sex'];
         $uid = $_POST['uid'];
-
+              
         if(!$uid){
             $sql = "INSERT INTO user (`sex`,`createtime`) VALUES('$sex','".time()."');";
             $uid = $db->insert($sql);
@@ -21,11 +23,15 @@ if($op == 'upload'){
         if(empty($data)){ 
           $pic=file_get_contents("php://input");
         }*/
-        
+
         if(!empty($pic)){
-            
-            $filename = date('Ymd',time()).substr(md5(time()),8,16).'-'.$uid;
-            $image = base64_decode(str_replace('data:image/png;base64,', '',$pic));
+            $path = './uploads/'.date('Y').'/'.date('m').'/'.date('d');
+            if(!is_dir($path)){
+                @mkdir($path,0777,true);
+            }
+            $filename = date('Ymd',time()).substr(md5(time()),8,16).'-'.$uid.'.png';
+            $image = str_replace(' ', '+', $pic);
+            $image = base64_decode(str_replace('data:image/png;base64,', '',$image));
             $fp = fopen($path.'/'.$filename, 'w');
             fwrite($fp, $image);
             fclose($fp);
