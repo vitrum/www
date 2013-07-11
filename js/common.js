@@ -80,6 +80,10 @@ function gotPic(e) {
     var fileInput = document.getElementById('takePictureField');
     var file = fileInput.files[0];
     var dragging = false;
+    EXIF.getData(e.target.files[0], function() {
+      var exifInfo = eval('('+EXIF.pretty(this)+')'); 
+        console.log(exifInfo);
+    });
     // MegaPixImage constructor accepts File/Blob object.
     var mpImg = new MegaPixImage(file);
     var resCanvas2 = document.getElementById('postThePicCanvas');
