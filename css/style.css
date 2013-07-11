@@ -113,7 +113,7 @@ header div.link_home a.book { }
   .takebox .gridbox { display: block; background: url(../image/mask-hand.png)  center -80px no-repeat; position: absolute; top: 0; left: 0; z-index: 10; width: 100%; height: 100%;}
   .takebox img { width: 100%;}
   #takePictureField { display: block; z-index: 200; }
-  .takebox .piccanvas { padding: 0; margin: 0;}
+  .takebox .piccanvas { padding: 0; margin: 0;position: absolute;}
 #yourimage { width: 0; height: 0; }
 /*rendering*/
 .rendering { position: relative; width: 100%; min-height: 520px;}

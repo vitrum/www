@@ -9,7 +9,33 @@
  * Released under the MIT license
  */
 (function(){function detectSubsampling(img){var iw=img.naturalWidth,ih=img.naturalHeight;if(iw*ih>1024*1024){var canvas=document.createElement('canvas');canvas.width=canvas.height=1;var ctx=canvas.getContext('2d');ctx.drawImage(img,-iw+1,0);return ctx.getImageData(0,0,1,1).data[3]===0}else{return false}}function detectVerticalSquash(img,iw,ih){var canvas=document.createElement('canvas');canvas.width=1;canvas.height=ih;var ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);var data=ctx.getImageData(0,0,1,ih).data;var sy=0;var ey=ih;var py=ih;while(py>sy){var alpha=data[(py-1)*4+3];if(alpha===0){ey=py}else{sy=py}py=(ey+sy)>>1}var ratio=(py/ih);return(ratio===0)?1:ratio}function renderImageToDataURL(img,options,doSquash){var canvas=document.createElement('canvas');renderImageToCanvas(img,canvas,options,doSquash);return canvas.toDataURL("image/jpeg",options.quality||0.8)}function renderImageToCanvas(img,canvas,options,doSquash){var iw=img.naturalWidth,ih=img.naturalHeight;var width=options.width,height=options.height;var ctx=canvas.getContext('2d');ctx.save();transformCoordinate(canvas,width,height,options.orientation);var subsampled=detectSubsampling(img);if(subsampled){iw/=2;ih/=2}var d=1024;var tmpCanvas=document.createElement('canvas');tmpCanvas.width=tmpCanvas.height=d;var tmpCtx=tmpCanvas.getContext('2d');var vertSquashRatio=doSquash?detectVerticalSquash(img,iw,ih):1;var dw=Math.ceil(d*width/iw);var dh=Math.ceil(d*height/ih/vertSquashRatio);var sy=0;var dy=0;while(sy<ih){var sx=0;var dx=0;while(sx<iw){tmpCtx.clearRect(0,0,d,d);tmpCtx.drawImage(img,-sx,-sy);ctx.drawImage(tmpCanvas,0,0,d,d,dx,dy,dw,dh);sx+=d;dx+=dw}sy+=d;dy+=dh}ctx.restore();tmpCanvas=tmpCtx=null}function transformCoordinate(canvas,width,height,orientation){switch(orientation){case 5:case 6:case 7:case 8:canvas.width=height;canvas.height=width;break;default:canvas.width=width;canvas.height=height}var ctx=canvas.getContext('2d');switch(orientation){case 2:ctx.translate(width,0);ctx.scale(-1,1);break;case 3:ctx.translate(width,height);ctx.rotate(Math.PI);break;case 4:ctx.translate(0,height);ctx.scale(1,-1);break;case 5:ctx.rotate(0.5*Math.PI);ctx.scale(1,-1);break;case 6:ctx.rotate(0.5*Math.PI);ctx.translate(0,-height);break;case 7:ctx.rotate(0.5*Math.PI);ctx.translate(width,-height);ctx.scale(-1,1);break;case 8:ctx.rotate(-0.5*Math.PI);ctx.translate(-width,0);break;default:break}}function MegaPixImage(srcImage){if(srcImage instanceof Blob){var img=new Image();var URL=window.URL&&window.URL.createObjectURL?window.URL:window.webkitURL&&window.webkitURL.createObjectURL?window.webkitURL:null;if(!URL){throw Error("No createObjectURL function found to create blob url")}img.src=URL.createObjectURL(srcImage);this.blob=srcImage;srcImage=img}if(!srcImage.naturalWidth&&!srcImage.naturalHeight){var _this=this;srcImage.onload=function(){var listeners=_this.imageLoadListeners;if(listeners){_this.imageLoadListeners=null;for(var i=0,len=listeners.length;i<len;i++){listeners[i]()}}};this.imageLoadListeners=[]}this.srcImage=srcImage}MegaPixImage.prototype.render=function(target,options){if(this.imageLoadListeners){var _this=this;this.imageLoadListeners.push(function(){_this.render(target,options)});return}options=options||{};var imgWidth=this.srcImage.naturalWidth,imgHeight=this.srcImage.naturalHeight,width=options.width,height=options.height,maxWidth=options.maxWidth,maxHeight=options.maxHeight,doSquash=!this.blob||this.blob.type==='image/jpeg';if(width&&!height){height=(imgHeight*width/imgWidth)<<0}else if(height&&!width){width=(imgWidth*height/imgHeight)<<0}else{width=imgWidth;height=imgHeight}if(maxWidth&&width>maxWidth){width=maxWidth;height=(imgHeight*width/imgWidth)<<0}if(maxHeight&&height>maxHeight){height=maxHeight;width=(imgWidth*height/imgHeight)<<0}var opt={width:width,height:height};for(var k in options)opt[k]=options[k];var tagName=target.tagName.toLowerCase();if(tagName==='img'){target.src=renderImageToDataURL(this.srcImage,opt,doSquash)}else if(tagName==='canvas'){renderImageToCanvas(this.srcImage,target,opt,doSquash)}if(typeof this.onrender==='function'){this.onrender(target)}};if(typeof define==='function'&&define.amd){define([],function(){return MegaPixImage})}else{this.MegaPixImage=MegaPixImage}})();
-
+function getObjPos(obj)   
+{   
+    var x = y = 0;   
+    if (obj.getBoundingClientRect)   
+    {   
+        var box = obj.getBoundingClientRect();   
+        var D = document.documentElement;   
+        x = box.left + Math.max(D.scrollLeft, document.body.scrollLeft) - D.clientLeft;   
+        y = box.top + Math.max(D.scrollTop, document.body.scrollTop) - D.clientTop;        
+    }   
+    else  
+    {   
+        for(; obj != document.body; x += obj.offsetLeft, y += obj.offsetTop, obj = obj.offsetParent );   
+    }   
+    return {'x':x, 'y':y};   
+}   
+  
+function getCurPos(e)   
+{   
+    e = e || window.event;   
+    var D = document.documentElement;   
+    if (e.pageX) return {x: e.pageX, y: e.pageY};   
+    return {   
+        x: e.clientX + D.scrollLeft - D.clientLeft,   
+        y: e.clientY + D.scrollTop - D.clientTop       
+    };   
+}  
 function sqRt(form) {
   var number = form.num.value;
   var ans = Math.sqrt(number);
@@ -58,32 +84,19 @@ function gotPic(e) {
     var mpImg = new MegaPixImage(file);
     var resCanvas2 = document.getElementById('postThePicCanvas');
       //need check pic's exif to select the right orientation value;
-    mpImg.render(resCanvas2, { maxWidth: 320, maxHeight: 500, orientation: 6 });
-    var dragbox = document.getElementById("gridbox");
-    Hammer(dragbox).on("dragstart", function(event) {
-      event.gesture.preventDefault();
-      var g = event.gesture;
-        dragx = g.center.pageX;
-        dragy = g.center.pageY;
-        dragging = true;
-        console.log("\ndragstart\ndragx:" + dragx + ",dragy:" + dragy);
+    mpImg.render(resCanvas2, { maxWidth: 400, maxHeight: 568, orientation: 6 });
+    var hammertime = Hammer(document.getElementById("gridbox"));
+    hammertime.on("touch drag", function(ev) {
+      var touches = ev.gesture.touches;
+      ev.gesture.preventDefault();
+      for(var t=0,len=touches.length; t<len; t++) {
+        var target = $(touches[t].target);
+        $('#postThePicCanvas').css({
+          left: touches[t].pageX-160,
+          top: touches[t].pageY-250
+        });
+      }
     });
-    Hammer(dragbox).on("dragend", function(event) {
-      //console.log("\ndrag event end! \ndragend\n dragx:" + dragx + ",dragy:" + dragy);
-      alert("\ndrag event end! \ndragend\n dragx:" + dragx + ",dragy:" + dragy);
-      dragx = dragy = null; 
-      dragging = false;
-
-      //clearInterval(intervalId);
-    });
-    Hammer(dragbox).on("drag", function(event) {
-      event.gesture.preventDefault();
-      var g = event.gesture;
-          //alert("event:" + obj2string(event));
-          //alert("point center:"+ obj2string(g.center) + "\n deltaX:" + g.deltaX + "\n deltaY:" + g.deltaY );
-          if (!dragging) return;
-        console.log("\deltaX\deltaY:" +  g.deltaX + ",dragy:" +  g.deltaY );
-      });
   }
 }
 

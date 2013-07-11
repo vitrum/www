@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(0);
 define('ROOT',dirname(__FILE__));
 
 require_once('db.php');
@@ -10,14 +10,7 @@ if($op == 'upload'){
     if(count($_POST)>0){
         
         $sex = $_POST['sex'];
-        $uid = $_POST['uid'];
-              
-        if(!$uid){
-            $sql = "INSERT INTO user (`sex`,`createtime`) VALUES('$sex','".time()."');";
-            $uid = $db->insert($sql);
-            setcookie('luxgenuser',$uid,time()+86400*180);
-        }
-
+        $from = $_POST['type']; //eg: mobile,pc,pad.
         $pic = $_POST['image'];
         /*$pic = $GLOBALS[HTTP_RAW_POST_DATA];
         if(empty($data)){ 
@@ -38,13 +31,14 @@ if($op == 'upload'){
         
         
             //图片
-            $sql = "INSERT INTO image (`uid`,`path`,`createtime`) VALUES ('$uid','$filename','".time()."');";
+            $sql = "INSERT INTO image (`type`,`sex`,`path`,`createtime`) VALUES ('$from','$sex','$filename','".time()."');";
             $res = $db->insert($sql);
         
         }
         
         if($res)
-        echo json_encode(array('error_msg'=>'','status'=>'success','data'=>array('uid'=>$uid,'mid'=>1,'similar'=>0.55)));
+        echo json_encode(array('error_msg'=>'','status'=>'success','data'=>array('uid'=>$res,'mid'=>1,'similar'=>0.55)));
+        setcookie('luxgenuser',$res,time()+86400*365);
         
     }else{
         echo json_encode(array('error_msg'=>'上传失败','status'=>'error','data'=>''));
@@ -52,18 +46,18 @@ if($op == 'upload'){
 }elseif ($op == 'profile'){
     
     if(isset($_POST)){
+        
         $uid = $_POST['uid'];
         $name = $_POST['name'];
         $mobile = $_POST['mobile'];
         $province = $_POST['province'];
         $city = $_POST['city'];
         
-        $sql = "UPDATE user set name='$name',mobile='$mobile',province='$province',city='$city' WHERE id='$uid';";
-        $res = $db->update($sql);
+        $sql = "INSERT INTO user (`uid`,`name`,`mobile`,`province`,`city`) VALUES ('$uid','$name','$mobile','$province','$city');";
+        $res = $db->insert($sql);
         
-        if($res){
-            echo json_encode(array('error_msg'=>'成功','status'=>'success','data'=>''));
-        }
+        if($res)
+            echo json_encode(array('error_msg'=>'成功','status'=>'success','data'=>array('isaward'=>1)));
         
     }else{
         
@@ -71,7 +65,40 @@ if($op == 'upload'){
         
     }
 }elseif ($op == 'share'){
-    
+    if(count($_POST)>0)
+    {
+        $title = '纳智捷Luxgen';
+        $content = '纳智捷Luxgen';
+        $pic = '';
+        $url = 'http://mobile.dfyl-luxgen.com';
+        
+        $uid = $_POST['uid'];
+        $from = $_POST['type'];
+        $platform = $_POST['platform'];
+        
+        $sql = "INSERT INTO share (`uid`,`platform`) VALUES ('$uid','$platform');";
+        $db->insert($sql);
+        
+        switch ($platform)
+        {
+            case 'qq':
+                $shareurl = 'http://share.v.t.qq.com/index.php?c=share&a=index&url='.$url.'&title='.$title.'&pic='.$pic.'&appkey=801cf76d3cfc44ada52ec13114e84a96';
+                break;
+            case 'sina':
+                $shareurl = 'http://service.weibo.com/share/share.php?title='.$title.$content.'&url='.$url.'&source=bookmark&appkey=1995346682&pic='.$pic.'&ralateUid=';
+                break;
+            case 'renren':
+                $shareurl = 'http://widget.renren.com/dialog/share?resourceUrl='.$url.'&srcUrl='.$url.'&title='.$title.'&description='.$content.'&pic='.$pic;
+                break;
+        }
+        
+         if($res){
+            echo json_encode(array('error_msg'=>'成功','status'=>'success','data'=>array('shareurl'=>$shareurl)));
+        }
+    }else{
+        
+         echo json_encode(array('error_msg'=>'失败','status'=>'error','data'=>''));
+    }
 }
 
 ?>
