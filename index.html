@@ -87,15 +87,15 @@
 						<p class="info">以便您中奖时，我们能及时联络。</p>
 					</div>
 					<div class="subform">
-						<form id="userprofile">
+						<form id="userprofile" name="creator">
 							<ul>
-								<li><label class="forname">姓名</label><input type="text" name="uname" id="uname" /></li>
-								<li><label class="forphone">手机</label><input type="number" name="phone" id="phone" /></li>
+								<li><label class="forname">姓名</label><input type="text" name="uname" id="uname"  maxlength="22" /></li>
+								<li><label class="forphone">手机</label><input type="number" name="phone" id="phone"  maxlength="20" /><input type="hidden" name="gender" id="gender" /></li>
 								<li>
 									<label class="forcity">城市</label>
-									<select name="city">
+									<select  name="province" id="city">
 									</select>
-									<select name="city2">
+									<select name="city" id="city2">
 									</select>
 								</li>
 							</ul>

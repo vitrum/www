@@ -53,7 +53,6 @@ var hammertime = Hammer(document.getElementById("toucharea"));
                 for(var t=0,len=touches.length; t<len; t++) {
                     var target = $(touches[t].target);
                     target.css({
-                        zIndex: 1337,
                         left: touches[t].pageX-50,
                         top: touches[t].pageY-50
                     });

@@ -13,24 +13,29 @@ if($op == 'upload'){
         $from = $_POST['type']; //eg: mobile,pc,pad.
         
         
-        if (isset($GLOBALS[HTTP_RAW_POST_DATA])) {
+        /*if (empty($_POST['image'])) {
         	$image = $GLOBALS[HTTP_RAW_POST_DATA];
             if(empty($data)){ 
                 $image=file_get_contents("php://input");
             }
-            //$image = $_POST['image'];
-        }else{
+        }*/
+        
+        /*if(!strrpos($_POST['image'],'base64')){
+            $image = $_POST['image'];
+            //$image = base64_decode($image);
+            $image = base64_decode(str_replace('data:image/png;base64,', '',$image));
+        }else{*/
             $pic = $_POST['image'];
             $image = str_replace(' ', '+', $pic);
             $image = base64_decode(str_replace('data:image/png;base64,', '',$image));
-        }
+        //}
         
-        if(!empty($pic)){
+        if(!empty($image)){
             $path = './uploads/'.date('Y').'/'.date('m').'/'.date('d');
             if(!is_dir($path)){
                 @mkdir($path,0777,true);
             }
-            $filename = date('Ymd',time()).substr(md5(time()),8,16).'-'.$uid.'.png';
+            $filename = date('Ymd',time()).substr(md5(time()),8,16).'.png';
             $fp = fopen($path.'/'.$filename, 'w');
             fwrite($fp, $image);
             fclose($fp);
