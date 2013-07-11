@@ -11,20 +11,26 @@ if($op == 'upload'){
         
         $sex = $_POST['sex'];
         $from = $_POST['type']; //eg: mobile,pc,pad.
-        $pic = $_POST['image'];
-        /*$pic = $GLOBALS[HTTP_RAW_POST_DATA];
-        if(empty($data)){ 
-          $pic=file_get_contents("php://input");
-        }*/
-
+        
+        
+        if (isset($GLOBALS[HTTP_RAW_POST_DATA])) {
+        	$image = $GLOBALS[HTTP_RAW_POST_DATA];
+            if(empty($data)){ 
+                $image=file_get_contents("php://input");
+            }
+            //$image = $_POST['image'];
+        }else{
+            $pic = $_POST['image'];
+            $image = str_replace(' ', '+', $pic);
+            $image = base64_decode(str_replace('data:image/png;base64,', '',$image));
+        }
+        
         if(!empty($pic)){
             $path = './uploads/'.date('Y').'/'.date('m').'/'.date('d');
             if(!is_dir($path)){
                 @mkdir($path,0777,true);
             }
             $filename = date('Ymd',time()).substr(md5(time()),8,16).'-'.$uid.'.png';
-            $image = str_replace(' ', '+', $pic);
-            $image = base64_decode(str_replace('data:image/png;base64,', '',$image));
             $fp = fopen($path.'/'.$filename, 'w');
             fwrite($fp, $image);
             fclose($fp);
@@ -47,17 +53,22 @@ if($op == 'upload'){
     
     if(isset($_POST)){
         
-        $uid = $_POST['uid'];
+        $uid = $_REQUEST['uid'];
         $name = $_POST['name'];
         $mobile = $_POST['mobile'];
         $province = $_POST['province'];
         $city = $_POST['city'];
         
-        $sql = "INSERT INTO user (`uid`,`name`,`mobile`,`province`,`city`) VALUES ('$uid','$name','$mobile','$province','$city');";
-        $res = $db->insert($sql);
-        
-        if($res)
-            echo json_encode(array('error_msg'=>'成功','status'=>'success','data'=>array('isaward'=>1)));
+        $sql = "SELECT COUNT(*) as num FROM user WHERE uid='$uid';";
+        $rows = $db->select($sql);        
+        if($rows[0]['num']>0){
+             $sql = "INSERT INTO user (`uid`,`name`,`mobile`,`province`,`city`,`default`) VALUES ('$uid','$name','$mobile','$province','$city',0);";
+        }else{
+             $sql = "INSERT INTO user (`uid`,`name`,`mobile`,`province`,`city`,`default`) VALUES ('$uid','$name','$mobile','$province','$city',1);";
+        }
+       
+        $db->insert($sql);
+        echo json_encode(array('error_msg'=>'成功','status'=>'success','data'=>''));
         
     }else{
         

@@ -87,8 +87,6 @@ function gotPic(e) {
       //need check pic's exif to select the right orientation value;
     var newImage = true;
     EXIF.getData(e.target.files[0], function() {
-      //var exifInfo = eval('('+EXIF.pretty(this)+')'); 
-        //console.log("exif info:" + EXIF.pretty(this));
         function getStrTime(time)
         {
             var t =  time.split(' ');
@@ -100,16 +98,27 @@ function gotPic(e) {
         var tempDate = EXIF.getTag(this, "DateTime");
         var d1 = getStrTime(tempDate);
         var date3=d1.getTime()-d2.getTime();
+         
+        var days=Math.floor(date3/(24*3600*1000)) //计算出相差天数  
         var leave1=date3%(24*3600*1000)    //计算天数后剩余的毫秒数  
-        var hours=Math.floor(leave1/(3600*1000))  
-        console.log("hours:" + hours);
-        console.log("exif date time:" + EXIF.getTag(this, "DateTime") + ". now time"+ new Date());
-        
+        var hours=Math.floor(leave1/(3600*1000))  //计算出小时数 
+        //计算相差分钟数  
+        var leave2=leave1%(3600*1000)        //计算小时数后剩余的毫秒数  
+        var minutes=Math.floor(leave2/(60*1000))  
+        var rage = days+hours+minutes;
+        if(  rage >= 1){
+          newImage = false;
+        }
+        console.log("newImage:" + newImage + ",rage:" + rage);
+        //alert("newImage:" + newImage + ",rage:" + rage );
     });
-    if(!newImage){
-      mpImg.render(resCanvas2, { maxWidth: 400, maxHeight: 568});
+
+    if(newImage){
+      mpImg.render(resCanvas2, { maxWidth: 400, maxHeight: 568, orientation: 6});
+      console.log("orientation:6");
     }else{
-      mpImg.render(resCanvas2, { maxWidth: 400, maxHeight: 568, orientation: 6 });
+      mpImg.render(resCanvas2, { maxWidth: 400, maxHeight: 568, orientation: 0 });
+      console.log("orientation:0");
     }
 
     var hammertime = Hammer(document.getElementById("gridbox"));
@@ -588,6 +597,18 @@ $(document).ready(function() {
     router.navigate('yourmount/real');
     $('.mountswich a').hide();
     $('.mountswich .pre').show();
+  });
+  $('.awardsubmint').tap(function(){
+              //     <li><label class="forname">姓名</label><input type="text" name="uname" id="uname" /></li>
+              // <li><label class="forphone">手机</label><input type="number" name="phone" id="phone" /></li>
+              // <li>
+              //   <label class="forcity">城市</label>
+              //   <select name="city">
+              //   </select>
+              //   <select name="city2">
+              //   </select>
+              // </li> 
+    var userName = a;
   });
 });
 
