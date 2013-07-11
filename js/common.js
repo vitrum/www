@@ -80,15 +80,38 @@ function gotPic(e) {
     var fileInput = document.getElementById('takePictureField');
     var file = fileInput.files[0];
     var dragging = false;
-    EXIF.getData(e.target.files[0], function() {
-      var exifInfo = eval('('+EXIF.pretty(this)+')'); 
-        console.log(exifInfo);
-    });
+
     // MegaPixImage constructor accepts File/Blob object.
     var mpImg = new MegaPixImage(file);
     var resCanvas2 = document.getElementById('postThePicCanvas');
       //need check pic's exif to select the right orientation value;
-    mpImg.render(resCanvas2, { maxWidth: 400, maxHeight: 568, orientation: 6 });
+    var newImage = true;
+    EXIF.getData(e.target.files[0], function() {
+      //var exifInfo = eval('('+EXIF.pretty(this)+')'); 
+        //console.log("exif info:" + EXIF.pretty(this));
+        function getStrTime(time)
+        {
+            var t =  time.split(' ');
+            var ts = t[1].split(':');
+            var th = t[0].split(':');
+            return new Date(th[0], th[1], th[2], ts[0], ts[1], ts[2]);
+        }
+        var d2 = new Date(); 
+        var tempDate = EXIF.getTag(this, "DateTime");
+        var d1 = getStrTime(tempDate);
+        var date3=d1.getTime()-d2.getTime();
+        var leave1=date3%(24*3600*1000)    //计算天数后剩余的毫秒数  
+        var hours=Math.floor(leave1/(3600*1000))  
+        console.log("hours:" + hours);
+        console.log("exif date time:" + EXIF.getTag(this, "DateTime") + ". now time"+ new Date());
+        
+    });
+    if(!newImage){
+      mpImg.render(resCanvas2, { maxWidth: 400, maxHeight: 568});
+    }else{
+      mpImg.render(resCanvas2, { maxWidth: 400, maxHeight: 568, orientation: 6 });
+    }
+
     var hammertime = Hammer(document.getElementById("gridbox"));
     hammertime.on("touch drag", function(ev) {
       var touches = ev.gesture.touches;
