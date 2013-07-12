@@ -1,6 +1,5 @@
 <?php
 error_reporting(0);
-define('ROOT',dirname(__FILE__));
 
 require_once('db.php');
 $db = new DB();
@@ -12,26 +11,24 @@ if($op == 'upload'){
         $sex = $_POST['sex'];
         $from = $_POST['type']; //eg: mobile,pc,pad.
         
-        
-        /*if (empty($_POST['image'])) {
-        	$image = $GLOBALS[HTTP_RAW_POST_DATA];
-            if(empty($data)){ 
-                $image=file_get_contents("php://input");
-            }
-        }*/
-        
-        /*if(!strrpos($_POST['image'],'base64')){
-            $image = $_POST['image'];
-            //$image = base64_decode($image);
-            $image = base64_decode(str_replace('data:image/png;base64,', '',$image));
-        }else{*/
-            $pic = $_POST['image'];
-            $image = str_replace(' ', '+', $pic);
-            $image = base64_decode(str_replace('data:image/png;base64,', '',$image));
-        //}
+        $pic = $_POST['image'];
+        $image = str_replace(' ', '+', $pic);
+        $image = base64_decode(str_replace('data:image/png;base64,', '',$image));
         
         if(!empty($image)){
             $path = './uploads/'.date('Y').'/'.date('m').'/'.date('d');
+            /*switch ($type){
+                case 'mobile':
+                    $path = '/ram/NFS/YouthCode/Luxgen_1307/mobile'.date('Ym').'/'.date('d');
+                    break;
+                case 'pc':
+                    $path = '/ram/NFS/YouthCode/Luxgen_1307/pc'.date('Ym').'/'.date('d');
+                    break;
+                case 'ipad':
+                    $path = '/ram/NFS/YouthCode/Luxgen_1307/pad/'.date('Ym').'/'.date('d');
+                    break;
+                default:;
+            }*/
             if(!is_dir($path)){
                 @mkdir($path,0777,true);
             }
@@ -47,18 +44,24 @@ if($op == 'upload'){
         
         }
         
-        if($res)
-        echo json_encode(array('error_msg'=>'','status'=>'success','data'=>array('uid'=>$res,'mid'=>1,'similar'=>0.55)));
-        setcookie('luxgenuser',$res,time()+86400*365);
+        
+        $mid = rand(1,5);
+        $similar = rand(1,100)/100;
+         
+        if($res){
+            setcookie('luxgenuser',$res,time()+86400*365);
+            echo json_encode(array('error_msg'=>'','status'=>'success','data'=>array('uid'=>$res,'mid'=>$mid,'similar'=>$similar)));
+        }
+       
         
     }else{
         echo json_encode(array('error_msg'=>'上传失败','status'=>'error','data'=>''));
     }
 }elseif ($op == 'profile'){
     
-    if(isset($_POST)){
+    if(count($_POST)>0){
         
-        $uid = $_REQUEST['uid'];
+        $uid = $_POST['uid'];
         $name = $_POST['name'];
         $mobile = $_POST['mobile'];
         $province = $_POST['province'];
@@ -93,8 +96,8 @@ if($op == 'upload'){
         $from = $_POST['type'];
         $platform = $_POST['platform'];
         
-        $sql = "INSERT INTO share (`uid`,`platform`) VALUES ('$uid','$platform');";
-        $db->insert($sql);
+        $sql = "INSERT INTO share (`uid`,`type`,`platform`) VALUES ('$uid','$from','$platform');";
+        $res = $db->insert($sql);
         
         switch ($platform)
         {
@@ -109,7 +112,7 @@ if($op == 'upload'){
                 break;
         }
         
-         if($res){
+        if($res){
             echo json_encode(array('error_msg'=>'成功','status'=>'success','data'=>array('shareurl'=>$shareurl)));
         }
     }else{

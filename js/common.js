@@ -263,8 +263,25 @@ function postProfile() {
       }
     })
 }
-function postShare(){
-
+function postShare(platform){
+  if(!platform){ return false;}
+  var userId    = $('#picid').val();
+  var postData = '&platform='+ platform + "&type=mobile&uid= "+userId;
+    console.log(postData);
+    $.ajax({type:'POST',url:'post.php?op=share',data:postData,
+      success:function(json){
+        var jsdata = eval('('+json+')');  
+        console.log('status='+ jsdata.data.shareurl);
+        alert(jsdata.status);
+        if (jsdata.status === "success"){
+          window.open(jsdata.data.shareurl,'_blank');
+        }
+        //console.log('mid='+ jsdata.data.mid );
+      },
+      error: function(xhr, type){
+        console.log('Ajax error!')
+      }
+    })
 }
 function allPrpos(obj) { 
      // 用来保存所有的属性名称和值
@@ -363,7 +380,7 @@ function drowMout(mountid) {
           stroke: 'white',
           opacity:0.4
         });
-        //console.log("lines-" + n +"-type:" + linesArr[n].type);
+        console.log("lines-" + n +"-type:" + linesArr[n].type + ",strpid:" + (linesArr[n].strpid-1) + ",endpid:" + (linesArr[n].endpid-1) );
           if(linesArr[n].type=="off"){
             staticGroup.add(line);
           }else{
@@ -570,12 +587,12 @@ var AppRouter = Backbone.Router.extend({
         var youId = $('#picid').val();
         var youGender = $('#gender').val();
         //for test post profile
-        if(!youId || !youGender){
-          showFrame('homepage');
-          router.navigate('index');
-          showNavBar();
-          return false;
-        }
+        // if(!youId || !youGender){
+        //   showFrame('homepage');
+        //   router.navigate('index');
+        //   showNavBar();
+        //   return false;
+        // }
         showSubFrame('awardbox','inputfrom');
         showNavBar('awardlink');
         selectInit();
@@ -693,6 +710,11 @@ $(document).ready(function() {
   $('.awardsubmint').die('click').live('click',function(){
     postProfile();
     return false;
+  });
+  $('.sharelist a').die('click').live('click',function(){
+    var $this = this;
+    postShare($this.className)
+    //console.log($this.className);
   });
   //$('#userprofile').on("change",select);
   

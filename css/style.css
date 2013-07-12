@@ -204,7 +204,7 @@ header div.link_home a.book { }
   .awardbox .share .title { background: url(../image/icon-share.png) center top no-repeat;}
   .awardbox .share li { height: 50px; }
   .awardbox .share a { height: 50px; width: 249px; display: block; text-indent: -9999em;  background: url(../image/icon-share.png) 0 -40px no-repeat;}
-  .awardbox .share a.qqweibo { background-position: 0 -90px;}
+  .awardbox .share a.qq { background-position: 0 -90px;}
   .awardbox .share a.renren { background-position: 0 -140px;}
 /* vertical iphone */
 @media screen and (max-width:320px) {
