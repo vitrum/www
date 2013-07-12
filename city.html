@@ -76,23 +76,20 @@ function selectInit() {
 	var $Province = $('#province');
 	var $City = $('#city');
 	var tempOption ="";
-	//with($Province){
+
 	for (var i = 0; i <where.length; i++) {
-		//console.log(where[i]+ "," +where[i].loca+ "," +where[i].locacity);
 		tempOption = tempOption + "<option value='"+ where[i].loca +"'>" + where[i].loca +"</option>";
 	};
 	$Province.html(tempOption);
-	//}
+
 	$Province.change(function(){
        $("#province option").each(function(i,o){
            if($(this).attr("selected")){
-               console.log("selected=" + where[i].locacity + ",o:" +o );
                var loca3 = (where[i].locacity).split("|");
                tempOption ="";
                for(l=0;l<loca3.length;l++) { 
 					tempOption = tempOption + "<option value='"+ loca3[l] +"'>" + loca3[l] +"</option>";
                }
-               console.log(tempOption);
                $City.html(tempOption);
            }
            

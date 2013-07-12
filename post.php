@@ -63,13 +63,14 @@ if($op == 'upload'){
         $mobile = $_POST['mobile'];
         $province = $_POST['province'];
         $city = $_POST['city'];
+        $sex = $_POST['sex'];
         
         $sql = "SELECT COUNT(*) as num FROM user WHERE uid='$uid';";
         $rows = $db->select($sql);        
         if($rows[0]['num']>0){
-             $sql = "INSERT INTO user (`uid`,`name`,`mobile`,`province`,`city`,`default`) VALUES ('$uid','$name','$mobile','$province','$city',0);";
+             $sql = "INSERT INTO user (`uid`,`name`,'sex',`mobile`,`province`,`city`,`createtime`,`default`) VALUES ('$uid','$name','$sex','$mobile','$province','$city','".time()."',0);";
         }else{
-             $sql = "INSERT INTO user (`uid`,`name`,`mobile`,`province`,`city`,`default`) VALUES ('$uid','$name','$mobile','$province','$city',1);";
+             $sql = "INSERT INTO user (`uid`,`name`,'sex',`mobile`,`province`,`city`,`createtime`,`default`) VALUES ('$uid','$name','$sex','$mobile','$province','$city','".time()."',1);";
         }
        
         $db->insert($sql);

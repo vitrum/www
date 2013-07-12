@@ -21,7 +21,7 @@
 				<div class="title">title</div>
 				<ul class="menu">
 					<li class="selectgender"><a class="punch selectgender" href="#/gender">selectgender</a></li>
-					<li class="awardlist"><a class="punch awardlist" href="#/awardlist">awardlist</a></li>
+					<li class="awardlist"><a class="punch awardlist" href="#/userlist">userlist</a></li>
 					<li class="aboutgame"><a class="punch aboutgame" href="#/aboutgame">aboutgame</a></li>
 				</ul>
 			</div>
@@ -90,7 +90,7 @@
 						<form id="userprofile" name="creator">
 							<ul>
 								<li><label class="forname">姓名</label><input type="text" name="uname" id="uname"  maxlength="22" /></li>
-								<li><label class="forphone">手机</label><input type="number" name="phone" id="phone"  maxlength="20" /><input type="hidden" name="gender" id="gender" /></li>
+								<li><label class="forphone">手机</label><input type="number" name="phone" id="phone"  maxlength="20" /><input type="hidden" name="gender" id="gender" /><input type="hidden" name="picid" id="picid" /></li>
 								<li>
 									<label class="forcity">城市</label>
 									<select  name="province" id="province">
@@ -126,6 +126,12 @@
 
 			</div>
 		</div>
+		<div class="frame userlist">
+			<div class="content">
+				获奖名单
+
+			</div>
+		</div>
 		<div class="horizontal">
 			<div class="content">
 				建议竖屏浏览已获得更好体验
@@ -137,11 +143,11 @@
 			<div class="navbar yourmount"><input type="button" class="youreal" value="您的专属掌纹山脉图"></div>
 			<div class="navbar showreal">
 				<a class="navlink youreal" href="#/share">即刻分享</a>
-				<a class="navlink youreal" href="#/awardlist">参与抽奖</a>
+				<a class="navlink youreal" href="#/award">参与抽奖</a>
 				<a class="navlink youreal" href="#/gender">再来一次</a>
 			</div>
 			<div class="navbar awardlink"><a class="navlink awardsubmint" href="#/subminsuccess">确认提交</a></div>
-			<div class="navbar subminsuccess"><a class="navlink subminsuccess" href="#/awardlist">活动说明</a></div>
+			<div class="navbar subminsuccess"><a class="navlink subminsuccess" href="#/aboutgame">活动说明</a></div>
 			<div class="navbar aboutgame"><a class="navlink aboutgame">活动说明</a></div>
 			<div class="navbar sheargame"><a class="navlink sheargame" href="#/awardlist">填写中奖信息</a></div>
 			

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Mega pixel image rendering library for iOS6 Safari
  *
  * Fixes iOS6 Safari's image file rendering issue for large size image (over mega-pixel),
@@ -208,9 +208,10 @@ function gotPic(e) {
 function postThePic(event) {
   //alert("postThePic OK!");
   var testCanvas = document.getElementById("postThePicCanvas");  
-  var canvasData = testCanvas.toDataURL("image/png");
+  var canvasData = testCanvas.toDataURL("image/png")
+  ,   userSex   = $('#gender').val();
   //uid and sex need be update;
-  var postData = '"&sex=male&uid=111&image='+ canvasData;
+  var postData = '&sex='+userSex+'&type=mobile&image='+ canvasData;
 
   $.ajax({type:'POST',url:'post.php?op=upload',data:postData,
     success:function(json){
@@ -223,18 +224,48 @@ function postThePic(event) {
       showSubFrame('yourmount','rendering');
       showNavBar();
       drowMout(Number(jsdata.data.mid));
-
+      $('#picid').val(jsdata.data.uid);
       //console.log('mid='+ jsdata.data.mid );
     },
     error: function(xhr, type){
       console.log('Ajax error!')
     }
   })
-
   //drowMout(2);
-  console.log('postThePic OK!');
+  //console.log('postThePic OK!');
 }// end of function postThePic(event)
+function postProfile() {
+    var userName  = $('#uname').val()
+    ,   userPhone = $('#phone').val()
+    ,   userProvince  = $('#province').val()
+    ,   userCity  = $('#city').val()
+    ,   userSex   = $('#gender').val()
+    ,   userId    = $('#picid').val();
+    if (!userName || !userPhone || !userCity || !userProvince){
+      alert("请完整填写信息！")
+      return false;
+    }
+    var postData = '&name='+ userName +'&mobile=' + userPhone +'&province=' + userProvince +'&city=' + userCity +'&sex=' + userSex +'&uid=' + userId;
+    console.log(postData);
+    $.ajax({type:'POST',url:'post.php?op=profile',data:postData,
+      success:function(json){
+        var jsdata = eval('('+json+')');  
+        console.log('status='+ jsdata.status);
+        if (jsdata.status === "success"){
+          showSubFrame('awardbox','subminsuccess');
+          showNavBar('subminsuccess');
+          router.navigate('subminsuccess');
+        }
+        //console.log('mid='+ jsdata.data.mid );
+      },
+      error: function(xhr, type){
+        console.log('Ajax error!')
+      }
+    })
+}
+function postShare(){
 
+}
 function allPrpos(obj) { 
      // 用来保存所有的属性名称和值
      var props = "";
@@ -500,13 +531,15 @@ var AppRouter = Backbone.Router.extend({
     routes : {  
         '' : 'main', 
         'index' : 'main', 
+        'homepage' : 'main', 
         'gender' : 'selectGender',
         "gender/:user" : "selectGenderUser",
         'take' : 'takePic',  
         'take/:user' : 'takePic',
         'retake' : 'retakePic', 
         'share':'shareGame',
-        'awardlist' : 'awardList',
+        'award' : 'awardList',
+        'userlist' : 'userList',
         'subminsuccess':'subminSuccess',
         'aboutgame' : 'aboutGame',
         'yourmount' : 'yourMount',
@@ -533,10 +566,24 @@ var AppRouter = Backbone.Router.extend({
 		    });
     },
     awardList: function() {  
-        console.log('awardlist');
+        console.log('填写抽奖');
+        var youId = $('#picid').val();
+        var youGender = $('#gender').val();
+        //for test post profile
+        if(!youId || !youGender){
+          showFrame('homepage');
+          router.navigate('index');
+          showNavBar();
+          return false;
+        }
         showSubFrame('awardbox','inputfrom');
         showNavBar('awardlink');
         selectInit();
+    },
+    userList: function() {  
+        console.log('获奖名单');
+        showFrame('userlist');
+        showNavBar('subminsuccess');
     },
     subminSuccess: function() {  
         console.log('subminsuccess');
@@ -644,33 +691,7 @@ $(document).ready(function() {
 
 
   $('.awardsubmint').die('click').live('click',function(){
-    var userName  = $('#uname').val()
-    ,   userPhone = $('#phone').val()
-    ,   userProvince  = $('#province').val()
-    ,   userCity  = $('#city').val()
-    ,   userSex   = $('#gender').val();
-    console.log( "userName:"+ userName +",userPhone:"+ userPhone +",userProvince:"+userProvince+",userCity:"+userCity +",userSex:"+userSex);
-    var postData = '"&sex=male&uid=111"';
-    $.ajax({type:'POST',url:'post.php?op=profile',data:postData,
-      success:function(json){
-        console.log(json);
-        var jsdata = eval('('+json+')');  
-        console.log('mid='+ jsdata.data.mid +",similar="+ jsdata.data.similar);
-        router.navigate('yourmount/'+ jsdata.data.mid , {  
-          trigger: true  
-        });
-        showSubFrame('yourmount','rendering');
-        showNavBar();
-        drowMout(Number(jsdata.data.mid));
-
-        //console.log('mid='+ jsdata.data.mid );
-      },
-      error: function(xhr, type){
-        console.log('Ajax error!')
-      }
-    })
-
-
+    postProfile();
     return false;
   });
   //$('#userprofile').on("change",select);
