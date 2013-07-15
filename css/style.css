@@ -83,14 +83,14 @@ header div.link_home a.book { }
 .navbox input[type='button'] , .navbox .navlink { 
   height:46px; text-align: center;/*background: url(../image/bg-navbar.png);*/ display: block;border:none;border-radius:0; color: #fff;background: none;
   appearance:none;-moz-appearance:none;-webkit-appearance:none;
-  text-indent: -9999em;
+  text-indent: -99em;
 }
 .navbox .takepic .takethepic { width: 100%; background: url(../image/bg-nav.png) top center no-repeat;}
-.navbox .retakepic .takethepic { width: 50%; float: left;background: url(../image/bg-nav.png) -159px -50px no-repeat; }
+.navbox .retakepic .takethepic { min-width: 161px; width: 50%; float: left;background: url(../image/bg-nav.png) -159px -50px no-repeat; }
 .navbox .retakepic .retake { width: 159px;  float: left; background: url(../image/bg-nav.png) 0 -50px no-repeat;}
 .navbox .navlink { 
   float: left; 
-  width: 50%; min-width: 161px;
+  width: 50%; 
   background: url(../image/bg-nav.png) top center no-repeat;
   text-indent: -9999em;
 }
@@ -100,7 +100,7 @@ header div.link_home a.book { }
 .navbox .sheargame { background-position: center -300px;}
 .navbox .awardsubmint { background-position: center -250px;}
 .navbox .aboutgame { background-position: center -200px;}
-.navbox .yourmount .youreal { background:url(../image/bg-nav.png) center -100px;}
+.navbox .yourmount .youreal { background:url(../image/bg-nav.png) center -100px no-repeat;}
 .navbox .showreal .linkshare { background-position: left -150px; width: 107px;}
 .navbox .showreal .linkaward { background-position: -107px -150px; width: 95px;}
 .navbox .showreal .replay { background-position: -202px -150px; min-width: 118px;}
@@ -158,16 +158,16 @@ header div.link_home a.book { }
   transform: translate3d(0,0,0);
 }
 @-webkit-keyframes caranimtion {
-  0% {bottom: 130px; right: 32px;} 
-  12% {bottom: 115px; right: 25px;}
-  19% { bottom: 100px; right: 20px;}
-  42% {bottom: 80px; right: 30px;}
-  47% {bottom: 60px; right: 30px;}
-  55% {bottom: 50px; right: 80px;}
+  0% {bottom: 130px; right: 38px;} 
+  12% {bottom: 115px; right: 30px;}
+  19% { bottom: 100px; right: 28px;}
+  42% {bottom: 80px; right: 40px;}
+  47% {bottom: 60px; right: 80px;}
+  55% {bottom: 50px; right: 100px;}
   62% {bottom: 20px; right: 120px;}
   70% {bottom: 20px; right: 200px;}
   74% {bottom: 20px; right: 210px;}
-  100% {bottom: 0px; right: 220px;}
+  100% {bottom: 0px; right: 230px;}
 }
 .carlight { 
   background:url(../image/bg-car-light.png) 0 0 no-repeat; 
@@ -185,10 +185,10 @@ header div.link_home a.book { }
   -webkit-animation-fill-mode: forwards;
 }
 @-webkit-keyframes lightanim {
-  0% { -webkit-mask-position:290px -100px;}
-  12% { -webkit-mask-position:280px -50px ;}
-  19% { -webkit-mask-position:270px -10px ;}
-  42% { -webkit-mask-position:250px 0 ;}
+  0% { -webkit-mask-position:260px -30px;}
+  12% { -webkit-mask-position:250px 0 ;}
+  19% { -webkit-mask-position:240px 0 ;}
+  42% { -webkit-mask-position:220px 0 ;}
   47% { -webkit-mask-position:200px 0 ;}
   55% { -webkit-mask-position:180px 0;}
   62% { -webkit-mask-position:150px 0;}
