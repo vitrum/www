@@ -155,32 +155,32 @@ function gotPic(e) {
     var resCanvas2 = document.getElementById('postThePicCanvas');
       //need check pic's exif to select the right orientation value;
     var newImage = true;
-    EXIF.getData(e.target.files[0], function() {
-        function getStrTime(time)
-        {
-            var t =  time.split(' ');
-            var ts = t[1].split(':');
-            var th = t[0].split(':');
-            return new Date(th[0], th[1], th[2], ts[0], ts[1], ts[2]);
-        }
-        var d2 = new Date(); 
-        var tempDate = EXIF.getTag(this, "DateTime");
-        var d1 = getStrTime(tempDate);
-        var date3=d1.getTime()-d2.getTime();
+    // EXIF.getData(e.target.files[0], function() {
+    //     function getStrTime(time)
+    //     {
+    //         var t =  time.split(' ');
+    //         var ts = t[1].split(':');
+    //         var th = t[0].split(':');
+    //         return new Date(th[0], th[1], th[2], ts[0], ts[1], ts[2]);
+    //     }
+    //     var d2 = new Date(); 
+    //     var tempDate = EXIF.getTag(this, "DateTime");
+    //     var d1 = getStrTime(tempDate);
+    //     var date3=d1.getTime()-d2.getTime();
          
-        var days=Math.floor(date3/(24*3600*1000)) //计算出相差天数  
-        var leave1=date3%(24*3600*1000)    //计算天数后剩余的毫秒数  
-        var hours=Math.floor(leave1/(3600*1000))  //计算出小时数 
-        //计算相差分钟数  
-        var leave2=leave1%(3600*1000)        //计算小时数后剩余的毫秒数  
-        var minutes=Math.floor(leave2/(60*1000))  
-        var rage = days+hours+minutes;
-        if(  rage >= 1){
-          newImage = false;
-        }
-        console.log("newImage:" + newImage + ",rage:" + rage);
-        //alert("newImage:" + newImage + ",rage:" + rage );
-    });
+    //     var days=Math.floor(date3/(24*3600*1000)) //计算出相差天数  
+    //     var leave1=date3%(24*3600*1000)    //计算天数后剩余的毫秒数  
+    //     var hours=Math.floor(leave1/(3600*1000))  //计算出小时数 
+    //     //计算相差分钟数  
+    //     var leave2=leave1%(3600*1000)        //计算小时数后剩余的毫秒数  
+    //     var minutes=Math.floor(leave2/(60*1000))  
+    //     var rage = days+hours+minutes;
+    //     if(  rage >= 1){
+    //       newImage = false;
+    //     }
+    //     console.log("newImage:" + newImage + ",rage:" + rage);
+    //     //alert("newImage:" + newImage + ",rage:" + rage );
+    // });
 
     if(newImage){
       mpImg.render(resCanvas2, { maxWidth: 400, maxHeight: 568, orientation: 6});
