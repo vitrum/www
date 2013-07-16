@@ -3,7 +3,7 @@ var mounts = eval(
 	{
 		"mid": "1",
 		"copy":"龙虎山",
-		"pic":"http://bbb.com/b.jpg",
+		"pic":"image/mounts/01.png",
 		"points": [
 			{ "pid":"1", "pname":"1", "ox":"99","oy":"227","type":"off","nx":"","ny":""},
 			{ "pid":"2", "pname":"2", "ox":"125","oy":"235","type":"off","nx":"","ny":""},
@@ -135,7 +135,7 @@ var mounts = eval(
 	{
 		"mid": "2",
 		"copy":"武陵山",
-		"pic":"http://aaa.com/a.jpg",
+		"pic":"image/mounts/02.png",
 		"points": [
 			{ "pid":"1", "ox":"80","oy":"226","type":"off",  "ny":""  },
 			{ "pid":"2", "ox":"133","oy":"228","type":"off",  "ny":""  },
@@ -325,7 +325,7 @@ var mounts = eval(
 	{
 		"mid": "3",
 		"copy":"金佛山",
-		"pic":"http://aaa.com/a.jpg",
+		"pic":"image/mounts/03.png",
 		"points": [
 			{ "pid":"1", "ox":"58","oy":"188","type":"off",  "ny":""  },
 			{ "pid":"2", "ox":"54","oy":"264","type":"off",  "ny":""  },
@@ -479,7 +479,7 @@ var mounts = eval(
 	{
 		"mid": "4",
 		"copy":"齐云山",
-		"pic":"http://aaa.com/a.jpg",
+		"pic":"image/mounts/04.png",
 		"points": [
 			{ "pid":"1", "ox":"65","oy":"247","type":"off",  "ny":""  },
 			{ "pid":"2", "ox":"93","oy":"262","type":"off",  "ny":""  },
@@ -627,7 +627,7 @@ var mounts = eval(
 	{
 		"mid": "5",
 		"copy":"天山",
-		"pic":"http://aaa.com/a.jpg",
+		"pic":"image/mounts/05.png",
 		"points": [
 			{ "pid":"1", "pname":"1", "ox":"52","oy":"306","type":"off","nx":"","ny":""},
 			{ "pid":"2", "pname":"2", "ox":"178","oy":"300","type":"off","nx":"","ny":""},
@@ -771,7 +771,7 @@ var mounts = eval(
 	{
 		"mid": "6",
 		"copy":"丹霞山",
-		"pic":"http://aaa.com/a.jpg",
+		"pic":"image/mounts/06.png",
 		"points": [
 			{ "pid":"1", "pname":"1", "ox":"52","oy":"306","type":"off","nx":"","ny":""},
 			{ "pid":"2", "pname":"2", "ox":"178","oy":"300","type":"off","nx":"","ny":""},
@@ -915,7 +915,7 @@ var mounts = eval(
 	{
 		"mid": "7",
 		"copy":"太老山",
-		"pic":"http://aaa.com/a.jpg",
+		"pic":"image/mounts/07.png",
 		"points": [
 			{ "pid":"1", "pname":"1", "ox":"54","oy":"268","type":"off","nx":"","ny":""},
 			{ "pid":"2", "pname":"2", "ox":"44","oy":"334","type":"off","nx":"","ny":""},
@@ -1030,7 +1030,7 @@ var mounts = eval(
 	{
 		"mid": "31",
 		"copy":"这是座很高的山",
-		"pic":"http://aaa.com/a.jpg",
+		"pic":"image/mounts/31.png",
 		"points": [
 			{ "pid":"1", "pname":"1", "ox":"155","oy":"340","type":"off",  "ny":""  },
 			{ "pid":"2", "pname":"2", "ox":"270","oy":"384","type":"off",  "ny":""  },

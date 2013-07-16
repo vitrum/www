@@ -59,16 +59,28 @@
 		<div class="frame yourmount">
 			<div class="content">
 				<section class="subframe rendering">
+					<div class="status">
+						<p class="txt">掌纹山势渲染中...</p>
+						<p class="loading">LOADING <b>0%</b></p>
+					</div>
+					<div class="mountstxt"><div class="text"></div></div>
 					<div id="container"></div>
 					<div class="caranimbox"><div class="carunit"></div><div class="carlight"></div></div>
-					<div class="mountstxt"></div>
+					
+					<!--
 					<div id="buttons" style="position: absolute; width: 100%; height: auto; z-index: 300;">
 				      <input type="button" id="start" value="Start">
 				      <input type="button" id="stop" value="Reset">
 				    </div>
+					-->
 				</section>
 				<section class="subframe real">
-					<div class="realmount">realmount</div>
+					<div class="realmount">
+						<h4 class="title"></h3>
+						<div class="text"></div>
+						<img src="aaa.png" class="mountpic" />
+						<h3 class="name"></h3>
+					</div>
 				</section>
 				<nav class="mountswich">
 					<a class="pre">pre</a>
@@ -132,11 +144,7 @@
 
 			</div>
 		</div>
-		<div class="horizontal">
-			<div class="content">
-				建议竖屏浏览已获得更好体验
-			</div>
-		</div>	
+	
 		<nav class="navbox">
 			<div class="navbar takepic"><!--<a class="takepic_btn" id="takeThePic">拍摄</a>--><input type="button" class="takethepic" value="拍摄"></div>
 			<div class="navbar retakepic"><input type="button" class="retake" value="使用"><input type="button" class="takethepic" value="重新拍摄"></div>
@@ -153,6 +161,14 @@
 			
 		</nav>
 	</div>
+	<div class="mask">
+		<div class="loading"></div>
+	</div>
+	<div class="horizontal">
+			<div class="content">
+				建议竖屏浏览已获得更好体验
+			</div>
+		</div>
 	<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

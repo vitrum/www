@@ -72,6 +72,7 @@ function selectInit() {
           tempOption = tempOption + "<option value='"+ loca3[l] +"'>" + loca3[l] +"</option>";
                }
                $City.html(tempOption);
+               //$City.focus();
            }
            
        });
@@ -206,6 +207,7 @@ function gotPic(e) {
 }
 
 function postThePic(event) {
+
   //alert("postThePic OK!");
   var testCanvas = document.getElementById("postThePicCanvas");  
   var canvasData = testCanvas.toDataURL("image/png")
@@ -267,6 +269,7 @@ function postShare(platform){
   if(!platform){ return false;}
   var userId    = $('#picid').val();
   var postData = '&platform='+ platform + "&type=mobile&uid= "+userId;
+
     console.log(postData);
     $.ajax({type:'POST',url:'post.php?op=share',data:postData,
       success:function(json){
@@ -300,11 +303,28 @@ function allPrpos(obj) {
      alert(props);
 }// end of function allPrpos(obj)
 
-function drowCar() {
+function drowCar(mountid) {
   var self = $(".carunit");
   self.toggleClass('caranim');
+  var loadingStatus = $('.rendering');
+
   $(".carlight").toggleClass('carlightanim');
-  console.log('drowCar~');
+  console.log('Now drowCar~');
+  setTimeout(function () {
+    console.log("drowCar anim finish");
+      loadingStatus.find('.status').hide();
+      loadingStatus.find('.status').hide();
+      loadingStatus.find('.mountstxt').show();
+      $('.yourmount .text').css('background-image', 'url(image/text/00'+ mountid +'.png)');
+      $('.yourmount .name').css('background-image', 'url(image/text/00'+ mountid +'.png)');
+  }, 2100);
+
+
+}// end of function drowCar() 
+
+function drowRealMount(mountid) {
+
+  console.log('drowRealMount~' + mountid );
 }// end of function drowCar() 
 
 function drowMout(mountid) {
@@ -329,7 +349,7 @@ function drowMout(mountid) {
   });
   /*drow*/
   if(!mountid){ mountid = 1;};
-
+      $('.mask').hide();
       /*drow point*/
       var i = mountid - 1;
       var pointArr = mounts[i].points
@@ -391,8 +411,16 @@ function drowMout(mountid) {
       }
 
   //console.log( thisMount);
-  console.log( thisMount);
+  var mountPic = thisMount.pic;
+  var mountPicDom = $('.mountpic'); 
+  
+  // var mountPicItem = $('.mountpic');
+  // mountPicItem.prop(src:'mountPic.png');
+  console.log('try src' + mountPicDom.attr('src'));
+  mountPicDom.attr("src",mountPic);
+  //mountPicDom.attr("src":'"' + mountPic + '"');
   //allPrpos(thisMount.mpoint);
+
 
   /*drow animtion*/
 
@@ -405,6 +433,12 @@ function drowMout(mountid) {
     var time = frame.time,
         timeDiff = frame.timeDiff,
         frameRate = frame.frameRate;
+    var loadingStatus = $('.rendering');
+
+    var tempLoadingPrecent =  Math.ceil(anims.b/anims.c*100);
+    if(tempLoadingPrecent>100){tempLoadingPrecent=100; };
+    //console.log("tempLoadingPrecent:" + tempLoadingPrecent + "%");
+    loadingStatus.find('b').html(tempLoadingPrecent + "%");
     /*remove animlayer*/
     animLayer.remove();
     animLayer = new Kinetic.Layer();
@@ -413,6 +447,8 @@ function drowMout(mountid) {
       y: 0,
       rotationDeg: 0
     });
+
+
     for(var p in thisMount.mpoint){ 
       if(typeof(thisMount.mpoint[p])=="function"){ 
          thisMount.mpoint[p]();
@@ -490,13 +526,14 @@ function drowMout(mountid) {
       //showSubFrame('yourmount','real');
       showNavBar('yourmount');
         setTimeout(function () {
-          console.log("drowCar~~~~~~");
-            drowCar();
-        }, 100);
+          console.log("call drowCar~~~~~~");
+            drowCar(mountid);
+        }, 0);
       
       //router.navigate('yourmount/real');
       $('.mountswich a').hide();
       $('.mountswich .nex').show();
+      drowRealMount(mountid);
 
     };
     anims.b++;
@@ -510,36 +547,20 @@ function drowMout(mountid) {
   stage.add(animLayer);
   
 
-  document.getElementById('start').addEventListener('click', function() {
-    anim.start();
-  }, false);
+  // document.getElementById('start').addEventListener('click', function() {
+  //   anim.start();
+  // }, false);
   
-  document.getElementById('stop').addEventListener('click', function() {
-    //anim.stop();
-    drowMout(mountid);
-  }, false);
+  // document.getElementById('stop').addEventListener('click', function() {
+  //   //anim.stop();
+  //   drowMout(mountid);
+  // }, false);
 
-  /*
-  function drowCar() {
-    var carLayer = new Kinetic.Layer();
-    var imageObj = new Image();
-    imageObj.onload = function() {
+  setTimeout(function () {
+    console.log("drow mount anim~~");
+      anim.start();
+  }, 1);
 
-        darth = new Kinetic.Image({
-          x: 10,
-          y: 10,
-          image: imageObj,
-          draggable: true,
-          filter: Kinetic.Filters.Invert,
-          filterRadius: 20
-        });
-      
-        carLayer.add(darth);
-        stage.add(carLayer); 
-      };
-      imageObj.src = 'image/x2/car-l-i.png';
-  }//drowCar finish;
-  */
 } //drowMout finish;
 
 
@@ -550,7 +571,7 @@ var AppRouter = Backbone.Router.extend({
         'index' : 'main', 
         'homepage' : 'main', 
         'gender' : 'selectGender',
-        "gender/:user" : "selectGenderUser",
+        'gender/:user' : 'selectGenderUser',
         'take' : 'takePic',  
         'take/:user' : 'takePic',
         'retake' : 'retakePic', 
@@ -572,15 +593,23 @@ var AppRouter = Backbone.Router.extend({
         console.log('selectGender');
         showFrame('selectgender');
         showNavBar();
+        $('.mountswich .nex').hide();
+        $('.yourmount .mountstxt').hide();
     },
     selectGenderUser: function(user) {  
     	if(!user){ user = 'male'}
-        console.log('性别为：' +user );
-        //$('#gender').prop(value, user);
-        $('#gender').val(user);
-        router.navigate('take/' + user , {  
-    		  trigger: true  
-		    });
+      console.log('性别为：' +user );
+
+      //$('#gender').prop(value, user);
+      $('#gender').val(user);
+      router.navigate('take/' + user , {  
+  		  trigger: true  
+	    });
+      if(user == 'female'){ 
+        $(".gridbox").addClass("femalegrid");
+      }else{
+        $(".gridbox").removeClass("femalegrid");
+      }
     },
     awardList: function() {  
         console.log('填写抽奖');
@@ -617,7 +646,8 @@ var AppRouter = Backbone.Router.extend({
         showFrame('aboutgame');
     },  
     takePic : function(user) {  
-    	if(!user){ user = 'male'}
+    	if(!user){ user = 'male'};
+      //$("#postThePicCanvas").remove();
       console.log('takePic 性别为：' +user);
     	showSubFrame('takebox','take');
       showNavBar('takepic');
@@ -629,6 +659,9 @@ var AppRouter = Backbone.Router.extend({
     	if(!step){ user = 'take'}
         console.log('渲染详情方法, id为: ' + step);
         showSubFrame('yourmount','rendering');
+        //
+        if(step>7){step = 1};
+        //
         if(step == 'take'){
         	router.navigate('yourmount/rendering' , {  
 	    		  trigger: true  
@@ -671,6 +704,7 @@ $(document).ready(function() {
 	$("#takePictureField").on("change",gotPic);
   
   $(".retake").die('click').live('click',function(){
+    $('.mask').show();
     postThePic();
   });
 
@@ -681,7 +715,7 @@ $(document).ready(function() {
   };
   $('.mountswich .pre').die('click').live('click',function(){
     showSubFrame('yourmount','rendering');
-    router.navigate('yourmount/take');
+    //router.navigate('yourmount/take');
     showNavBar('yourmount');
     $('.mountswich a').hide();
     //if 
@@ -690,17 +724,22 @@ $(document).ready(function() {
   $('.mountswich .nex').die('click').live('click',function(){
     showSubFrame('yourmount','real');
     showNavBar('showreal');
-    router.navigate('yourmount/real');
+    //router.navigate('yourmount/real');
     $('.mountswich a').hide();
     $('.mountswich .pre').show();
+    $('.carunit').removeClass('caranim');
+    $('.carlight').removeClass('carlightanim');
+    console.log('next');
   });
 
   $('.navbox .youreal').die('click').live('click',function(){
     showSubFrame('yourmount','real');
     showNavBar('showreal');
-    router.navigate('yourmount/real');
+    //router.navigate('yourmount/real');
     $('.mountswich a').hide();
     $('.mountswich .pre').show();
+    $('.carunit').addClass('carlightanim');
+    console.log('next');
   });
 
 
