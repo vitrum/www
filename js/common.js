@@ -191,17 +191,57 @@ function gotPic(e) {
       console.log("orientation:0");
     }
 
-    var hammertime = Hammer(document.getElementById("gridbox"));
-    hammertime.on("touch drag", function(ev) {
-      var touches = ev.gesture.touches;
-      ev.gesture.preventDefault();
-      for(var t=0,len=touches.length; t<len; t++) {
-        var target = $(touches[t].target);
-        $('#postThePicCanvas').css({
-          left: touches[t].pageX-160,
-          top: touches[t].pageY-250
-        });
-      }
+    var hammertime = Hammer(document.getElementById("gridbox"), {
+        transform_always_block: true,
+        transform_min_scale: 1,
+        drag_block_horizontal: true,
+        drag_block_vertical: true,
+        drag_min_distance: 0
+    });
+    var rect = document.getElementById('postThePicCanvas');
+
+    var posX=0, posY=0,last_posX,last_posY,
+        scale=1, last_scale,
+        rotation= 1, last_rotation;
+    hammertime.on("touch drag transform", function(ev) {
+      // var touches = ev.gesture.touches;
+      // ev.gesture.preventDefault();
+      // for(var t=0,len=touches.length; t<len; t++) {
+      //   var target = $(touches[t].target);
+      //   $('#postThePicCanvas').css({
+      //     left: touches[t].pageX-160,
+      //     top: touches[t].pageY-250
+      //   });
+      // }
+        switch(ev.type) {
+            case 'touch':
+                last_scale = scale;
+                last_rotation = rotation;
+                break;
+
+            case 'drag':
+                posX = ev.gesture.deltaX ;
+                posY = ev.gesture.deltaY ;
+                break;
+
+            case 'transform':
+                rotation = last_rotation + ev.gesture.rotation;
+                scale = Math.max(0.7, Math.min(last_scale * ev.gesture.scale, 1.5));
+                break;
+        }
+
+        // transform!
+        var transform =
+                "translate3d("+posX+"px,"+posY+"px, 0) " +
+                //"scale3d("+scale+","+scale+", 0) " +
+                "scale("+scale+","+scale+") " +
+                "rotate("+rotation+"deg) ";
+        console.log("translate3d("+posX+"px,"+posY+"px, 0) " +"scale3d("+scale+","+scale+", 0) " + "rotate("+rotation+"deg) ");
+        rect.style.transform = transform;
+        rect.style.oTransform = transform;
+        rect.style.msTransform = transform;
+        rect.style.mozTransform = transform;
+        rect.style.webkitTransform = transform;
     });
   }
 }
@@ -225,7 +265,7 @@ function postThePic(event) {
       });
       showSubFrame('yourmount','rendering');
       showNavBar();
-      drowMout(Number(jsdata.data.mid));
+      //drowMout(Number(jsdata.data.mid));
       $('#picid').val(jsdata.data.uid);
       //console.log('mid='+ jsdata.data.mid );
     },
@@ -275,7 +315,7 @@ function postShare(platform){
       success:function(json){
         var jsdata = eval('('+json+')');  
         console.log('status='+ jsdata.data.shareurl);
-        alert(jsdata.status);
+        //alert(jsdata.status);
         if (jsdata.status === "success"){
           window.open(jsdata.data.shareurl,'_blank');
         }
@@ -305,19 +345,19 @@ function allPrpos(obj) {
 
 function drowCar(mountid) {
   var self = $(".carunit");
-  self.toggleClass('caranim');
+  self.addClass('caranim');
   var loadingStatus = $('.rendering');
 
-  $(".carlight").toggleClass('carlightanim');
+  $(".carlight").addClass('carlightanim');
   console.log('Now drowCar~');
-  setTimeout(function () {
+  //setTimeout(function () {
     console.log("drowCar anim finish");
       loadingStatus.find('.status').hide();
       loadingStatus.find('.status').hide();
       loadingStatus.find('.mountstxt').show();
       $('.yourmount .text').css('background-image', 'url(image/text/00'+ mountid +'.png)');
       $('.yourmount .name').css('background-image', 'url(image/text/00'+ mountid +'.png)');
-  }, 2100);
+  //}, 2100);
 
 
 }// end of function drowCar() 
@@ -334,7 +374,9 @@ function drowMout(mountid) {
     width: 320,
     height: 200
   });
-
+  //
+  if(mountid>7){mountid = 1};
+  //
   var staticLayer = new Kinetic.Layer();
   var staticGroup = new Kinetic.Group({
     x: 0,
@@ -349,7 +391,7 @@ function drowMout(mountid) {
   });
   /*drow*/
   if(!mountid){ mountid = 1;};
-      $('.mask').hide();
+
       /*drow point*/
       var i = mountid - 1;
       var pointArr = mounts[i].points
@@ -400,7 +442,7 @@ function drowMout(mountid) {
           stroke: 'white',
           opacity:0.4
         });
-        console.log("lines-" + n +"-type:" + linesArr[n].type + ",strpid:" + (linesArr[n].strpid-1) + ",endpid:" + (linesArr[n].endpid-1) );
+        //console.log("lines-" + n +"-type:" + linesArr[n].type + ",strpid:" + (linesArr[n].strpid-1) + ",endpid:" + (linesArr[n].endpid-1) );
           if(linesArr[n].type=="off"){
             staticGroup.add(line);
           }else{
@@ -525,10 +567,10 @@ function drowMout(mountid) {
       anim.stop();
       //showSubFrame('yourmount','real');
       showNavBar('yourmount');
-        setTimeout(function () {
-          console.log("call drowCar~~~~~~");
-            drowCar(mountid);
-        }, 0);
+        // setTimeout(function () {
+        //   console.log("call drowCar~~~~~~");
+             drowCar(mountid);
+        // }, 2000);
       
       //router.navigate('yourmount/real');
       $('.mountswich a').hide();
@@ -556,11 +598,21 @@ function drowMout(mountid) {
   //   drowMout(mountid);
   // }, false);
 
-  setTimeout(function () {
-    console.log("drow mount anim~~");
-      anim.start();
-  }, 1);
-
+  // function _animStart(){
+  //   console.log("in  _animStart");
+  //   return function(){
+  //     anim.start();
+  //     console.log("drow mount anim~~");
+  //   }
+  // }
+  // setTimeout(function () {
+  //   $('.mask').hide();
+  //   anim.start();
+  //   console.log("call _animStart");
+  // }, 2000);
+    $('.mask').hide();
+    anim.start();
+    console.log("call _animStart");
 } //drowMout finish;
 
 
@@ -655,18 +707,17 @@ var AppRouter = Backbone.Router.extend({
     retakePic : function(id) {  
       console.log('渲染详情方法, id为: ' + id);  
     }, 
-    yourMount : function(step) {  
+    yourMount : function(step) {
+      //parent.location.reload();   
     	if(!step){ user = 'take'}
         console.log('渲染详情方法, id为: ' + step);
         showSubFrame('yourmount','rendering');
-        //
-        if(step>7){step = 1};
-        //
+
         if(step == 'take'){
         	router.navigate('yourmount/rendering' , {  
 	    		  trigger: true  
           });
-        	drowMout(2);
+        	//drowMout(2);
         }else if (step == 'real'){
           router.navigate('yourmount/real');
           showSubFrame('yourmount','real');
@@ -674,9 +725,10 @@ var AppRouter = Backbone.Router.extend({
           $('.mountswich a').hide();
           $('.mountswich .pre').show();
         }else{
-          router.navigate('yourmount/' + step , {  
-            trigger: true  
-          });
+          // router.navigate('yourmount/' + step , {  
+          //   trigger: true  
+          // });
+
           drowMout(step);
 
         }
@@ -738,7 +790,8 @@ $(document).ready(function() {
     //router.navigate('yourmount/real');
     $('.mountswich a').hide();
     $('.mountswich .pre').show();
-    $('.carunit').addClass('carlightanim');
+    $('.carunit').removeClass('caranim');
+    $('.carlight').removeClass('carlightanim');
     console.log('next');
   });
 
@@ -753,6 +806,7 @@ $(document).ready(function() {
   $('.sharelist a').die('click').live('click',function(){
     var $this = this;
     postShare($this.className)
+    //return false;
     //console.log($this.className);
   });
   //$('#userprofile').on("change",select);
