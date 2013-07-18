@@ -599,20 +599,8 @@ function drowMout(mountid) {
   //   drowMout(mountid);
   // }, false);
 
-  // function _animStart(){
-  //   console.log("in  _animStart");
-  //   return function(){
-  //     anim.start();
-  //     console.log("drow mount anim~~");
-  //   }
-  // }
-  // setTimeout(function () {
-  //   $('.mask').hide();
-  //   anim.start();
-  //   console.log("call _animStart");
-  // }, 2000);
     $('.mask').hide();
-    //anim.start();
+    anim.start();
     console.log("call _animStart");
 } //drowMout finish;
 
@@ -682,7 +670,8 @@ var AppRouter = Backbone.Router.extend({
         showSubFrame('awardbox','inputfrom');
         showNavBar('awardlink');
         selectInit();
-        _smq.push(['custom','活动按钮','首页','获奖名单']);
+        _smq.push(['custom','活动按钮','互动页','互动完成-参与抽奖']);
+        //_smq.push(['custom','活动按钮','首页','获奖名单']);
     },
     userList: function() {  
         console.log('获奖名单');
@@ -693,11 +682,14 @@ var AppRouter = Backbone.Router.extend({
         console.log('subminsuccess');
         showSubFrame('awardbox','subminsuccess');
         showNavBar('subminsuccess');
+        _smq.push(['custom','活动按钮','提交成功页','活动说明']);
+
     },
     shareGame: function() {  
         console.log('shearGame');
         showSubFrame('awardbox','share');
         showNavBar('sheargame');
+        _smq.push(['custom','活动按钮','互动页','互动完成-即刻分享']);
     },  
     aboutGame: function() {  
         console.log('aboutGame');
@@ -752,14 +744,17 @@ Backbone.history.start();
 
 $(document).ready(function() {
 
-  console.log('onReady');
+  //console.log('onReady');
 
-  $('.takethepic').die('click').live('click',function(){
+  $('.takepic .takethepic').die('click').live('click',function(){
     $('#takePictureField').click();
     _smq.push(['custom','活动按钮','互动页','拍摄按钮']);
     //$('#input1').val($('#myfile').val());
   });
-
+  $('.retakepic .takethepic').die('click').live('click',function(){
+    $('#takePictureField').click();
+    _smq.push(['custom','活动按钮','互动页','拍摄完成-重新拍摄']);
+  });
 	$("#takePictureField").on("change",gotPic);
   
   $(".retake").die('click').live('click',function(){
@@ -789,7 +784,8 @@ $(document).ready(function() {
     $('.mountswich .pre').show();
     $('.carunit').removeClass('caranim');
     $('.carlight').removeClass('carlightanim');
-    console.log('next');
+    _smq.push(['custom','活动按钮','互动页','您专属的掌纹山势图']);
+    //console.log('next');
   });
 
   $('.navbox .youreal').die('click').live('click',function(){
@@ -800,25 +796,38 @@ $(document).ready(function() {
     $('.mountswich .pre').show();
     $('.carunit').removeClass('caranim');
     $('.carlight').removeClass('carlightanim');
-    console.log('next');
+    console.log('您专属的掌纹山势图');
+    _smq.push(['custom','活动按钮','互动页','您专属的掌纹山势图']);
   });
 
-
-
-
-
   $('.awardsubmint').die('click').live('click',function(){
+    _smq.push(['custom','活动按钮','填写信息页','确认提交']);
     postProfile();
     return false;
   });
   $('.sharelist a').die('click').live('click',function(){
     var $this = this;
-    postShare($this.className)
+    postShare($this.className);
+    switch($this.className) {
+        case 'sina':
+            _smq.push(['custom','活动按钮','分享页面','新浪微博']);
+            break;
+        case 'qq':
+            _smq.push(['custom','活动按钮','分享页面','腾讯微博']);
+            break;
+        case 'renren':
+            _smq.push(['custom','活动按钮','分享页面','人人网']);
+            break;
+    }
     //return false;
     //console.log($this.className);
   });
-  //$('#userprofile').on("change",select);
-  
+  $('.navbox .replay').die('click').live('click',function(){
+    _smq.push(['custom','活动按钮','互动页','互动完成-再试一次']);  
+  });
+  $('.navbox .sheargame').die('click').live('click',function(){
+    _smq.push(['custom','活动按钮','分享页面','填写中奖信息']);
+  });
 });
 
 
