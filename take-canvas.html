@@ -27,12 +27,13 @@
 <body>
     <input type="button" id="postpic" value="Post Pic">
     <input type="button" id="takepic" value="Take Pic">
-    <input type="file" accept="image/*" capture="camera" id="takePictureField" name="photo" >
     <div id="imagebox" class="imagebox">
         info
         <canvas id ="newCanvas" width="300" height="400"></canvas>
         <div class="gridbox" id="gridbox"></div>
     </div>
+    <input type="button" id="htmlcanvas" value="html 2 canvas">
+    <input type="file" accept="image/*" capture="camera" id="takePictureField" name="photo" >
     <canvas id ="tempCanvas" class="piccanvas"></canvas>
     <img id="resultImage">
 
@@ -151,11 +152,34 @@ function postThePic(event) {
     ctx2.putImageData(imgData,0,0);
     // ctx2.restore(); 
   }
+
+    function capture() {
+        html2canvas($('#imagebox'), {
+            onrendered: function(canvasnew) {
+                //$('#img_val').val(canvas.toDataURL("image/png"));
+                document.body.appendChild(canvasnew);
+            }
+        });
+
+        // $('#imagebox').html2canvas({
+        //     onrendered: function (canvasnew) {
+        //         $('#img_val').val(canvas.toDataURL("image/png"));
+
+        //         document.body.appendChild(canvasnew);
+
+        //     }
+        // });
+    }
+
+
 $(document).ready(function() {
   $("#takePictureField").on("change",gotPic);
 
   $('#takepic').on('click',function(){
     takeNewCanvas();
+  });
+  $('#htmlcanvas').on('click',function(){
+    capture();
   });
   $("#postpic").on('click',function(){
 
