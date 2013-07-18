@@ -347,13 +347,13 @@ function drowCar(mountid) {
   var self = $(".carunit");
   self.addClass('caranim');
   var loadingStatus = $('.rendering');
-
+  //$('.rendering .status').hide();
   $(".carlight").addClass('carlightanim');
   console.log('Now drowCar~');
   //setTimeout(function () {
     console.log("drowCar anim finish");
       loadingStatus.find('.status').hide();
-      loadingStatus.find('.status').hide();
+      //loadingStatus.find('.status').hide();
       loadingStatus.find('.mountstxt').show();
       $('.yourmount .text').css('background-image', 'url(image/text/00'+ mountid +'.png)');
       $('.yourmount .name').css('background-image', 'url(image/text/00'+ mountid +'.png)');
@@ -375,8 +375,9 @@ function drowMout(mountid) {
     height: 200
   });
   //
-  if(mountid>7){mountid = 1};
+  //if(mountid>7){mountid = 1};
   //
+  $('.rendering .status').show();
   var staticLayer = new Kinetic.Layer();
   var staticGroup = new Kinetic.Group({
     x: 0,
@@ -442,7 +443,7 @@ function drowMout(mountid) {
           stroke: 'white',
           opacity:0.4
         });
-        //console.log("lines-" + n +"-type:" + linesArr[n].type + ",strpid:" + (linesArr[n].strpid-1) + ",endpid:" + (linesArr[n].endpid-1) );
+        console.log("lines-" + n +"-type:" + linesArr[n].type + ",strpid:" + (linesArr[n].strpid-1) + ",endpid:" + (linesArr[n].endpid-1) );
           if(linesArr[n].type=="off"){
             staticGroup.add(line);
           }else{
@@ -611,7 +612,7 @@ function drowMout(mountid) {
   //   console.log("call _animStart");
   // }, 2000);
     $('.mask').hide();
-    anim.start();
+    //anim.start();
     console.log("call _animStart");
 } //drowMout finish;
 
@@ -647,6 +648,7 @@ var AppRouter = Backbone.Router.extend({
         showNavBar();
         $('.mountswich .nex').hide();
         $('.yourmount .mountstxt').hide();
+        _smq.push(['custom','活动按钮','首页','解密你的掌纹山势']);
     },
     selectGenderUser: function(user) {  
     	if(!user){ user = 'male'}
@@ -659,8 +661,11 @@ var AppRouter = Backbone.Router.extend({
 	    });
       if(user == 'female'){ 
         $(".gridbox").addClass("femalegrid");
+        _smq.push(['custom','活动按钮','互动页','选择性别-女']);
+
       }else{
         $(".gridbox").removeClass("femalegrid");
+        _smq.push(['custom','活动按钮','互动页','选择性别-男']);
       }
     },
     awardList: function() {  
@@ -677,6 +682,7 @@ var AppRouter = Backbone.Router.extend({
         showSubFrame('awardbox','inputfrom');
         showNavBar('awardlink');
         selectInit();
+        _smq.push(['custom','活动按钮','首页','获奖名单']);
     },
     userList: function() {  
         console.log('获奖名单');
@@ -696,6 +702,7 @@ var AppRouter = Backbone.Router.extend({
     aboutGame: function() {  
         console.log('aboutGame');
         showFrame('aboutgame');
+        _smq.push(['custom','活动按钮','首页','活动说明']);
     },  
     takePic : function(user) {  
     	if(!user){ user = 'male'};
@@ -749,7 +756,7 @@ $(document).ready(function() {
 
   $('.takethepic').die('click').live('click',function(){
     $('#takePictureField').click();
-
+    _smq.push(['custom','活动按钮','互动页','拍摄按钮']);
     //$('#input1').val($('#myfile').val());
   });
 
@@ -757,6 +764,7 @@ $(document).ready(function() {
   
   $(".retake").die('click').live('click',function(){
     $('.mask').show();
+    _smq.push(['custom','活动按钮','互动页','拍摄完成-使用']);
     postThePic();
   });
 

@@ -148,7 +148,7 @@ header div.link_home a.book { }
 
 /*rendering*/
 .rendering { position: relative; width: 100%; min-height: 520px;}
-.rendering .status {  text-align: center; height: 70px; padding-top: 80px;}
+.rendering .status {  text-align: center; height: 70px; padding-top: 80px; display: none;}
 .rendering .status .txt { font-size: 120%; font-weight: bold;line-height: 22px;}
 .rendering .status .loading { font-size: 80%; line-height: 22px;}
 .rendering .status .loading b { font-size: 150%; display: inline-block;}
@@ -325,7 +325,7 @@ header div.link_home a.book { }
   .page { background: url(../image/x2/bg-i.jpg) ; background-size: 320px 539px;}
   .homepage { background: url(../image/x2/bg-homepage-01.jpg) no-repeat top center; background-size: 320px 539px;}
   .homepage .menu li a { background-image: url(../image/x2/home-menu.png); background-size: 320px 136px;}
-  .navbox .navlink { background-image: url(../image/x2/bg-nav.png);background-size: 320px 400px;}
+  .navbox .navlink { background-image: url(../image/x2/bg-nav.png); background-size: 320px 400px;}
   .navbox .takepic .takethepic { background-image: url(../image/x2/bg-nav.png); background-size: 320px 400px;}
   .navbox .retakepic .takethepic { background-image: url(../image/x2/bg-nav.png); background-size: 320px 400px;}
   .navbox .retakepic .retake { background-image: url(../image/x2/bg-nav.png); background-size: 320px 400px;}
