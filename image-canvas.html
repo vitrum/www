@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>::LUXGEN::</title>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" media="all" type="text/css" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" /> 
+    <style>
+        body{ max-height: 320px;}
+        canvas {
+            border: 1px solid green;
+        }
+        img {border: 1px solid red;}
+        .imagebox {position: relative; width: 320px; height: 200px;border: 1px solid green; overflow: hidden;}
+        .gridbox { top:0;left: 0; position: absolute; width: 320px; height: 200px; background: #3c3c3c; opacity: 0.3; z-index: 999; background: url(image/mask-hand.png)  center -80px no-repeat; }
+        #takePictureField { display: block; width: auto; height: auto;}
+    </style>
+  </head>
+  <body>
+    <div id="imagebox" class="imagebox">
+      <img id="resultImage" src="image/bg-homepage-01.jpg">
+      <div class="gridbox" id="gridbox"></div>
+    </div>
+    <canvas id ="newCanvas" width="300" height="400"></canvas>
+    <canvas id ="tempCanvas" class="piccanvas"></canvas>
+    <script type="text/javascript" src="js/lib/zepto.min.js"></script>
+    <script type="text/javascript" src="js/lib/hammer.min.js"></script>
+    <script src="js/lib/hammer.fakemultitouch.js"></script>
+    <script src="js/lib/hammer.showtouches.js"></script>
+    <script>
+if(!Hammer.HAS_TOUCHEVENTS && !Hammer.HAS_POINTEREVENTS) {
+  Hammer.plugins.fakeMultitouch();
+}
+
+function hammerInit() {
+  var rect = document.getElementById('resultImage');
+  var hammertime = Hammer(document.getElementById("imagebox"), {
+    transform_always_block: true,
+    transform_min_scale: 1,
+    drag_block_horizontal: true,
+    drag_block_vertical: true,
+    drag_min_distance: 0
+  });
+  var posX=0, posY=0,last_posX,last_posY,
+      scale=1, last_scale,
+      rotation= 1, last_rotation;
+  hammertime.on("touch drag transform", function(ev) {
+    switch(ev.type) {
+      case 'touch':
+        last_scale = scale;
+        last_rotation = rotation;
+        break;
+      case 'drag':
+        posX = ev.gesture.deltaX ;
+        posY = ev.gesture.deltaY ;
+        break;
+      case 'transform':
+        rotation = last_rotation + ev.gesture.rotation;
+        scale = Math.max(0.6, Math.min(last_scale * ev.gesture.scale, 1.8));
+        break;
+    }
+      // transform!
+    var transform =
+      "translate3d("+posX+"px,"+posY+"px, 0) " +
+      //"scale3d("+scale+","+scale+", 0) " +
+      "scale("+scale+","+scale+") " +
+      "rotate("+rotation+"deg) ";
+    console.log("translate3d("+posX+"px,"+posY+"px, 0) " +"scale3d("+scale+","+scale+", 0) " + "rotate("+rotation+"deg) ");
+    rect.style.transform = transform;
+    rect.style.oTransform = transform;
+    rect.style.msTransform = transform;
+    rect.style.mozTransform = transform;
+    rect.style.webkitTransform = transform;
+    //takeNewCanvas(posX,posY,scale,rotation);
+    var c=document.getElementById("newCanvas");
+    var ctx=c.getContext("2d");
+    var img=document.getElementById("resultImage");
+    var x = 320; //canvas.width / 2;
+    var y = 240;//canvas.height / 2;
+    var width = 320;//image.width;
+    var height = 468; //image.height;
+    //ctx.width = ctx.width;
+    
+    ctx.clearRect ( 0 , 0 , width , height );
+    ctx.save();
+    ctx.translate(posX,posY);
+    var angleInRadians = rotation * Math.PI / 180;
+    ctx.rotate(angleInRadians);
+    ctx.scale(scale, scale);  
+    //ctx.rotate(rotation);
+    ctx.drawImage(img, -width / 2, -height / 2, width, height);
+    ctx.restore();
+//ctx.rotate(-angleInRadians);
+//ctx.translate(-x, -y);
+    //ctx.drawImage(img,10,10);
+  });
+}
+
+$(document).ready(function() {
+  hammerInit();
+});
+
+
+
+
+
+    </script>
+  </body>
+</html>
+
+
+
