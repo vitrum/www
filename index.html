@@ -52,10 +52,14 @@
 				<section class="subframe take">
 					<form action="upload.php?action=upfile" method="post" name="UForm" enctype="multipart/form-data">
 						<div class="imagebox">
-							<img id="yourimage" />
-							<canvas id ="postThePicCanvas" class="piccanvas"></canvas>
+							<!-- <img id="yourimage" /> -->
+						    <canvas id ="backcanvas" width="300" height="400"></canvas>
+						    <canvas id ="newCanvas" width="300" height="400"></canvas>
+  							<canvas id ="postThePicCanvas" class="piccanvas" width="116" height="116"></canvas>
+							<!-- <canvas id ="postThePicCanvas" class="piccanvas"></canvas> -->
 							<div class="gridbox" id="gridbox"></div>
 						</div>
+						<img id="savedate" />
 						<!--<button type="submit">上传</button>-->
 						<input type="file" accept="image/*" capture="camera" id="takePictureField" name="photo" >
 					</form>

@@ -142,6 +142,86 @@ function showNavBar(barname) {
   //check nav bar prostion;
 }
 
+function hammerInit() {
+// create backing canvas
+  var c=document.getElementById("newCanvas");
+  var ctx=c.getContext("2d");
+  var backCanvas = document.getElementById('backcanvas');
+  var backCtx = backCanvas.getContext('2d');
+  var resImage = document.getElementById('resultImage');
+  var canvasData = backCtx.getImageData(0, 0, 999, 999);
+  var savedData = document.getElementById('savedate');
+
+  setTimeout(function(){
+    
+    savedData.src = backcanvas.toDataURL("image/png");
+    //document.body.appendChild(savedData);
+    $("#savedate").hide();
+    //$("#backcanvas").hide();
+  },500);
+
+  var hammertime = Hammer(document.getElementById("gridbox"), {
+    transform_always_block: true,
+    transform_min_scale: 1,
+    drag_block_horizontal: true,
+    drag_block_vertical: true,
+    drag_min_distance: 0
+  });
+  var posX=0, posY=0,last_posX,last_posY,
+      scale=1, last_scale,
+      rotation= 1, last_rotation;
+  hammertime.on("touch drag transform", function(ev) {
+    switch(ev.type) {
+      case 'touch':
+        last_scale = scale;
+        last_rotation = rotation;
+        $("#backcanvas").hide();
+        break;
+      case 'drag':
+        posX = ev.gesture.deltaX+100 ;
+        posY = ev.gesture.deltaY+100 ;
+        break;
+      case 'transform':
+        rotation = last_rotation + ev.gesture.rotation;
+        scale = Math.max(0.6, Math.min(last_scale * ev.gesture.scale, 1.8));
+        break;
+    }
+      // transform!
+    var transform =
+      "translate3d("+posY+"px,"+posX+"px, 0) " +
+      //"scale3d("+scale+","+scale+", 0) " +
+      "scale("+scale+","+scale+") " +
+      "rotate("+rotation+"deg) ";
+    //console.log("translate3d("+posX+"px,"+posY+"px, 0) " +"scale3d("+scale+","+scale+", 0) " + "rotate("+rotation+"deg) ");
+    var x = 300; //canvas.width / 2;
+    var y = 400;//canvas.height / 2;
+    var width = 300;//image.width;
+    var height = 400; //image.height;
+    ctx.clearRect (0,0,999,999);
+    ctx.save();
+    ctx.translate(posX,posY);
+    var angleInRadians = rotation * Math.PI / 180;
+    ctx.rotate(angleInRadians);
+    ctx.scale(scale, scale);
+    ctx.drawImage(savedData, -width / 2, -height / 2, width, height);
+    ctx.restore();
+    takeNewCanvas();
+  });
+
+}
+function takeNewCanvas(posX,posY,scale,rotation) {
+  //var ctx = $('#postThePicCanvas').get(0).getContext("2d");//.get(0).getContext('2d');
+  var c=document.getElementById("newCanvas");
+  var ctx=c.getContext("2d");
+  var c2=document.getElementById("postThePicCanvas");
+  var ctx2 = c2.getContext("2d");
+  console.log("take new pic to postThePicCanvas");
+  // ctx2.save(); 
+  // ctx2.rotate(rotate);
+  var imgData=ctx.getImageData(100,220,230,230);
+  ctx2.putImageData(imgData,0,0);
+  // ctx2.restore(); 
+}
 function gotPic(e) {
   if(event.target.files.length == 1 && event.target.files[0].type.indexOf("image/") == 0) {
     //$("#yourimage").attr("src",URL.createObjectURL(event.target.files[0]));
@@ -153,96 +233,12 @@ function gotPic(e) {
 
     // MegaPixImage constructor accepts File/Blob object.
     var mpImg = new MegaPixImage(file);
-    var resCanvas2 = document.getElementById('postThePicCanvas');
-      //need check pic's exif to select the right orientation value;
-    var newImage = true;
-    // EXIF.getData(e.target.files[0], function() {
-    //     function getStrTime(time)
-    //     {
-    //         var t =  time.split(' ');
-    //         var ts = t[1].split(':');
-    //         var th = t[0].split(':');
-    //         return new Date(th[0], th[1], th[2], ts[0], ts[1], ts[2]);
-    //     }
-    //     var d2 = new Date(); 
-    //     var tempDate = EXIF.getTag(this, "DateTime");
-    //     var d1 = getStrTime(tempDate);
-    //     var date3=d1.getTime()-d2.getTime();
-         
-    //     var days=Math.floor(date3/(24*3600*1000)) //计算出相差天数  
-    //     var leave1=date3%(24*3600*1000)    //计算天数后剩余的毫秒数  
-    //     var hours=Math.floor(leave1/(3600*1000))  //计算出小时数 
-    //     //计算相差分钟数  
-    //     var leave2=leave1%(3600*1000)        //计算小时数后剩余的毫秒数  
-    //     var minutes=Math.floor(leave2/(60*1000))  
-    //     var rage = days+hours+minutes;
-    //     if(  rage >= 1){
-    //       newImage = false;
-    //     }
-    //     console.log("newImage:" + newImage + ",rage:" + rage);
-    //     //alert("newImage:" + newImage + ",rage:" + rage );
-    // });
 
-    if(newImage){
-      mpImg.render(resCanvas2, { maxWidth: 400, maxHeight: 568, orientation: 6});
-      console.log("orientation:6");
-    }else{
-      mpImg.render(resCanvas2, { maxWidth: 400, maxHeight: 568, orientation: 0 });
-      console.log("orientation:0");
-    }
-
-    var hammertime = Hammer(document.getElementById("gridbox"), {
-        transform_always_block: true,
-        transform_min_scale: 1,
-        drag_block_horizontal: true,
-        drag_block_vertical: true,
-        drag_min_distance: 0
-    });
-    var rect = document.getElementById('postThePicCanvas');
-
-    var posX=0, posY=0,last_posX,last_posY,
-        scale=1, last_scale,
-        rotation= 1, last_rotation;
-    hammertime.on("touch drag transform", function(ev) {
-      // var touches = ev.gesture.touches;
-      // ev.gesture.preventDefault();
-      // for(var t=0,len=touches.length; t<len; t++) {
-      //   var target = $(touches[t].target);
-      //   $('#postThePicCanvas').css({
-      //     left: touches[t].pageX-160,
-      //     top: touches[t].pageY-250
-      //   });
-      // }
-        switch(ev.type) {
-            case 'touch':
-                last_scale = scale;
-                last_rotation = rotation;
-                break;
-
-            case 'drag':
-                posX = ev.gesture.deltaX ;
-                posY = ev.gesture.deltaY ;
-                break;
-
-            case 'transform':
-                rotation = last_rotation + ev.gesture.rotation;
-                scale = Math.max(0.7, Math.min(last_scale * ev.gesture.scale, 1.5));
-                break;
-        }
-
-        // transform!
-        var transform =
-                "translate3d("+posX+"px,"+posY+"px, 0) " +
-                //"scale3d("+scale+","+scale+", 0) " +
-                "scale("+scale+","+scale+") " +
-                "rotate("+rotation+"deg) ";
-        console.log("translate3d("+posX+"px,"+posY+"px, 0) " +"scale3d("+scale+","+scale+", 0) " + "rotate("+rotation+"deg) ");
-        rect.style.transform = transform;
-        rect.style.oTransform = transform;
-        rect.style.msTransform = transform;
-        rect.style.mozTransform = transform;
-        rect.style.webkitTransform = transform;
-    });
+    var backcanvas = document.getElementById('backcanvas');
+    //mpImg.render(resCanvas2, { maxWidth: 400, maxHeight: 568, orientation: 0 });
+    mpImg.render(backcanvas, { maxWidth: 400, maxHeight: 568, orientation: 6 });
+    //mpImg.render(resImage, { maxWidth: 400, maxHeight: 568, orientation: 0 });
+    hammerInit();
   }
 }
 

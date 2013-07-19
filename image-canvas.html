@@ -139,12 +139,10 @@ function hammerInit() {
     ctx.rotate(angleInRadians);
     ctx.scale(scale, scale);
     
-    // console.log(canvasData);
-    // console.log(ctx);
-    // console.log(backCtx);
-    //ctx.rotate(rotation);
-    //ctx.putImageData(canvasData, -width / 2, -height / 2);
+
     ctx.drawImage(savedData, -width / 2, -height / 2, width, height);
+    // var imgData=backCtx.getImageData(0,0,320,480);
+    // ctx.putImageData(imgData,0,0);
     ctx.restore();
 
   });
@@ -159,7 +157,7 @@ function takeNewCanvas(posX,posY,scale,rotation) {
   // ctx2.save(); 
   // ctx2.rotate(rotate);
 
-  var imgData=ctx.getImageData(120,220,230,230);
+  var imgData=ctx.getImageData(100,220,230,230);
   ctx2.putImageData(imgData,0,0);
   // ctx2.restore(); 
 }

@@ -127,7 +127,7 @@ header div.link_home a.book { }
 /*take pic*/
 .takebox .takebox_frame { display: none; position: relative;}
   .takebox .take { display:block; max-width: 320px; overflow: hidden;}
-  .takebox .gridbox { display: block; background: url(../image/mask-hand.png)  center -80px no-repeat; position: absolute; top: 0; left: 0; z-index: 10; width: 100%; height: 100%;}
+  .takebox .gridbox { display: block; background: url(../image/mask-hand.png)  center -80px no-repeat; position: absolute; top: 0; left: 0; z-index: 500; width: 100%; height: 100%;}
   .takebox .femalegrid { 
   -webkit-transform: translate3d(0,0,0);
   -moz-transform: translate3d(0,0,0);
@@ -141,26 +141,27 @@ header div.link_home a.book { }
 
   }
   .takebox img { width: 100%;}
-  #takePictureField { display: block; z-index: 200; width: 0; height: 0;}
+  #takePictureField { z-index: 200; width: 0; height: 0; display: block;}
   .takebox .piccanvas { padding: 0; margin: 0;position: absolute;}
 #yourimage { width: 0; height: 0; }
-
-
+#postThePicCanvas { display: none;}
+#backcanvas{ position: absolute; width: 300px; height: 400px; z-index: 250; top: 0}
+#newCanvas { position: absolute; width: 300px; height: 400px; z-index: 300; top: 0}
 /*rendering*/
 .rendering { position: relative; width: 100%; min-height: 520px;}
 .rendering .status {  text-align: center; height: 70px; padding-top: 80px; display: none;}
 .rendering .status .txt { font-size: 120%; font-weight: bold;line-height: 22px;}
 .rendering .status .loading { font-size: 80%; line-height: 22px;}
 .rendering .status .loading b { font-size: 150%; display: inline-block;}
-.rendering .mountstxt { display: none; width: 100%; min-height: 470px;  position: relative;background: url(../image/icon-mount-title.png)  center 38px  no-repeat; padding-top: 68px; }
+.rendering .mountstxt { display: none; width: 100%; min-height: 470px;  position: relative;background: url(../image/icon-mount-title.png)  center 28px  no-repeat; padding-top: 58px; }
 .rendering .mountstxt .title , .yourmount .real .title { padding:0; margin: 0; width: 100%; background: no-repeat; height: 50px;}
-.yourmount .real .title { position: relative;background: url(../image/icon-mount-title.png)  center 38px  no-repeat; padding-top: 48px; height: 20px;}
+.yourmount .real .title { position: relative;background: url(../image/icon-mount-title.png)  center 28px  no-repeat; padding-top: 38px; height: 20px;}
 .yourmount .text { padding:0; margin: 0; width: 100%; background:url() center top no-repeat; height: 50px; background-size: 320px 178px; }
-.yourmount .name { padding:0; margin: 10px 0; width: 100%; background:url() center bottom no-repeat; height: 30px; background-size: 320px 178px; }
-.yourmount .mountpic { margin: 10px auto; display: block }
+.yourmount .name { padding:0; margin: 0; width: 100%; background:url() center bottom no-repeat; height: 30px; background-size: 320px 178px; }
+.yourmount .mountpic { margin: 0 auto; display: block }
 /*anims*/
-#container {position: absolute; width: 100%; height: auto; z-index: 100;top:160px;}
-.caranimbox {position: absolute; width: 300px; height: 200px; top:160px;  z-index: 200; overflow: hidden;}
+#container {position: absolute; width: 100%; height: auto; z-index: 100;top:150px;}
+.caranimbox {position: absolute; width: 300px; height: 200px; top:150px;  z-index: 200; overflow: hidden;}
 .carunit { position: absolute;background: url(../image/x2/car-left-i.png) no-repeat; width: 40px; height: 40px; background-size: 40px 40px; z-index: 400;
   bottom: 500px; right: 0; opacity: 0;
   -webkit-transform: translate3d(0,0,0);
@@ -237,7 +238,7 @@ header div.link_home a.book { }
 
 /*mounts*/
 .mountswich { width: 100%; }
-  .mountswich a { position: absolute; z-index: 900;  top: 50%;  width: 45px; height: 45px; display: block; background: url(../image/icon-mountswich.png) no-repeat; text-indent: -9999em; overflow: hidden; display: none; margin-top: -30px; cursor: pointer;}
+  .mountswich a { position: absolute; z-index: 900;  top: 200px;  width: 45px; height: 45px; display: block; background: url(../image/icon-mountswich.png) no-repeat; text-indent: -9999em; overflow: hidden; display: none; margin-top: -30px; cursor: pointer;}
   .mountswich a.pre {left: 0px;left:6px;}
   .mountswich a.nex { right: 0px; background-position: top right; right:6px;}
 
@@ -332,6 +333,7 @@ header div.link_home a.book { }
   .navbox .yourmount .youreal { background-image:url(../image/x2/bg-nav.png); background-size: 320px 400px;}
   .rendering .mountstxt , .yourmount .real .title { background-image: url(../image/x2/icon-mount-title.png); background-size: 320px 23px;}
   .selectgender .gender { background-image: url(../image/x2/icon-gender.png);background-size: 320px 174px; }
+ .selectgender ul a {  background-image: url(../image/x2/icon-gender.png); background-size: 320px 174px;}
 
 
   /* vertical fat 3star */
