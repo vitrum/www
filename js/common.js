@@ -78,7 +78,14 @@ function selectInit() {
        });
   });
 }
-
+function cleanCanvas(){
+  var resCanvas2 = document.getElementById("newCanvas");
+  var ctx  = resCanvas2.getContext("2d");
+  ctx.clearRect (0,0,999,999);
+  var backCanvas = document.getElementById('backcanvas');
+  var ctx  = backCanvas.getContext("2d");
+  ctx.clearRect (0,0,999,999);
+}
 function getObjPos(obj)   
 {   
     var x = y = 0;   
@@ -170,12 +177,14 @@ function hammerInit() {
   var posX=0, posY=0,last_posX,last_posY,
       scale=1, last_scale,
       rotation= 1, last_rotation;
+  var touchEd = false;
   hammertime.on("touch drag transform", function(ev) {
     switch(ev.type) {
       case 'touch':
         last_scale = scale;
         last_rotation = rotation;
         $("#backcanvas").hide();
+        touchEd = true;
         break;
       case 'drag':
         posX = ev.gesture.deltaX+100 ;
@@ -218,8 +227,9 @@ function takeNewCanvas(posX,posY,scale,rotation) {
   console.log("take new pic to postThePicCanvas");
   // ctx2.save(); 
   // ctx2.rotate(rotate);
-  var imgData=ctx.getImageData(100,220,230,230);
+  var imgData=ctx.getImageData(80,170,230,230);
   ctx2.putImageData(imgData,0,0);
+  //alert("touchEd = " + touchEd );
   // ctx2.restore(); 
 }
 function gotPic(e) {
@@ -230,14 +240,25 @@ function gotPic(e) {
     var fileInput = document.getElementById('takePictureField');
     var file = fileInput.files[0];
     var dragging = false;
+      
+    var resCanvas2 = document.getElementById('newCanvas');
+    var ctx = resCanvas2.getContext("2d");
+    var newImage = true;
+    ctx.clearRect (0,0,999,999);
 
     // MegaPixImage constructor accepts File/Blob object.
     var mpImg = new MegaPixImage(file);
 
     var backcanvas = document.getElementById('backcanvas');
-    //mpImg.render(resCanvas2, { maxWidth: 400, maxHeight: 568, orientation: 0 });
-    mpImg.render(backcanvas, { maxWidth: 400, maxHeight: 568, orientation: 6 });
-    //mpImg.render(resImage, { maxWidth: 400, maxHeight: 568, orientation: 0 });
+      EXIF.getData(e.target.files[0], function() {
+        var picX = EXIF.getTag(this,"PixelXDimension");
+        var picY = EXIF.getTag(this,"PixelYDimension");
+        if (picX>picY){
+            mpImg.render(backcanvas, { maxWidth: 400, maxHeight: 568, orientation: 6 });
+        }else{
+            mpImg.render(backcanvas, { maxWidth: 400, maxHeight: 568, orientation: 0 });
+        }
+    });
     hammerInit();
   }
 }
@@ -245,6 +266,7 @@ function gotPic(e) {
 function postThePic(event) {
 
   //alert("postThePic OK!");
+  //var testCanvas = document.getElementById("postThePicCanvas");  
   var testCanvas = document.getElementById("postThePicCanvas");  
   var canvasData = testCanvas.toDataURL("image/png")
   ,   userSex   = $('#gender').val();
@@ -256,7 +278,15 @@ function postThePic(event) {
       console.log(json);
       var jsdata = eval('('+json+')');  
       console.log('mid='+ jsdata.data.mid +",similar="+ jsdata.data.similar);
-      router.navigate('yourmount/'+ jsdata.data.mid , {  
+      var mid = 1;
+      if (!jsdata.data.mid){
+        alert("很抱歉，请确保将手掌整体置于拍摄区域内，请重试");
+        $('.mask').hide();
+        return false;
+      }else{
+        mid =jsdata.data.mid;
+      }
+      router.navigate('yourmount/'+ mid , {  
         trigger: true  
       });
       showSubFrame('yourmount','rendering');
@@ -371,7 +401,7 @@ function drowMout(mountid) {
     height: 200
   });
   //
-  //if(mountid>7){mountid = 1};
+  if(mountid>15){mountid = 1};
   //
   $('.rendering .status').show();
   var staticLayer = new Kinetic.Layer();
@@ -749,9 +779,11 @@ $(document).ready(function() {
   });
   $('.retakepic .takethepic').die('click').live('click',function(){
     $('#takePictureField').click();
+    cleanCanvas();
     _smq.push(['custom','活动按钮','互动页','拍摄完成-重新拍摄']);
   });
 	$("#takePictureField").on("change",gotPic);
+  $("#takePictureField2").on("change",gotPic);
   
   $(".retake").die('click').live('click',function(){
     $('.mask').show();
@@ -819,6 +851,7 @@ $(document).ready(function() {
     //console.log($this.className);
   });
   $('.navbox .replay').die('click').live('click',function(){
+    cleanCanvas();
     _smq.push(['custom','活动按钮','互动页','互动完成-再试一次']);  
   });
   $('.navbox .sheargame').die('click').live('click',function(){

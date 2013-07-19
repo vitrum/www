@@ -127,7 +127,7 @@ header div.link_home a.book { }
 /*take pic*/
 .takebox .takebox_frame { display: none; position: relative;}
   .takebox .take { display:block; max-width: 320px; overflow: hidden;}
-  .takebox .gridbox { display: block; background: url(../image/mask-hand.png)  center -80px no-repeat; position: absolute; top: 0; left: 0; z-index: 500; width: 100%; height: 100%;}
+  .takebox .gridbox { display: block; background: url(../image/mask-hand.png)  center -80px no-repeat; position: absolute; top: 0; left: 0; z-index: 5; width: 100%; height: 100%;}
   .takebox .femalegrid { 
   -webkit-transform: translate3d(0,0,0);
   -moz-transform: translate3d(0,0,0);
@@ -141,12 +141,13 @@ header div.link_home a.book { }
 
   }
   .takebox img { width: 100%;}
-  #takePictureField { z-index: 200; width: 0; height: 0; display: block;}
+  #takePictureField, #takePictureField2 { z-index: 200; width: 100%; height: 40px; position: absolute; bottom: 0; display: block; opacity: 0}
+  #takePictureField2 { right: 0; width: 50%;}
   .takebox .piccanvas { padding: 0; margin: 0;position: absolute;}
 #yourimage { width: 0; height: 0; }
 #postThePicCanvas { display: none;}
-#backcanvas{ position: absolute; width: 300px; height: 400px; z-index: 250; top: 0}
-#newCanvas { position: absolute; width: 300px; height: 400px; z-index: 300; top: 0}
+#backcanvas{ position: absolute; z-index: 1; top: 0}
+#newCanvas { position: absolute; z-index: 2; top: 0}
 /*rendering*/
 .rendering { position: relative; width: 100%; min-height: 520px;}
 .rendering .status {  text-align: center; height: 70px; padding-top: 80px; display: none;}
@@ -323,8 +324,8 @@ header div.link_home a.book { }
   header div.link_home a { background-image: url(../image/x2/icon-header-i2.png); background-size: 320px 50px;}
   header div.link_home a.link_home { background-image: url(../image/x2/icon-header-i2.png); background-size: 320px 50px;  }
 
-  .page { background: url(../image/x2/bg-i.jpg) ; background-size: 320px 539px;}
-  .homepage { background: url(../image/x2/bg-homepage-01.jpg) no-repeat top center; background-size: 320px 539px;}
+  .page { background-image: url(../image/x2/bg-i.jpg) ; background-size: 320px 539px;}
+  .homepage { background-image: url(../image/x2/bg-homepage-01.jpg); background-size: 320px 539px;}
   .homepage .menu li a { background-image: url(../image/x2/home-menu.png); background-size: 320px 136px;}
   .navbox .navlink { background-image: url(../image/x2/bg-nav.png); background-size: 320px 400px;}
   .navbox .takepic .takethepic { background-image: url(../image/x2/bg-nav.png); background-size: 320px 400px;}
@@ -335,12 +336,21 @@ header div.link_home a.book { }
   .selectgender .gender { background-image: url(../image/x2/icon-gender.png);background-size: 320px 174px; }
  .selectgender ul a {  background-image: url(../image/x2/icon-gender.png); background-size: 320px 174px;}
 
+  .awardbox .subminsuccess .title { background-image: url(../image/x2/icon-subminsuccess.png); background-size: 249px 115px;}
+  .awardbox .successinfobox { background-image: url(../image/x2/icon-subminsuccess.png);  background-size: 249px 115px;}
+
+  .awardbox .share .title { background-image: url(../image/x2/icon-share.png);  background-size: 249px 186px;}
+    .awardbox .share a { background-image: url(../image/x2/icon-share.png);   background-size: 249px 186px;}
+  .awardbox .inputfrom .title { background-image: url(../image/x2/icon-form.png);  background-size: 249px 236px;}
+  .awardbox .subinfobox { background-image: url(../image/x2/icon-form.png); background-size: 249px 236px;}
+  .awardbox label { background-image: url(../image/x2/icon-form.png); background-size: 249px 236px;}
 
   /* vertical fat 3star */
   @media screen and (min-width:321px) and (max-width:360px) {
-    header h1 { background: url(../image/x2/icon-header-a.png) top left no-repeat; }
-    header a { background: url(../image/x2/icon-header-a.png) top right no-repeat; }
-    .page { background: url(../image/x2/bg-a.jpg)}
+    header h1 { background-image: url(../image/x2/icon-header-a.png); background-size: 360px 60px;}
+    header a { background-image: url(../image/x2/icon-header-a.png); }
+    .page { background-image: url(../image/x2/bg-a.jpg)}
+    .homepage { background-image: url(../image/x2/bg-homepage-01.jpg); background-size: 360px 539px;}
   }
   /* pc and ipad */
   @media screen and (min-width:801px) {

@@ -55,13 +55,13 @@
 							<!-- <img id="yourimage" /> -->
 						    <canvas id ="backcanvas" width="300" height="400"></canvas>
 						    <canvas id ="newCanvas" width="300" height="400"></canvas>
-  							<canvas id ="postThePicCanvas" class="piccanvas" width="116" height="116"></canvas>
+  							<canvas id ="postThePicCanvas" class="piccanvas" width="230" height="230"></canvas>
 							<!-- <canvas id ="postThePicCanvas" class="piccanvas"></canvas> -->
 							<div class="gridbox" id="gridbox"></div>
 						</div>
 						<img id="savedate" />
 						<!--<button type="submit">上传</button>-->
-						<input type="file" accept="image/*" capture="camera" id="takePictureField" name="photo" >
+						
 					</form>
 				</section>
 			</div>
@@ -135,8 +135,8 @@
 				<section class="subframe share">
 					<h2 class="title">分享至</h2>
 					<ul class="sharelist">
-						<li><a class="sina" href="http://service.weibo.com/share/share.php?title=纳智捷Luxgen纳智捷Luxgen&url=http://mobile.dfyl-luxgen.com&source=bookmark&appkey=1995346682&pic=&ralateUid=" target="_blank">新浪微博</a></li>
-						<li><a class="qq" href="http://share.v.t.qq.com/index.php?c=share&a=index&url=http://mobile.dfyl-luxgen.com&title=纳智捷Luxgen&pic=&appkey=801cf76d3cfc44ada52ec13114e84a96"  target="_blank">腾讯微博</a></li>
+						<li><a class="sina" href="http://service.weibo.com/share/share.php?title=纳智捷Luxgen纳智捷Luxgen&url=http://mobile.dfyl-luxgen.com&source=bookmark&appkey=&pic=&ralateUid=" target="_blank">新浪微博</a></li>
+						<li><a class="qq" href="http://share.v.t.qq.com/index.php?c=share&a=index&url=http://mobile.dfyl-luxgen.com&title=纳智捷Luxgen&pic=&appkey="  target="_blank">腾讯微博</a></li>
 						<li><a class="renren" href="http://widget.renren.com/dialog/share?resourceUrl=http://mobile.dfyl-luxgen.com&srcUrl=http://mobile.dfyl-luxgen.com&title=纳智捷Luxgen&description=纳智捷Luxgen&pic="  target="_blank">人人网</a></li>
 					</ul>
 				</section>
@@ -156,8 +156,8 @@
 		</div>
 	
 		<nav class="navbox">
-			<div class="navbar takepic"><!--<a class="takepic_btn" id="takeThePic">拍摄</a>--><input type="button" class="takethepic" value="拍摄"></div>
-			<div class="navbar retakepic"><input type="button" class="retake" value="使用"><input type="button" class="takethepic" value="重新拍摄"></div>
+			<div class="navbar takepic"><!--<a class="takepic_btn" id="takeThePic">拍摄</a>--><input type="button" class="takethepic" value="拍摄"><input type="file" accept="image/*" capture="camera" id="takePictureField" name="photo" ></div>
+			<div class="navbar retakepic"><input type="button" class="retake" value="使用"><input type="button" class="takethepic" value="重新拍摄"><input type="file" accept="image/*" capture="camera" id="takePictureField2" name="photo" ></div>
 			<div class="navbar yourmount"><input type="button" class="youreal" value="您的专属掌纹山脉图"></div>
 			<div class="navbar showreal">
 				<a class="navlink youreal linkshare" href="#/share">即刻分享</a>
