@@ -539,7 +539,7 @@ function drowMout(mountid) {
     height: 200
   });
   //need remove this code, this only for test.
-  if(mountid>20){mountid = Math.max(1,mountid-20);};
+  //if(mountid>20){mountid = Math.max(1,mountid-20);};
   //need remove this code, this only for test.
   $('.rendering .status').show();
   var staticLayer = new Kinetic.Layer();

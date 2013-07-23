@@ -323,20 +323,20 @@ header div.link_home a.book { }
 }
 @-webkit-keyframes caranimtion-18 {
   0% {top: -20px; left:-100px;} 
-  60% {top: 70px; left: 120px;}
-  70% {top: 110px; left: 116px;}
-  100% {top: 146px; left: 180px;}
+  60% {top: 70px; left: 70px;}
+  80% {top: 110px; left: 5px;}
+  100% {top: 140px; left: 30px;}
 }
 @-webkit-keyframes caranimtion-19 {
-  0% {top: -20px; left:-100px;} 
-  60% {top: 70px; left: 120px;}
-  70% {top: 110px; left: 116px;}
-  100% {top: 146px; left: 180px;}
+  0% {top: 10px; left:-100px;} 
+  68% {top: 70px; left: 120px;}
+  86% {top: 110px; left: 76px;}
+  100% {top: 146px; left: 130px;}
 }
 @-webkit-keyframes caranimtion-20 {
-  0% {top: -20px; left:-100px;} 
-  60% {top: 70px; left: 120px;}
-  70% {top: 110px; left: 116px;}
+  0% {top: 10px; left:-60px;} 
+  78% {top: 110px; left: 200px;}
+  95% {top: 120px; left: 146px;}
   100% {top: 146px; left: 180px;}
 }
 @-webkit-keyframes caranimtion-21 {
@@ -489,6 +489,7 @@ header div.link_home a.book { }
 .carlightanim-20 { 
   -webkit-animation: lightanim-20 2s;
   background-image: url(../image/lt/20.png);
+  background-position: 0px -8px;
 }
 .carlightanim-21 { 
   -webkit-animation: lightanim-21 2s;
@@ -632,19 +633,22 @@ header div.link_home a.book { }
   100% {-webkit-mask-position:-10px 0px;}
 }
 @-webkit-keyframes lightanim-18 {
-  0% { -webkit-mask-position:-300px 0px;}
-  40% { -webkit-mask-position:-200px 0px;}
-  100% {-webkit-mask-position:-10px 0px;}
+  0% { -webkit-mask-position:-300px -400px;}
+  40% { -webkit-mask-position:-150px -200px;}
+  90% { -webkit-mask-position:-130px -110px;}
+  100% {-webkit-mask-position:-100px -100px;}
 }
 @-webkit-keyframes lightanim-19 {
-  0% { -webkit-mask-position:-300px 0px;}
-  40% { -webkit-mask-position:-200px 0px;}
-  100% {-webkit-mask-position:-10px 0px;}
+  0% { -webkit-mask-position:-280px -260px;}
+  70% { -webkit-mask-position:-130px -130px;}
+  80% { -webkit-mask-position:-130px -110px;}
+  100% {-webkit-mask-position:-100px -60px;}
 }
 @-webkit-keyframes lightanim-20 {
-  0% { -webkit-mask-position:-300px 0px;}
-  40% { -webkit-mask-position:-200px 0px;}
-  100% {-webkit-mask-position:-10px 0px;}
+  0% { -webkit-mask-position:-280px -160px;}
+  78% { -webkit-mask-position:-70px -105px;}
+  92% { -webkit-mask-position:-60px -100px;}
+  100% {-webkit-mask-position:0px -80px;}
 }
 @-webkit-keyframes lightanim-21 {
   0% { -webkit-mask-position:-300px 0px;}

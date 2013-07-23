@@ -2701,7 +2701,7 @@ var mounts = eval(
 			{'time':'0','x':'-120','y':'80','mx':'-400','my':'0'},
 			{'time':'1.5','x':'340','y':'0','mx':'0','my':'0'}
 		],
-		'carimg':'image/car/20.png',
+		'carimg':'image/car/16.png',
 		'lightimg':'image/lt/1.png'
 	},
 	{
@@ -2823,7 +2823,7 @@ var mounts = eval(
 			{'time':'0','x':'-120','y':'80','mx':'-400','my':'0'},
 			{'time':'1.5','x':'340','y':'0','mx':'0','my':'0'}
 		],
-		'carimg':'image/car/20.png',
+		'carimg':'image/car/15.png',
 		'lightimg':'image/lt/1.png'
 	},
 	{
@@ -2923,7 +2923,7 @@ var mounts = eval(
 			{'time':'0','x':'-120','y':'80','mx':'-400','my':'0'},
 			{'time':'1.5','x':'340','y':'0','mx':'0','my':'0'}
 		],
-		'carimg':'image/car/20.png',
+		'carimg':'image/car/17.png',
 		'lightimg':'image/lt/1.png'
 	},
 	{
