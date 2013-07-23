@@ -96,7 +96,7 @@ function cleanCanvas(){
   ctx.restore();
   var backCanvas = document.getElementById('backcanvas');
   var ctx2  = backCanvas.getContext("2d");
-  // var savedData = document.getElementById('savedate');
+  var savedData = document.getElementById('savedate');
   // savedData.src = "";
   ctx2.clearRect (0,0,999,999);
   ctx2.save();
@@ -184,10 +184,21 @@ function hammerInit() {
 
   setTimeout(function(){
     
-    savedData.src = backcanvas.toDataURL("image/png");
+    
     //document.body.appendChild(savedData);
     $("#savedate").hide();
     //$("#backcanvas").hide();
+    //alert(Number(backCanvas.height));
+    if (Number(backCanvas.height)>400){
+      var temp = document.getElementById('tempcanvas2');
+      var tempCtx = temp.getContext('2d');
+      var imgData=backCtx.getImageData(0,20,300,400);
+      tempCtx.putImageData(imgData,0,0);
+      savedData.src = temp.toDataURL("image/png");
+      //alert(temp.toDataURL("image/png"));
+    }else{
+      savedData.src = backcanvas.toDataURL("image/png");
+    }
   },500);
 
   var hammertime = Hammer(document.getElementById("gridbox"), {
@@ -210,8 +221,8 @@ function hammerInit() {
         touchEd = true;
         break;
       case 'drag':
-        posX = ev.gesture.deltaX+100 ;
-        posY = ev.gesture.deltaY+100 ;
+        posX = ev.gesture.deltaX+150 ;
+        posY = ev.gesture.deltaY+200 ;
         break;
       case 'transform':
         rotation = last_rotation + ev.gesture.rotation;
@@ -283,9 +294,9 @@ function gotPic(e) {
         var picX = EXIF.getTag(this,"PixelXDimension");
         var picY = EXIF.getTag(this,"PixelYDimension");
         if (picX>picY){
-            mpImg.render(backcanvas, { maxWidth: 400, maxHeight: 568, orientation: 6 });
+            mpImg.render(backcanvas, { maxWidth: 400, maxHeight: 533, orientation: 6 });
         }else{
-            mpImg.render(backcanvas, { maxWidth: 400, maxHeight: 568, orientation: 0 });
+            mpImg.render(backcanvas, { maxWidth: 400, maxHeight: 533, orientation: 0 });
         }
     });
     hammerInit();
@@ -313,12 +324,14 @@ function reGotPic(e){
 
     var backcanvas = document.getElementById('backcanvas');
       EXIF.getData(e.target.files[0], function() {
+        //alert(EXIF.pretty(this));
         var picX = EXIF.getTag(this,"PixelXDimension");
         var picY = EXIF.getTag(this,"PixelYDimension");
+        // alert("picX:" + picX + ",picY:" + picY);
         if (picX>picY){
-            mpImg.render(backcanvas, { maxWidth: 400, maxHeight: 568, orientation: 6 });
+            mpImg.render(backcanvas, { maxWidth: 400, maxHeight: 533, orientation: 6 });
         }else{
-            mpImg.render(backcanvas, { maxWidth: 400, maxHeight: 568, orientation: 0 });
+            mpImg.render(backcanvas, { maxWidth: 400, maxHeight: 533, orientation: 0 });
         }
     });
     $("#backcanvas").show();
@@ -937,6 +950,11 @@ $(document).ready(function() {
     _smq.push(['custom','活动按钮','互动页','拍摄完成-使用']);
     postThePic();
   });
+  $(".btn_post").die('click').live('click',function(){
+    $('.mask').show();
+    _smq.push(['custom','活动按钮','互动页','拍摄完成-使用']);
+    postThePic();
+  });
 
 	//$("#yourimage").load(getSwatches);
 	desiredWidth = window.innerWidth;
@@ -974,6 +992,21 @@ $(document).ready(function() {
     console.log('您专属的掌纹山势图');
     _smq.push(['custom','活动按钮','互动页','您专属的掌纹山势图']);
   });
+
+  $('.btn_youreal').die('click').live('click',function(){
+    showSubFrame('yourmount','real');
+    showNavBar('showreal');
+    //router.navigate('yourmount/real');
+    $('.mountswich a').hide();
+    $('.mountswich .pre').show();
+    //$('.carunit').removeClass('caranim');
+    //$('.carlight').removeClass('carlightanim');
+    console.log('您专属的掌纹山势图');
+    _smq.push(['custom','活动按钮','互动页','您专属的掌纹山势图']);
+  });
+
+
+
   $('.navbox .linkaward').die('click').live('click',function(){
     showNavBar('awardlink');
     _smq.push(['custom','活动按钮','互动页','互动完成-参与抽奖']);
@@ -1025,6 +1058,15 @@ $(document).ready(function() {
     $('.yourmount .mountstxt').hide();
     _smq.push(['custom','活动按钮','首页','解密你的掌纹山势']);
   });
+  $('.btn_back').die('click').live('click',function(){
+    showFrame('selectgender');
+    showNavBar();
+    $('.mountswich .nex').hide();
+    $('.yourmount .mountstxt').hide();
+    _smq.push(['custom','活动按钮','首页','解密你的掌纹山势']);
+  });
+
+
 });
 
 

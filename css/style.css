@@ -147,6 +147,8 @@ header div.link_home a.book { }
     background-image: url(../image/hand-use-right.jpg);
   }
   .takebox img { width: 100%;}
+  .btn_back , .btn_post , .btn_youreal { z-index: 200; width: 50%; height: 40px; position: absolute; bottom: 0; left:0; display: block; opacity: 0;}
+.btn_youreal { width: 100%;}
   #takePictureField, #takePictureField2 { z-index: 200; width: 50%; height: 40px; position: absolute; bottom: 0; right:0; display: block; opacity: 0; }
   #takePictureField2 { right: 0; width: 50%;}
   .takebox .piccanvas { padding: 0; margin: 0;position: absolute;}
@@ -154,6 +156,7 @@ header div.link_home a.book { }
 #postThePicCanvas { display: none;}
 #backcanvas{ position: absolute; z-index: 1; top: 10px;left:10px;}
 #newCanvas { position: absolute; z-index: 2; top: 10px;left:10px;}
+#tempcanvas2 { display: none;}
 /*rendering*/
 .rendering { position: relative; width: 100%; min-height: 520px;}
 .rendering .status {  text-align: center; height: 70px; padding-top: 80px; display: none;}
@@ -741,7 +744,7 @@ header div.link_home a.book { }
   /*.homepage { margin-top: 12px;}*/
 }
 /* vertical fat 3star */
-@media screen and (min-width:340px) and (max-width:500px) {
+@media screen and (min-width:360px) and (max-width:500px) {
   header {height: 56px;  background-image: url(../image/bg-header-a.png);}
   header h1 { height: 56px; line-height:56px; background-image: url(../image/x2/icon-header-a.png); }
   header a { height:56px;background-image: url(../image/x2/icon-header-a.png);}
@@ -749,8 +752,8 @@ header div.link_home a.book { }
   .homepage { background-size: 360px 595px;}
   .navbox { background-size: 360px 51px; height: 51px; padding-top: 4px}
   .navbox .navlink { background-image: url(../image/x2/bg-nav.png); background-size: 360px 450px; }
-.navbox .takepic .back {width: 159px;  float: left; background: url(../image/x2/bg-nav.png) 0 -350px no-repeat; background-size: 360px 450px;}
-.navbox .takepic .takethepic { min-width: 161px; width: 50%; float: left; background: url(../image/x2/bg-nav.png)  -159px -350px no-repeat; background-size: 360px 450px;}
+.navbox .takepic .back {width: 159px;  float: left; background: url(../image/x2/bg-nav.png) 10px -356px no-repeat; background-size: 360px 450px; margin-left: 20px;}
+.navbox .takepic .takethepic { min-width: 161px; float: left; background: url(../image/x2/bg-nav.png)  -149px -356px no-repeat; background-size: 360px 450px;}
 .navbox .retakepic .takethepic { min-width: 150px; width: 150px; background-position: -139px -50px ;    }
 .navbox .retakepic .retake { width: 159px; background-position: 20px -50px ;  }
   .navbox .showreal .linkshare { margin-left: 30px;}

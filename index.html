@@ -55,6 +55,7 @@
 							<!-- <img id="yourimage" /> -->
 						    <canvas id ="backcanvas" width="300" height="400"></canvas>
 						    <canvas id ="newCanvas" width="300" height="400"></canvas>
+						    <canvas id ="tempcanvas2" width="300" height="400"></canvas>
   							<canvas id ="postThePicCanvas" class="piccanvas" width="230" height="230"></canvas>
 							<!-- <canvas id ="postThePicCanvas" class="piccanvas"></canvas> -->
 							<div class="gridbox" id="gridbox"></div>
@@ -157,9 +158,21 @@
 		</div>
 	
 		<nav class="navbox">
-			<div class="navbar takepic"><!--<a class="takepic_btn" id="takeThePic">拍摄</a>--><input type="button" class="back" value="返回"><input type="button" class="takethepic" value="拍摄"><input type="file" accept="image/*" capture="camera" id="takePictureField" name="photo" ></div>
-			<div class="navbar retakepic"><input type="button" class="retake" value="使用"><input type="button" class="takethepic" value="重新拍摄"><input type="file" accept="image/*" capture="camera" id="takePictureField2" name="photo" ></div>
-			<div class="navbar yourmount"><input type="button" class="youreal" value="您的专属掌纹山脉图"></div>
+			<div class="navbar takepic"><!--<a class="takepic_btn" id="takeThePic">拍摄</a>-->
+				<a class="navlink back">返回</a>
+				<a class="navlink takethepic">拍摄</a>
+				<button class="btn_back" type="button">返回</button>
+				<input type="file" accept="image/*" capture="camera" id="takePictureField" name="photo" />
+			</div>
+			<div class="navbar retakepic">
+				<a  class="navlink retake" >使用</a><a class="navlink takethepic">重新拍摄</a>
+				<button class="btn_post" type="button">返回</button>
+				<input type="file" accept="image/*" capture="camera" id="takePictureField2" name="photo" />
+			</div>
+			<div class="navbar yourmount">
+				<a class="navlink youreal">您的专属掌纹山脉图</a>
+				<button class="btn_youreal" type="button">您的专属掌纹山脉图</button>
+			</div>
 			<div class="navbar showreal">
 				<a class="navlink youreal linkshare" href="#/share">即刻分享</a>
 				<a class="navlink youreal linkaward" href="#/award">参与抽奖</a>
