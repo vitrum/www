@@ -7,9 +7,73 @@
 	<link rel="stylesheet" href="css/style.css" media="all" type="text/css" />
 	<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 	<style>
-	.carlight {left:0;top: 0; display: block;right: none; bottom: none;opacity:1;border: 2px solid #ccc;}
-	.carunit {left:0;top: 0; display: block;right: none; bottom: none;opacity:1;border: 2px solid #ccc;}
+	.carlight {left:0;top: 0; display: block;opacity:1;border: 2px solid #ccc;}
+	.carunit {left:0;top: 0; display: block;opacity:1;border: 2px solid #ccc;}
 	.caranimbox { width: 96%; height: 500px; top: 50px;}
+
+.carunit {
+  opacity: 0;
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+.caranim-1 {-webkit-animation: caranimtion-1 2s;}
+.caranim-2 {-webkit-animation: caranimtion-2 2s;}
+.caranim-3 {-webkit-animation: caranimtion-3 2s;}
+.caranim-4 {-webkit-animation: caranimtion-4 2s;}
+.caranim {
+  opacity: 1;
+  /*-webkit-animation: caranimtion1 2s;*/
+  -webkit-animation-iteration-count :1;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation: caranimtion 2s;
+  -ms-animation: caranimtion 2s;
+  -o-animation: caranimtion 2s;
+  -webkit-animatin-delay: 3s;
+  -moz-animatin-delay: 3s;
+  -ms-animatin-delay: 3s;
+  -o-animatin-delay: 3s;
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+@-webkit-keyframes caranimtion-1 {
+  0% {top: 90px; left:-100px;} 
+  60% {top: 95px; left: 120px;}
+  100% {top: 100px; left: 250px;}
+}
+
+.carlight { 
+  background: 0 0 no-repeat; 
+  -webkit-mask:0px 0px no-repeat;
+  -webkit-mask-image:url(image/bg-car-light-mask.png);
+  -webkit-mask-size:100%;
+}
+
+.carlightanim-1 { 
+  -webkit-animation: lightanim-1 2s;
+  background-image: url(image/lt/1.png);
+}
+.carlightanim {
+  -webkit-animation-iteration-count :1;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animatin-delay: 3s;
+  -moz-animatin-delay: 3s;
+  -ms-animatin-delay: 3s;
+  -o-animatin-delay: 3s;
+}
+@-webkit-keyframes lightanim-1 {
+  0% { -webkit-mask-position:-400px 0px;}
+  50% { -webkit-mask-position:-160px 0px;}
+  100% {-webkit-mask-position:20px 0px;}
+}
+
 	</style>
 	</head>
 <body>
@@ -42,32 +106,39 @@ function drawCarAnim(mid){
   var loadingStatus = $('.rendering');
   var carimgtxt = "<img src='"+mounts[i].carimg+"' width='100' height='67'>"
   //$('.carunit').css({'background':'none)'});
+
   $('.carunit').html(carimgtxt);
+  carimgtxt = "<img src='"+mounts[i].lightimg+"' width='300' height='200'>"
+  //$(".carlight").html(carimgtxt);
   //console.log(lightbgimg);
   //var lightbgimg = "'"+mounts[i].lightimg+"'"
-  $('.carlight').css('background-image','url('+mounts[i].lightimg +')');
-  for (var p in pointArr) {
-    var k = p;
-    if(k=="0"){ 
-      animCode ="move('.carunit').x("+pointArr[k].x+").y("+pointArr[k].y+").duration('0s')"
-      animLCode="move('.carlight').set('-webkit-mask-position','"+pointArr[k].mx+"px "+pointArr[k].my+"px').duration('0s')"
-    }
-    else{
-      animCode = animCode + ".then().x("+pointArr[k].x+").y("+pointArr[k].y+").duration('"+pointArr[k].time+"s')";
-      animLCode = animLCode + ".then().set('-webkit-mask-position','"+pointArr[k].mx+"px "+pointArr[k].my+"px').duration('"+pointArr[k].time+"s')";
-    }
-    n++;
-  }
-  for (var u=0; u<n-1; u++) {
-    animCode = animCode +".pop()";
-    animLCode = animLCode +".pop()";
-  }
-  animCode = animCode + ".end();";
-  animLCode = animLCode + ".end();";
-  eval(animCode);
-  console.log(animLCode);
-  eval(animLCode);
+  //$('.carlight').css('background-image','url('+mounts[i].lightimg +')');
+  var self = $(".carunit");
+  self.removeClass('caranim caranim-1 caranim-2 caranim-3 caranim-4 caranim-5 caranim-6 caranim-7 caranim-8');
+  self.addClass('caranim').addClass('caranim-'+mid);
+
+  $(".carlight").removeClass(' carlightanim carlightanim-1 carlightanim-2 carlightanim-3 carlightanim-4 carlightanim-5  carlightanim-6 carlightanim-7 carlightanim-8');
+  
+  $(".carlight").addClass('carlightanim').addClass('carlightanim-'+mid);
+
 }
+
+function drowCar(mountid) {
+  var self = $(".carunit");
+  self.addClass('caranim');
+  var loadingStatus = $('.rendering');
+  //$('.rendering .status').hide();
+  $(".carlight").addClass('carlightanim');
+  console.log('Now drowCar~');
+  //setTimeout(function () {
+    console.log("drowCar anim finish");
+      loadingStatus.find('.status').hide();
+      //loadingStatus.find('.status').hide();
+      loadingStatus.find('.mountstxt').show();
+      $('.yourmount .text').css('background-image', 'url(image/text/00'+ mountid +'.png)');
+      $('.yourmount .name').css('background-image', 'url(image/text/00'+ mountid +'.png)');
+  //}, 2100);
+}// end of function drowCar() 
 
 $(document).ready(function() {
 
@@ -114,6 +185,6 @@ $(document).ready(function() {
 
 	<noscript>
 		建议启用JavaScript以获得更好体验!
-	</noscirpt>
+	</noscript>
 </body>
 </html>

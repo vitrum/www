@@ -1,3 +1,4 @@
+  var pages=["home","hand","pro","win","intro"];
   var mountain=[
     {
       "id":"1",
@@ -189,130 +190,19 @@ var citys=[
   {province:"台湾",city:["台北","高雄","台中","台南","屏东","南投","云林","新竹","彰化","苗栗","嘉义","花莲","桃园","宜兰","基隆","台东","金门","马祖","澎湖"]},
   {province:"其它",city:["北美洲","南美洲","亚洲","非洲","欧洲","大洋洲"]}
 ];
-//转场
-;(function($,window){
-  "use strick";
-  var Transition=function(selector,options){
-    this.options=$.extend(true,{},this.defaults,options);
-    this.selector=selector;
-    this.idName=selector[0].id.replace(this.options.type,"");
-    this.on("click",this.changePanel);
-    return this;
-  };
-  Transition.prototype.defauts={
-    
-  };
-  Transition.prototype.changePanel=function(){
-    changePanel(this.idName);
-  }
-  Transition.prototype.on=function(eventName,callback){
-    return this.selector.on(eventName+'.transition',$.proxy(callback,this));
-  }
-  window.Transition=Transition;
-  $.fn.transition=function(options){
-    return this.each(function(){
-      if(!$.data(this,'transition')){
-        $.data(this,'transition',new Transition($(this),options));
-      }
-    });
-  };
-})(jQuery,this)
-function changePanel(options){
-  var pc=$(".pc"),
-        classArry=pc.attr("class").split(" "),
-        classStr="",
-        panelName="p_"+options,
-        selector=$("#nav_"+options),
-        footer=$("footer");
-    classStr=classArry[0]+" "+options;
-    pc.attr("class",classStr);
-    $(".nav_main a").removeClass("current");
-    selector.addClass("current");
-    $(".pagination_number a").removeClass("current");
-    $("#page_"+options).addClass("current");
-    $(".panel").addClass("hide");
-    $("."+panelName).removeClass("hide");
-    if(options=="pro"||options=="win"||options=="intro"){
-      footer.addClass("wite");
-    }else{
-      footer.removeClass("wite");
-    }
-    var urls=getNavArray();
-    $(".pagination_next").attr("href","#"+urls[0]);
-    if(options=="hand"){
-      $(".p_hand .container").addClass("hide");
-      $(".flash_swf").removeClass("hide");
-    }
-}
 
-function changeHand(option){
-  var hand=$(".p_hand");
-  hand.find(".container").addClass("hide");
-  hand.find(".flash_"+option).removeClass("hide");
-}
-
-function changeWin(option){
-  var win=$(".p_win");
-  win.find(".win_c").addClass("hide");
-  win.find(".win_"+option).removeClass("hide");
-}
-
-function pageRefesh(){
-  var url=getUrlArgu(),
-      hindex=url.indexOf("hand_"),
-      windex=url.indexOf("win_");
-  if(hindex>-1){
-    var option=url.replace("hand_","");
-    changePanel("hand");
-    changeHand(option);
-  }else if(windex>-1){
-    var option=url.replace("win_","");
-    changePanel("win");
-    changeWin(option);
-  }else{
-    changePanel(url);
-  }
-}
-
-function getUrlArgu(){
-  var url=document.URL,
-      index=url.indexOf("#");
-  if(index!=-1){
-    var str =url.slice(index+1);
-  }else{str="home";}
-  return str;
-}
-function getNavArray(){
-  var navArray=$(".pagination_number a"),
-      navLen=navArray.length,
-      index=0,
-      url="page_"+getUrlArgu();
-  $.each(navArray,function(i){
-        if(navArray[i].id==url){
-          index=i+1;
-        }
-  });
-  if(index>=navLen){index=0;}
-  url=navArray[index].id.replace("page_","");
-  index++;
-  if(index>=navLen){index=0;}
-  var str=navArray[index].id.replace("page_",""),
-      urls=new Array();
-  urls[0]=url;
-  urls[1]=str;
-  return urls;
-}
 function showShare(uid,mid,similar,sex){
-  $("#flash_img1 img").attr("src","img/l"+mid+".png");
-  $("#flash_img2 img").attr("src","img/r"+mid+".png");
+  $("#hand_img1 img").attr("src","mountain/l"+mid+".png");
+  $("#hand_img2 img").attr("src","mountain/r"+mid+".png");
   var bodyDiv=$("body");
   bodyDiv.attr("uid",uid);
   bodyDiv.attr("sex",sex);
-  $("#flash_name").html(mountain[mid]["name"]);
-  $("#flash_intro").html(mountain[mid]["intro"]);
-  $("#flash_similar").html(similar);
-  $(".p_hand .container").addClass("hide");
-  $(".flash_share").removeClass("hide");
+  $("#hand_name").html(mountain[mid-1]["name"]);
+  $("#hand_intro").html(mountain[mid-1]["intro"]);
+  $("#hand_similar").html(similar);
+  $(".p_hand .container").fadeOut(0);
+  $(".hand_share").fadeIn(0);
+  window.location.href="#hand_share";
 }
 function shareTo(platform){
   var uid=$("body").attr("uid");
@@ -324,21 +214,19 @@ function shareTo(platform){
     success:function(json){
       json=$.parseJSON(json);
       if(json.status=="success"){
-        window.location.href=json.data.shareurl;
+        //window.location.href=json.data.shareurl;
+        //window.open(json.data.shareurl,"blank");
+        $("#flash_"+platform).attr("href",json.data.shareurl);
+        $(".share_"+platform+" a").attr("href",json.data.shareurl);
       }
     }
   });
-}
-function gotoSub(options){
-  window.location.href=options;
-  window.location.reload();
 }
 function winOrderSilder(type){
   var silders=$(".win_txt"),
       length=silders.length;
       currentId=$(".win_txt.current"),
       current=parseInt(currentId.attr("id").replace("txt_",""));
-  console.log(current);
   if(type==1){
     current++;
     current=current%length;
@@ -346,20 +234,69 @@ function winOrderSilder(type){
     current--;
     if(current<0){current=current+length;}
   }
-  console.log(current);
   currentId.hide().removeClass("current");
   $("#"+silders[current].id).fadeIn(0).addClass("current");
 }
-$(function(){
-  $(".nav_main a").transition({type:"nav_"});
-  $(".pagination_number a").transition({type:"page_"});
-  $(".pagination_next").click(function(){
-      var urls=getNavArray();
-      $(".pagination_next").attr("href","#"+urls[1]);
-      changePanel(urls[0]);
+
+function pageTransition(){
+  var hash=window.location.hash.replace("#",""),
+      sub=hash.indexOf("_"),
+      url=hash;
+      subPanel=hash;
+  if(sub>0){
+    var hashArray=hash.split("_");
+    hash=hashArray[0];   
+  }else{
+    if(hash=="hand"){
+      subPanel="hand_swf";
+    }else if(hash=="win"){
+      subPanel="win_list";
+    }
+  }
+  if(!hash||hash==""){hash="home";}
+  if(hash=="hand"||hash=="win"){
+    $(".subPanel").fadeOut(0);
+    $("."+subPanel).fadeIn(0);
+  }
+  if(url!="win_list"&&url!="win_awards"){
+    $(".panel").fadeOut(0);
+    $(".p_"+hash).fadeIn(1000);
+  }
+  
+  $(".nav_main a").removeClass("current");
+  $("#nav_"+hash).addClass("current");
+  $(".pagination_number a").removeClass("current");
+  $("#page_"+hash).addClass("current");
+  var i=getIndex(hash,pages,5,1),
+      next=pages[i];
+  $(".pagination_next").attr("href","#"+next);
+}
+function autoRefresh(){
+  window.location.reload();
+}
+function getIndex(current,array,size,type){
+  var index;
+  $.each(array,function(i){
+    if(current==array[i]){
+        index=i;
+    }
   });
+  if(type==1){
+    index++;
+    index=index%size;
+  }else{
+    index--;
+    if(index<0){index+=size}
+  }
+  return index;
+}
+$(function(){
   $regTelPhone = /^1[3458]\d{9}$/; //手机号
   $blank = /^(|\s+)$/; //空格
+  var $height=parseInt(document.documentElement.clientHeight);
+  if($height<734){$height=800;}
+  $(".body").css({"height":$height});
+  $(".panel").css({"height":$height});
   $("#formName").blur(function(){
    var self=$(this),
         $val=self.val();
@@ -419,7 +356,7 @@ $(function(){
       $("#formCity").addClass("error").focus();
     }else{
       $(".form_li input").removeClass("error");
-      gotoSub("#hand_send");
+      window.location.href="#hand_send";
     }
   });
   $.ajax({
@@ -427,10 +364,23 @@ $(function(){
     url:"post.php?op=all",
     data: {},
     success:function(json){
-      //json=$.parseJSON(json);
-      //if(json.status=="success"){
-       // $("text_total").html(json.data.total);
-      //}
+      json=$.parseJSON(json);
+      if(json.status=="success"){
+        var total=json.data.total;
+        total=total.split("");
+        $.each(total,function(i){
+          $("#text_total").append("<b class='text_img"+total[i]+"'>"+total[i]+"</b>");
+        });
+      }
     }
   });
+  window.onhashchange=function(){
+    pageTransition();
+  }
+  window.onload=function(){
+    pageTransition();
+  }
+  //shareTo('sina');
+  //shareTo('qq');
+  //shareTo('renren');
 });

@@ -24,7 +24,7 @@
 		<header>
 			<div class="link_home">
 				<a class="punch link_home" href="#/index">返回首页</a>
-				<a class="book" href="http://">预约试驾</a>
+				<a class="book" href="http://html.cigtest.com.cn/commeal/test/drive.html">预约试驾</a>
 			</div>
 			<h1 class="logo">LUXGEN 纳智捷</h1>
 		</header>
@@ -58,6 +58,7 @@
   							<canvas id ="postThePicCanvas" class="piccanvas" width="230" height="230"></canvas>
 							<!-- <canvas id ="postThePicCanvas" class="piccanvas"></canvas> -->
 							<div class="gridbox" id="gridbox"></div>
+							<div class="default"></div>
 						</div>
 						<img id="savedate" />
 						<!--<button type="submit">上传</button>-->
@@ -112,7 +113,7 @@
 						<form id="userprofile" name="creator">
 							<ul>
 								<li><label class="forname">姓名</label><input type="text" name="uname" id="uname"  maxlength="22" /></li>
-								<li><label class="forphone">手机</label><input type="number" name="phone" id="phone"  maxlength="20" /><input type="hidden" name="gender" id="gender" /><input type="hidden" name="picid" id="picid" /></li>
+								<li><label class="forphone">手机</label><input type="number" name="phone" id="phone"  maxlength="11" /><input type="hidden" name="gender" id="gender" /><input type="hidden" name="picid" id="picid" /></li>
 								<li>
 									<label class="forcity">城市</label>
 									<select  name="province" id="province">
@@ -145,18 +146,16 @@
 		<div class="frame aboutgame">
 			<div class="content">
 				活动说明
-
 			</div>
 		</div>
 		<div class="frame userlist">
 			<div class="content">
-				获奖名单
-
+				<p style="text-align:center; padding:30% 0 0 0">目前还未有获奖名单，敬请期待！<p>
 			</div>
 		</div>
 	
 		<nav class="navbox">
-			<div class="navbar takepic"><!--<a class="takepic_btn" id="takeThePic">拍摄</a>--><input type="button" class="takethepic" value="拍摄"><input type="file" accept="image/*" capture="camera" id="takePictureField" name="photo" ></div>
+			<div class="navbar takepic"><!--<a class="takepic_btn" id="takeThePic">拍摄</a>--><input type="button" class="back" value="返回"><input type="button" class="takethepic" value="拍摄"><input type="file" accept="image/*" capture="camera" id="takePictureField" name="photo" ></div>
 			<div class="navbar retakepic"><input type="button" class="retake" value="使用"><input type="button" class="takethepic" value="重新拍摄"><input type="file" accept="image/*" capture="camera" id="takePictureField2" name="photo" ></div>
 			<div class="navbar yourmount"><input type="button" class="youreal" value="您的专属掌纹山脉图"></div>
 			<div class="navbar showreal">
@@ -175,10 +174,10 @@
 		<div class="loading"></div>
 	</div>
 	<div class="horizontal">
-			<div class="content">
-				建议竖屏使用获得更好体验!
-			</div>
+		<div class="content">
+			建议竖屏使用获得更好体验!
 		</div>
+	</div>
 
 	<script type="text/javascript" src="js/lib/zepto.min.js"></script>
 	<script type="text/javascript" src="js/lib/underscore-min.js"></script>
@@ -189,5 +188,9 @@
 	<script type="text/javascript" src="js/lib/exif.js"></script>
 	<script type="text/javascript" charset="utf-8" src="data/mount.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/common.js"></script>
+
+	<noscript>
+		建议启用JavaScript以获得更好体验!
+	</noscript>
 </body>
 </html>

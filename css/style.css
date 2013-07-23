@@ -88,22 +88,25 @@ header div.link_home a.book { }
   appearance:none;-moz-appearance:none;-webkit-appearance:none;
   text-indent: -99em;
 }
-.navbox .takepic .takethepic { width: 100%; background: url(../image/bg-nav.png) top center no-repeat;}
+.navbox .takepic .back {width: 159px;  float: left; background: url(../image/bg-nav.png) 4px -353px no-repeat;}
+.navbox .takepic .takethepic { min-width: 161px; width: 50%; float: left; background: url(../image/bg-nav.png)  -159px -354px no-repeat;}
 .navbox .retakepic .takethepic { min-width: 161px; width: 50%; float: left;background: url(../image/bg-nav.png) -159px -50px no-repeat; }
 .navbox .retakepic .retake { width: 159px;  float: left; background: url(../image/bg-nav.png) 0 -50px no-repeat;}
 .navbox .navlink { 
   float: left; 
   width: 50%; 
   background: url(../image/bg-nav.png) top center no-repeat;
-  text-indent: -9999em;
+  text-indent: 2em;
+  padding-top: 60px;
 }
+
 .navbox .subminsuccess ,.navbox .subminsuccess , .navbox .sheargame ,.navbox .yourmount .youreal , .navbox .awardsubmint , .navbox .aboutgame { width: 100%; text-decoration: none;}
 .navbox .showreal .youreal { width: 33.3%;}
-.navbox .subminsuccess { background-position: center -50px;}
+.navbox .subminsuccess { background-position: center -200px;}
 .navbox .sheargame { background-position: center -300px;}
 .navbox .awardsubmint { background-position: center -250px;}
 .navbox .aboutgame { background-position: center -200px;}
-.navbox .yourmount .youreal { background:url(../image/bg-nav.png) center -100px no-repeat;}
+.navbox .yourmount .youreal { background:url(../image/bg-nav.png) center -100px no-repeat; text-indent: 2em;padding-top: 60px;}
 .navbox .showreal .linkshare { background-position: left -150px; width: 107px;}
 .navbox .showreal .linkaward { background-position: -107px -150px; width: 95px;}
 .navbox .showreal .replay { background-position: -202px -150px; min-width: 118px;}
@@ -127,7 +130,7 @@ header div.link_home a.book { }
 /*take pic*/
 .takebox .takebox_frame { display: none; position: relative;}
   .takebox .take { display:block; max-width: 320px; overflow: hidden;}
-  .takebox .gridbox { display: block; background: url(../image/mask-hand.png)  center -80px no-repeat; position: absolute; top: 0; left: 0; z-index: 5; width: 100%; height: 100%;}
+  .takebox .gridbox { display: block; background: url(../image/mask-hand.png)  center -40px no-repeat; position: absolute; top: 0; left: 0; z-index: 5; width: 100%; height: 100%;}
   .takebox .femalegrid { 
   -webkit-transform: translate3d(0,0,0);
   -moz-transform: translate3d(0,0,0);
@@ -138,16 +141,19 @@ header div.link_home a.book { }
     -webkit-transform:scaleX(-1);
     -o-transform:scaleX(-1);
     transform:scaleX(-1);
-
+  }
+  .takebox .default { display: block; background: url(../image/hand-use-left.jpg)  center -40px no-repeat; position: absolute; top: 0; left: 0; z-index: 6; width: 100%; height: 100%;}
+  .takebox .femaledefault {
+    background-image: url(../image/hand-use-right.jpg);
   }
   .takebox img { width: 100%;}
-  #takePictureField, #takePictureField2 { z-index: 200; width: 100%; height: 40px; position: absolute; bottom: 0; display: block; opacity: 0}
+  #takePictureField, #takePictureField2 { z-index: 200; width: 50%; height: 40px; position: absolute; bottom: 0; right:0; display: block; opacity: 0; }
   #takePictureField2 { right: 0; width: 50%;}
   .takebox .piccanvas { padding: 0; margin: 0;position: absolute;}
 #yourimage { width: 0; height: 0; }
 #postThePicCanvas { display: none;}
-#backcanvas{ position: absolute; z-index: 1; top: 0}
-#newCanvas { position: absolute; z-index: 2; top: 0}
+#backcanvas{ position: absolute; z-index: 1; top: 10px;left:10px;}
+#newCanvas { position: absolute; z-index: 2; top: 10px;left:10px;}
 /*rendering*/
 .rendering { position: relative; width: 100%; min-height: 520px;}
 .rendering .status {  text-align: center; height: 70px; padding-top: 80px; display: none;}
@@ -161,26 +167,54 @@ header div.link_home a.book { }
 .yourmount .name { padding:0; margin: 0; width: 100%; background:url() center bottom no-repeat; height: 30px; background-size: 320px 178px; }
 .yourmount .mountpic { margin: 0 auto; display: block }
 /*anims*/
-#container {position: absolute; width: 100%; height: auto; z-index: 100;top:150px;}
-.caranimbox {position: absolute; width: 300px; height: 200px; top:150px;  z-index: 200; overflow: hidden;}
-.carunit { position: absolute;background: url(../image/x2/car-left-i.png) no-repeat; width: 40px; height: 40px; background-size: 40px 40px; z-index: 400;
-  bottom: 500px; right: 0; opacity: 0;
+#container {position: absolute; width: 100%; height: auto; z-index: 50;top:150px;}
+.caranimbox {position: absolute; width: 100%; height: 200px; top:150px;  z-index: 60; overflow: hidden;}
+.carunit { position: absolute;/*background: url(../image/x2/car-left-i.png) no-repeat;*/ width: 100px; height: 67px; background-size:100px 67x; z-index: 80;
+  opacity: 0;
   -webkit-transform: translate3d(0,0,0);
   -moz-transform: translate3d(0,0,0);
   -ms-transform: translate3d(0,0,0);
   -o-transform: translate3d(0,0,0);
   transform: translate3d(0,0,0);
 }
+.caranim-1 {-webkit-animation: caranimtion-1 2s;}
+.caranim-2 {-webkit-animation: caranimtion-2 2s;}
+.caranim-3 {-webkit-animation: caranimtion-3 2s;}
+.caranim-4 {-webkit-animation: caranimtion-4 2s;}
+.caranim-5 {-webkit-animation: caranimtion-5 2s;}
+.caranim-6 {-webkit-animation: caranimtion-6 2s;}
+.caranim-7 {-webkit-animation: caranimtion-7 2s;}
+.caranim-8 {-webkit-animation: caranimtion-8 2s;}
+.caranim-9 {-webkit-animation: caranimtion-9 2s;}
+.caranim-10 {-webkit-animation: caranimtion-10 2s;}
+.caranim-11 {-webkit-animation: caranimtion-11 2s;}
+.caranim-12 {-webkit-animation: caranimtion-12 2s;}
+.caranim-13 {-webkit-animation: caranimtion-13 2s;}
+.caranim-14 {-webkit-animation: caranimtion-14 2s;}
+.caranim-15 {-webkit-animation: caranimtion-15 2s;}
+.caranim-16 {-webkit-animation: caranimtion-16 2s;}
+.caranim-17 {-webkit-animation: caranimtion-17 2s;}
+.caranim-18 {-webkit-animation: caranimtion-18 2s;}
+.caranim-19 {-webkit-animation: caranimtion-19 2s;}
+.caranim-20 {-webkit-animation: caranimtion-20 2s;}
+.caranim-21 {-webkit-animation: caranimtion-21 2s;}
+.caranim-22 {-webkit-animation: caranimtion-22 2s;}
+.caranim-23 {-webkit-animation: caranimtion-23 2s;}
+.caranim-24 {-webkit-animation: caranimtion-24 2s;}
+.caranim-25 {-webkit-animation: caranimtion-25 2s;}
+.caranim-26 {-webkit-animation: caranimtion-26 2s;}
+.caranim-27 {-webkit-animation: caranimtion-27 2s;}
+.caranim-28 {-webkit-animation: caranimtion-28 2s;}
+.caranim-29 {-webkit-animation: caranimtion-29 2s;}
+.caranim-30 {-webkit-animation: caranimtion-30 2s;}
 .caranim {
   opacity: 1;
-  -webkit-animation: caranimtion 2s;
   -webkit-animation-iteration-count :1;
   -webkit-animation-timing-function: linear;
   -webkit-animation-fill-mode: forwards;
   -moz-animation: caranimtion 2s;
   -ms-animation: caranimtion 2s;
   -o-animation: caranimtion 2s;
-  animation: caranimtion 2s;
   -webkit-animatin-delay: 3s;
   -moz-animatin-delay: 3s;
   -ms-animatin-delay: 3s;
@@ -191,52 +225,478 @@ header div.link_home a.book { }
   -o-transform: translate3d(0,0,0);
   transform: translate3d(0,0,0);
 }
-@-webkit-keyframes caranimtion {
-  0% {bottom: 130px; right: 38px;} 
-  12% {bottom: 115px; right: 30px;}
-  19% { bottom: 100px; right: 28px;}
-  42% {bottom: 80px; right: 40px;}
-  47% {bottom: 60px; right: 80px;}
-  55% {bottom: 50px; right: 100px;}
-  62% {bottom: 20px; right: 160px;}
-  70% {bottom: 20px; right: 210px;}
-  74% {bottom: 20px; right: 216px;}
-  100% {bottom: 0px; right: 230px;}
+@-webkit-keyframes caranimtion-1 {
+  0% {top: 70px; left:-100px;} 
+  60% {top: 75px; left: 120px;}
+  100% {top: 80px; left: 240px;}
+}
+@-webkit-keyframes caranimtion-2 {
+  0% {top: -20px; left:-100px;} 
+  60% {top: 70px; left: 120px;}
+  70% {top: 110px; left: 116px;}
+  100% {top: 146px; left: 180px;}
+}
+@-webkit-keyframes caranimtion-3 {
+  0% {top: 50px; left:340px;} 
+  100% {top: 107px; left: 0px;}
+}
+@-webkit-keyframes caranimtion-4 {
+  0% {top: -20px; left:-100px;} 
+  60% {top: 70px; left: 120px;}
+  70% {top: 110px; left: 116px;}
+  100% {top: 146px; left: 180px;}
+}
+@-webkit-keyframes caranimtion-5 {
+  0% {top: -20px; left:150px;} 
+  60% {top: 80px; left:30px;} 
+  70% {top: 110px; left:80px;} 
+  100% {top: 140px; left: 50px;}
+}
+@-webkit-keyframes caranimtion-6 {
+  0% {top: -20px; left:40px;} 
+  60% {top: 70px; left: 180px;}
+  70% {top: 90px; left: 106px;}
+  100% {top: 136px; left: 140px;}
+}
+@-webkit-keyframes caranimtion-7 {
+  0% {top: 0px; left:300px;} 
+
+  100% {top: 136px; left: 50px;}
+}
+@-webkit-keyframes caranimtion-8 {
+  0% {top: -70px; left:-100px;} 
+  60% {top: 50px; left: 130px;}
+  70% {top: 90px; left: 10px;}
+  100% {top: 140px; left: 20px;}
+}
+@-webkit-keyframes caranimtion-9 {
+  0% {top: 40px; left:340px;} 
+  60% {top: 70px; left: 60px;}
+  70% {top: 94px; left: 106px;}
+  100% {top: 116px; left: 20px;}
+}
+@-webkit-keyframes caranimtion-10 {
+  0% {top: -30px; left:186px;} 
+  100% {top: 136px; left: 80px;}
+}
+@-webkit-keyframes caranimtion-11 {
+  0% {top: 40px; left:-100px;} 
+  75% {top: 50px; left: 140px;}
+  85% {top: 90px; left: 146px;}
+  100% {top: 116px; left: 210px;}
+}
+@-webkit-keyframes caranimtion-12 {
+  0% {top: 0px; left:340px;} 
+  70% {top: 70px; left: 60px;}
+  85% {top: 94px; left: 106px;}
+  100% {top: 136px; left: 60px;}
+}
+@-webkit-keyframes caranimtion-13 {
+  0% {top: 50px; left:340px;} 
+  60% {top: 70px; left: 80px;}
+  70% {top: 124px; left: 126px;}
+  100% {top: 146px; left: 70px;}
+}
+@-webkit-keyframes caranimtion-14 {
+  0% {top: 90px; left:-50px;} 
+  20% {top: 100px; left: 20px;}
+  30% {top:142px; left: -10px;}
+  100% {top: 146px; left: 240px;}
+}
+@-webkit-keyframes caranimtion-15 {
+  0% {top: 30px; left:-60px;} 
+  70% {top: 70px; left: 160px;}
+  80% {top: 110px; left: 116px;}
+  100% {top: 146px; left: 180px;}
+}
+@-webkit-keyframes caranimtion-16 {
+  0% {top: 0px; left:-100px;} 
+  80% {top: 90px; left: 180px;}
+  90% {top: 120px; left: 156px;}
+  100% {top: 146px; left: 180px;}
+}
+@-webkit-keyframes caranimtion-17 {
+  0% {top: -20px; left:-100px;} 
+  60% {top: 70px; left: 120px;}
+  70% {top: 110px; left: 116px;}
+  100% {top: 146px; left: 180px;}
+}
+@-webkit-keyframes caranimtion-18 {
+  0% {top: -20px; left:-100px;} 
+  60% {top: 70px; left: 120px;}
+  70% {top: 110px; left: 116px;}
+  100% {top: 146px; left: 180px;}
+}
+@-webkit-keyframes caranimtion-19 {
+  0% {top: -20px; left:-100px;} 
+  60% {top: 70px; left: 120px;}
+  70% {top: 110px; left: 116px;}
+  100% {top: 146px; left: 180px;}
+}
+@-webkit-keyframes caranimtion-20 {
+  0% {top: -20px; left:-100px;} 
+  60% {top: 70px; left: 120px;}
+  70% {top: 110px; left: 116px;}
+  100% {top: 146px; left: 180px;}
+}
+@-webkit-keyframes caranimtion-21 {
+  0% {top: -20px; left:-100px;} 
+  60% {top: 70px; left: 120px;}
+  70% {top: 110px; left: 116px;}
+  100% {top: 146px; left: 180px;}
+}
+@-webkit-keyframes caranimtion-22 {
+  0% {top: -20px; left:-100px;} 
+  60% {top: 70px; left: 120px;}
+  70% {top: 110px; left: 116px;}
+  100% {top: 146px; left: 180px;}
+}
+@-webkit-keyframes caranimtion-23 {
+  0% {top: -20px; left:-100px;} 
+  60% {top: 70px; left: 120px;}
+  70% {top: 110px; left: 116px;}
+  100% {top: 146px; left: 180px;}
+}
+@-webkit-keyframes caranimtion-24 {
+  0% {top: -20px; left:-100px;} 
+  60% {top: 70px; left: 120px;}
+  70% {top: 110px; left: 116px;}
+  100% {top: 146px; left: 180px;}
+}
+@-webkit-keyframes caranimtion-25 {
+  0% {top: -20px; left:-100px;} 
+  60% {top: 70px; left: 120px;}
+  70% {top: 110px; left: 116px;}
+  100% {top: 146px; left: 180px;}
+}
+@-webkit-keyframes caranimtion-26 {
+  0% {top: -20px; left:-100px;} 
+  60% {top: 70px; left: 120px;}
+  70% {top: 110px; left: 116px;}
+  100% {top: 146px; left: 180px;}
+}
+@-webkit-keyframes caranimtion-27 {
+  0% {top: -20px; left:-100px;} 
+  60% {top: 70px; left: 120px;}
+  70% {top: 110px; left: 116px;}
+  100% {top: 146px; left: 180px;}
+}
+@-webkit-keyframes caranimtion-28 {
+  0% {top: -20px; left:-100px;} 
+  60% {top: 70px; left: 120px;}
+  70% {top: 110px; left: 116px;}
+  100% {top: 146px; left: 180px;}
+}
+@-webkit-keyframes caranimtion-29 {
+  0% {top: -20px; left:-100px;} 
+  60% {top: 70px; left: 120px;}
+  70% {top: 110px; left: 116px;}
+  100% {top: 146px; left: 180px;}
+}
+@-webkit-keyframes caranimtion-30 {
+  0% {top: -20px; left:-100px;} 
+  60% {top: 70px; left: 120px;}
+  70% {top: 110px; left: 116px;}
+  100% {top: 146px; left: 180px;}
 }
 .carlight { 
-  background:url(../image/bg-car-light.png) 0 0 no-repeat; 
-  position: absolute; width: 300px; height: 200px; top:0;  z-index: 300;
-  -webkit-mask:400px -400px no-repeat;
-  -webkit-mask-image:
-    url(../image/bg-car-light-mask.png);
+  width: 310px;
+  height: 205px;
+  background: 0 -20px no-repeat; 
+  -webkit-mask:-400px -400px no-repeat;
+  -webkit-mask-image:url(../image/bg-car-light-mask.png);
   -webkit-mask-size:100%;
 }
 
-.carlightanim { 
-  -webkit-animation: lightanim 2s;
+.carlightanim-1 { 
+  -webkit-animation: lightanim-1 2s;
+  background-image: url(../image/lt/1.png);
+}
+.carlightanim-2 { 
+  -webkit-animation: lightanim-2 2s;
+  background-image: url(../image/lt/2.png);
+}
+.carlightanim-3 { 
+  -webkit-animation: lightanim-3 2s;
+  background-image: url(../image/lt/3.png);
+}
+.carlightanim-4 { 
+  -webkit-animation: lightanim-4 2s;
+  background-image: url(../image/lt/4.png);
+}
+.carlightanim-5 { 
+  -webkit-animation: lightanim-5 2s;
+  background-image: url(../image/lt/5.png);
+}
+.carlightanim-6 { 
+  -webkit-animation: lightanim-6 2s;
+  background-image: url(../image/lt/6.png);
+}
+.carlightanim-7 { 
+  -webkit-animation: lightanim-7 2s;
+  background-image: url(../image/lt/7.png);
+  background-position: 0 0;
+}
+.carlightanim-8 { 
+  -webkit-animation: lightanim-8 2s;
+  background-image: url(../image/lt/8.png);
+}
+.carlightanim-9 { 
+  -webkit-animation: lightanim-9 2s;
+  background-image: url(../image/lt/9.png);
+}
+.carlightanim-10 { 
+  -webkit-animation: lightanim-10 2s;
+  background-image: url(../image/lt/10.png);
+}
+.carlightanim-11 { 
+  -webkit-animation: lightanim-11 2s;
+  background-image: url(../image/lt/11.png);
+}
+.carlightanim-12 { 
+  -webkit-animation: lightanim-12 2s;
+  background-image: url(../image/lt/12.png);
+}
+.carlightanim-13 { 
+  -webkit-animation: lightanim-13 2s;
+  background-image: url(../image/lt/13.png);
+  background-position: 46px 40px;
+}
+.carlightanim-14 { 
+  -webkit-animation: lightanim-14 2s;
+  background-image: url(../image/lt/14.png);
+}
+.carlightanim-15 { 
+  -webkit-animation: lightanim-15 2s;
+  background-image: url(../image/lt/15.png);
+}
+.carlightanim-16 { 
+  -webkit-animation: lightanim-16 2s;
+  background-image: url(../image/lt/16.png);
+}
+.carlightanim-17 { 
+  -webkit-animation: lightanim-17 2s;
+  background-image: url(../image/lt/17.png);
+}
+.carlightanim-18 { 
+  -webkit-animation: lightanim-18 2s;
+  background-image: url(../image/lt/18.png);
+}
+.carlightanim-19 { 
+  -webkit-animation: lightanim-19 2s;
+  background-image: url(../image/lt/19.png);
+}
+.carlightanim-20 { 
+  -webkit-animation: lightanim-20 2s;
+  background-image: url(../image/lt/20.png);
+}
+.carlightanim-21 { 
+  -webkit-animation: lightanim-21 2s;
+  background-image: url(../image/lt/21.png);
+}
+.carlightanim-22 { 
+  -webkit-animation: lightanim-22 2s;
+  background-image: url(../image/lt/22.png);
+}
+.carlightanim-23 { 
+  -webkit-animation: lightanim-23 2s;
+  background-image: url(../image/lt/23.png);
+}
+.carlightanim-24 { 
+  -webkit-animation: lightanim-24 2s;
+  background-image: url(../image/lt/24.png);
+}
+.carlightanim-25 { 
+  -webkit-animation: lightanim-25 2s;
+  background-image: url(../image/lt/25.png);
+}
+.carlightanim-26 { 
+  -webkit-animation: lightanim-26 2s;
+  background-image: url(../image/lt/26.png);
+}
+.carlightanim-27 { 
+  -webkit-animation: lightanim-27 2s;
+  background-image: url(../image/lt/27.png);
+}
+.carlightanim-28 { 
+  -webkit-animation: lightanim-28 2s;
+  background-image: url(../image/lt/28.png);
+}
+.carlightanim-29 { 
+  -webkit-animation: lightanim-29 2s;
+  background-image: url(../image/lt/29.png);
+}
+.carlightanim-30 { 
+  -webkit-animation: lightanim-30 2s;
+  background-image: url(../image/lt/30.png);
+}
+.carlightanim {
   -webkit-animation-iteration-count :1;
   -webkit-animation-timing-function: linear;
   -webkit-animation-fill-mode: forwards;
-  animation: caranimtion 2s;
   -webkit-animatin-delay: 3s;
   -moz-animatin-delay: 3s;
   -ms-animatin-delay: 3s;
   -o-animatin-delay: 3s;
 }
-@-webkit-keyframes lightanim {
-  0% { -webkit-mask-position:260px -30px;}
-  12% { -webkit-mask-position:250px 0 ;}
-  19% { -webkit-mask-position:240px 0 ;}
-  42% { -webkit-mask-position:220px 0 ;}
-  47% { -webkit-mask-position:200px 0 ;}
-  55% { -webkit-mask-position:180px 0;}
-  62% { -webkit-mask-position:150px 0;}
-  70% { -webkit-mask-position:130px 0;}
-  74% { -webkit-mask-position:60px 0;}
-  100% { -webkit-mask-position:20px 0;}
+@-webkit-keyframes lightanim-1 {
+  0% { -webkit-mask-position:-300px 0px;}
+  40% { -webkit-mask-position:-200px 0px;}
+  100% {-webkit-mask-position:-10px 0px;}
 }
-
-
+@-webkit-keyframes lightanim-2 {
+  0% { -webkit-mask-position:-300px 0px;}
+  60% { -webkit-mask-position:-140px 0px;}
+  70% { -webkit-mask-position:-120px 10px;}
+  100% {-webkit-mask-position:-80px 10px;}
+}
+@-webkit-keyframes lightanim-3 {
+  0% { -webkit-mask-position:400px 0px;}
+  50% { -webkit-mask-position:200px 0px;}
+  100% {-webkit-mask-position:10px 0px;}
+}
+@-webkit-keyframes lightanim-4 {
+  0% { -webkit-mask-position:-300px 0px;}
+  40% { -webkit-mask-position:-200px 0px;}
+  100% {-webkit-mask-position:-10px 0px;}
+}
+@-webkit-keyframes lightanim-5 {
+  0% { -webkit-mask-position:0px -300px;}
+  50% { -webkit-mask-position:0px -200px;}
+  60% { -webkit-mask-position:0px -180px;}
+  70% { -webkit-mask-position:0px -150px;}
+  100% {-webkit-mask-position:0px -30px;}
+}
+@-webkit-keyframes lightanim-6 {
+  0% { -webkit-mask-position:0px -300px;}
+  50% { -webkit-mask-position:0px -200px;}
+  60% { -webkit-mask-position:0px -180px;}
+  70% { -webkit-mask-position:0px -160px;}
+  100% {-webkit-mask-position:0px -100px;}
+}
+@-webkit-keyframes lightanim-7 {
+  0% { -webkit-mask-position:100px -300px;}
+  100% {-webkit-mask-position:40px -80px;}
+}
+@-webkit-keyframes lightanim-8 {
+  0% { -webkit-mask-position:0px -300px;}
+  50% { -webkit-mask-position:-10px -240px;}
+  60% { -webkit-mask-position:-40px -200px;}
+  70% { -webkit-mask-position:-50px -150px;}
+  100% {-webkit-mask-position:-70px -120px;}
+}
+@-webkit-keyframes lightanim-9 {
+  0% { -webkit-mask-position:200px -300px;}
+  100% {-webkit-mask-position:20px -40px;}
+}
+@-webkit-keyframes lightanim-10 {
+  0% { -webkit-mask-position:200px -280px;}
+  100% {-webkit-mask-position:40px -70px;}
+}
+@-webkit-keyframes lightanim-11 {
+  0% { -webkit-mask-position:-300px 0px;}
+  70% { -webkit-mask-position:-100px 0px;}
+  80% { -webkit-mask-position:-100px 0px;}
+  100% {-webkit-mask-position:-40px 0px;}
+}
+@-webkit-keyframes lightanim-12 {
+  0% { -webkit-mask-position:200px -300px;}
+  80% {-webkit-mask-position:100px -100px;}
+  90% {-webkit-mask-position:90px -90px;}
+  100% {-webkit-mask-position:50px -50px;}
+}
+@-webkit-keyframes lightanim-13 {
+  0% { -webkit-mask-position:200px -300px;}
+  80% {-webkit-mask-position:80px -90px;}
+  100% {-webkit-mask-position:50px -80px;}
+}
+@-webkit-keyframes lightanim-14 {
+  0% { -webkit-mask-position:-300px -120px;}
+  20% { -webkit-mask-position:-200px -80px;}
+  100% {-webkit-mask-position:-10px 0px;}
+}
+@-webkit-keyframes lightanim-15 {
+  0% { -webkit-mask-position:-300px -120px;}
+  70% { -webkit-mask-position:-110px -120px;}
+  85% { -webkit-mask-position:-100px -100px;}
+  100% {-webkit-mask-position:-40px -80px;}
+}
+@-webkit-keyframes lightanim-16 {
+  0% { -webkit-mask-position:-300px 0px;}
+  40% { -webkit-mask-position:-200px 0px;}
+  100% {-webkit-mask-position:-10px 0px;}
+}
+@-webkit-keyframes lightanim-17 {
+  0% { -webkit-mask-position:-300px 0px;}
+  40% { -webkit-mask-position:-200px 0px;}
+  100% {-webkit-mask-position:-10px 0px;}
+}
+@-webkit-keyframes lightanim-18 {
+  0% { -webkit-mask-position:-300px 0px;}
+  40% { -webkit-mask-position:-200px 0px;}
+  100% {-webkit-mask-position:-10px 0px;}
+}
+@-webkit-keyframes lightanim-19 {
+  0% { -webkit-mask-position:-300px 0px;}
+  40% { -webkit-mask-position:-200px 0px;}
+  100% {-webkit-mask-position:-10px 0px;}
+}
+@-webkit-keyframes lightanim-20 {
+  0% { -webkit-mask-position:-300px 0px;}
+  40% { -webkit-mask-position:-200px 0px;}
+  100% {-webkit-mask-position:-10px 0px;}
+}
+@-webkit-keyframes lightanim-21 {
+  0% { -webkit-mask-position:-300px 0px;}
+  40% { -webkit-mask-position:-200px 0px;}
+  100% {-webkit-mask-position:-10px 0px;}
+}
+@-webkit-keyframes lightanim-22 {
+  0% { -webkit-mask-position:-300px 0px;}
+  60% { -webkit-mask-position:-140px 0px;}
+  70% { -webkit-mask-position:-120px 10px;}
+  100% {-webkit-mask-position:-80px 10px;}
+}
+@-webkit-keyframes lightanim-23 {
+  0% { -webkit-mask-position:-300px 0px;}
+  40% { -webkit-mask-position:-200px 0px;}
+  100% {-webkit-mask-position:-10px 0px;}
+}
+@-webkit-keyframes lightanim-24 {
+  0% { -webkit-mask-position:-300px 0px;}
+  40% { -webkit-mask-position:-200px 0px;}
+  100% {-webkit-mask-position:-10px 0px;}
+}
+@-webkit-keyframes lightanim-25 {
+  0% { -webkit-mask-position:-300px 0px;}
+  40% { -webkit-mask-position:-200px 0px;}
+  100% {-webkit-mask-position:-10px 0px;}
+}
+@-webkit-keyframes lightanim-26 {
+  0% { -webkit-mask-position:-300px 0px;}
+  40% { -webkit-mask-position:-200px 0px;}
+  100% {-webkit-mask-position:-10px 0px;}
+}
+@-webkit-keyframes lightanim-27 {
+  0% { -webkit-mask-position:-300px 0px;}
+  40% { -webkit-mask-position:-200px 0px;}
+  100% {-webkit-mask-position:-10px 0px;}
+}
+@-webkit-keyframes lightanim-28 {
+  0% { -webkit-mask-position:-300px 0px;}
+  40% { -webkit-mask-position:-200px 0px;}
+  100% {-webkit-mask-position:-10px 0px;}
+}
+@-webkit-keyframes lightanim-29 {
+  0% { -webkit-mask-position:-300px 0px;}
+  40% { -webkit-mask-position:-200px 0px;}
+  100% {-webkit-mask-position:-10px 0px;}
+}
+@-webkit-keyframes lightanim-30 {
+  0% { -webkit-mask-position:-300px 0px;}
+  40% { -webkit-mask-position:-200px 0px;}
+  100% {-webkit-mask-position:-10px 0px;}
+}
 /*mounts*/
 .mountswich { width: 100%; }
   .mountswich a { position: absolute; z-index: 900;  top: 200px;  width: 45px; height: 45px; display: block; background: url(../image/icon-mountswich.png) no-repeat; text-indent: -9999em; overflow: hidden; display: none; margin-top: -30px; cursor: pointer;}
@@ -266,9 +726,10 @@ header div.link_home a.book { }
   .awardbox .share a.qq { background-position: 0 -90px;}
   .awardbox .share a.renren { background-position: 0 -140px;}
 
-
+/*about game*/
+.aboutgame .content {width: 100%;  background: #f4f4f4 url(../image/x2/bg-aboutgame.jpg) no-repeat top center; min-height: 1182px; padding: 0px; background-size: 320px 1182px; text-indent: -9999em; }
 /* vertical iphone */
-@media screen and (max-width:320px) {
+@media screen and (max-width:340px) {
   body { background-size: 320px 569px;}
   header {height: 50px;}
   header h1 { height: 50px; line-height:50px; }
@@ -276,16 +737,23 @@ header div.link_home a.book { }
   /*.homepage { margin-top: 12px;}*/
 }
 /* vertical fat 3star */
-@media screen and (min-width:321px) and (max-width:360px) {
-  header {height: 56px;  background-image: url(../image/bg-header-a.png) no-repeat;}
-  header h1 { height: 56px; line-height:56px; background-image: url(../image/x2/icon-header-a.png) top left no-repeat; }
-  header a { height:56px;background-image: url(../image/x2/icon-header-a.png) top right no-repeat;}
+@media screen and (min-width:340px) and (max-width:500px) {
+  header {height: 56px;  background-image: url(../image/bg-header-a.png);}
+  header h1 { height: 56px; line-height:56px; background-image: url(../image/x2/icon-header-a.png); }
+  header a { height:56px;background-image: url(../image/x2/icon-header-a.png);}
 
   .homepage { background-size: 360px 595px;}
+  .navbox { background-size: 360px 51px; height: 51px; padding-top: 4px}
+  .navbox .navlink { background-image: url(../image/x2/bg-nav.png); background-size: 360px 450px; }
+.navbox .takepic .back {width: 159px;  float: left; background: url(../image/x2/bg-nav.png) 0 -350px no-repeat; background-size: 360px 450px;}
+.navbox .takepic .takethepic { min-width: 161px; width: 50%; float: left; background: url(../image/x2/bg-nav.png)  -159px -350px no-repeat; background-size: 360px 450px;}
+.navbox .retakepic .takethepic { min-width: 150px; width: 150px; background-position: -139px -50px ;    }
+.navbox .retakepic .retake { width: 159px; background-position: 20px -50px ;  }
+  .navbox .showreal .linkshare { margin-left: 30px;}
 }
 
 /* horizontal small iphone4*/
-@media screen and (min-width:361px) and (max-width:567px) {
+@media screen and (min-width:501px) and (max-width:567px) {
   header {height: 50px; }
   header h1 { height: 50px; line-height:50px; }
   header a { height:50px;}
@@ -328,6 +796,7 @@ header div.link_home a.book { }
   .homepage { background-image: url(../image/x2/bg-homepage-01.jpg); background-size: 320px 539px;}
   .homepage .menu li a { background-image: url(../image/x2/home-menu.png); background-size: 320px 136px;}
   .navbox .navlink { background-image: url(../image/x2/bg-nav.png); background-size: 320px 400px;}
+  .navbox .takepic .back { background-image: url(../image/x2/bg-nav.png); background-size: 320px 400px;}
   .navbox .takepic .takethepic { background-image: url(../image/x2/bg-nav.png); background-size: 320px 400px;}
   .navbox .retakepic .takethepic { background-image: url(../image/x2/bg-nav.png); background-size: 320px 400px;}
   .navbox .retakepic .retake { background-image: url(../image/x2/bg-nav.png); background-size: 320px 400px;}
@@ -350,13 +819,9 @@ header div.link_home a.book { }
     header h1 { background-image: url(../image/x2/icon-header-a.png); background-size: 360px 60px;}
     header a { background-image: url(../image/x2/icon-header-a.png); }
     .page { background-image: url(../image/x2/bg-a.jpg)}
-    .homepage { background-image: url(../image/x2/bg-homepage-01.jpg); background-size: 360px 539px;}
+    .homepage { background-image: url(../image/x2/bg-homepage-01.jpg); background-size: 360px 539px; width:360px; }
+    body {display:none;}
   }
   /* pc and ipad */
-  @media screen and (min-width:801px) {
-    header {height: 50px; }
-    header h1 { height: 50px; line-height:50px; }
-    header a { height:50px;}
-  }
-  
+  /* nothing here */
 }
