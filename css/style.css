@@ -331,8 +331,8 @@ text-align: center; color:rgba(200,200,200,0.4);}
   100% {top: 140px; left: 30px;}
 }
 @-webkit-keyframes caranimtion-19 {
-  0% {top: 10px; left:-100px;} 
-  68% {top: 70px; left: 120px;}
+  0% {top: 50px; left:-100px;} 
+  68% {top: 90px; left: 120px;}
   86% {top: 110px; left: 76px;}
   100% {top: 146px; left: 130px;}
 }
@@ -646,8 +646,8 @@ text-align: center; color:rgba(200,200,200,0.4);}
 }
 @-webkit-keyframes lightanim-19 {
   0% { -webkit-mask-position:-280px -260px;}
-  70% { -webkit-mask-position:-130px -130px;}
-  80% { -webkit-mask-position:-130px -110px;}
+
+  80% { -webkit-mask-position:-120px -90px;}
   100% {-webkit-mask-position:-100px -60px;}
 }
 @-webkit-keyframes lightanim-20 {

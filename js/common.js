@@ -823,6 +823,7 @@ var AppRouter = Backbone.Router.extend({
         'aboutgame' : 'aboutGame',
         'yourmount' : 'yourMount',
         'yourmount/:step' : 'yourMount',
+        'yourmount/:step/:mid' : 'yourMount',
         '*error' : 'renderError'  
     },  
     main : function() {  
@@ -927,7 +928,7 @@ var AppRouter = Backbone.Router.extend({
       console.log('渲染详情方法, id为: ' + id); 
       //_gaq.push(['_trackPageview', '/pv/takepic'); 
     }, 
-    yourMount : function(step) {
+    yourMount : function(step,mid) {
       //parent.location.reload();   
     	if(!step){ user = 'take'}
         console.log('渲染详情方法, id为: ' + step);
@@ -939,12 +940,14 @@ var AppRouter = Backbone.Router.extend({
           });
         	//drowMout(2);
         }else if (step == 'real'){
-          router.navigate('yourmount/real');
+          //alert(mid);
           showSubFrame('yourmount','real');
-          showNavBar('submintinfo');
+          showNavBar('showreal');
+          router.navigate('yourmount/real');
           $('.mountswich a').hide();
           $('.mountswich .pre').show();
           _gaq.push(['_trackPageview', '/pv/real']);
+
         }else{
           // router.navigate('yourmount/' + step , {  
           //   trigger: true  
@@ -1016,6 +1019,7 @@ $(document).ready(function() {
     //router.navigate('yourmount/real');
     $('.mountswich a').hide();
     $('.mountswich .pre').show();
+    router.navigate('yourmount/real');
     //$('.carunit').removeClass('caranim');
     //$('.carlight').removeClass('carlightanim');
     _smq.push(['custom','活动按钮','互动页','您专属的掌纹山势图']);
@@ -1023,18 +1027,19 @@ $(document).ready(function() {
     //console.log('next');
   });
 
-  $('.navbox .youreal').die('click').live('click',function(){
-    showSubFrame('yourmount','real');
-    showNavBar('showreal');
-    //router.navigate('yourmount/real');
-    $('.mountswich a').hide();
-    $('.mountswich .pre').show();
-    //$('.carunit').removeClass('caranim');
-    //$('.carlight').removeClass('carlightanim');
-    console.log('您专属的掌纹山势图');
-    _smq.push(['custom','活动按钮','互动页','您专属的掌纹山势图']);
-    _gaq.push(['_trackPageview', '/pv/real']);
-  });
+  // $('.navbox .youreal').die('click').live('click',function(){
+  //   showSubFrame('yourmount','real');
+  //   showNavBar('showreal');
+  //   //router.navigate('yourmount/real');
+  //   $('.mountswich a').hide();
+  //   $('.mountswich .pre').show();
+  //   //$('.carunit').removeClass('caranim');
+  //   //$('.carlight').removeClass('carlightanim');
+  //   console.log('您专属的掌纹山势图');
+  //   router.navigate('yourmount/real');
+  //   _smq.push(['custom','活动按钮','互动页','您专属的掌纹山势图']);
+  //   _gaq.push(['_trackPageview', '/pv/real']);
+  // });
 
   $('.btn_youreal').die('click').live('click',function(){
     showSubFrame('yourmount','real');
@@ -1044,6 +1049,7 @@ $(document).ready(function() {
     $('.mountswich .pre').show();
     //$('.carunit').removeClass('caranim');
     //$('.carlight').removeClass('carlightanim');
+    router.navigate('yourmount/real');
     console.log('您专属的掌纹山势图');
     _smq.push(['custom','活动按钮','互动页','您专属的掌纹山势图']);
     _gaq.push(['_trackPageview', '/pv/real']);
@@ -1062,6 +1068,9 @@ $(document).ready(function() {
     _smq.push(['custom','活动按钮','填写信息页','确认提交']);
     _gaq.push(['_trackEvent','btn','jump','submitprofile']);
     return false;
+  });
+  $('.showreal a').live('click',function(){
+    //$('.mountstxt').hide();
   });
   $('.sharelist a').die('click').live('click',function(){
     var $this = this;

@@ -2800,6 +2800,7 @@ var mounts = eval(
 		    {'strpid':'35', 'endpid':'34', 'type':'on'},
 		    {'strpid':'4', 'endpid':'34', 'type':'on'},
 		    {'strpid':'11', 'endpid':'35', 'type':'on'},
+		    {'strpid':'36', 'endpid':'35', 'type':'on'},
 		    {'strpid':'37', 'endpid':'36', 'type':'on'},
 		    {'strpid':'38', 'endpid':'37', 'type':'on'},
 		    {'strpid':'12', 'endpid':'37', 'type':'on'},
@@ -2823,7 +2824,7 @@ var mounts = eval(
 			{'time':'0','x':'-120','y':'80','mx':'-400','my':'0'},
 			{'time':'1.5','x':'340','y':'0','mx':'0','my':'0'}
 		],
-		'carimg':'image/car/15.png',
+		'carimg':'image/car/20.png',
 		'lightimg':'image/lt/1.png'
 	},
 	{
