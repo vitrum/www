@@ -178,7 +178,7 @@ function hammerInit() {
   var ctx=c.getContext("2d");
   var backCanvas = document.getElementById('backcanvas');
   var backCtx = backCanvas.getContext('2d');
-  var resImage = document.getElementById('resultImage');
+  //var resImage = document.getElementById('resultImage');
   var canvasData = backCtx.getImageData(0, 0, 999, 999);
   var savedData = document.getElementById('savedate');
 
@@ -188,19 +188,27 @@ function hammerInit() {
     //document.body.appendChild(savedData);
     $("#savedate").hide();
     //$("#backcanvas").hide();
-    //alert(Number(backCanvas.height));
+    //alert("backCanvas.height:" + Number(backCanvas.height));
     if (Number(backCanvas.height)>400){
-      var temp = document.getElementById('tempcanvas2');
-      var tempCtx = temp.getContext('2d');
-      var imgData=backCtx.getImageData(0,20,300,400);
-      tempCtx.putImageData(imgData,0,0);
-      savedData.src = temp.toDataURL("image/png");
+      // var temp = document.getElementById('tempcanvas2');
+      // var tempCtx = temp.getContext('2d');
+      // var imgData=backCtx.getImageData(0,20,300,400);
+      // tempCtx.putImageData(imgData,0,0);
+      // savedData.src = temp.toDataURL("image/png");
       //alert(temp.toDataURL("image/png"));
-    }else{
-      savedData.src = backcanvas.toDataURL("image/png");
+      //resize c size
+      c.height = backCanvas.height;
+      //savedData.width =  backCanvas.width;
+      //savedData.height =  backCanvas.height;
     }
+    //savedData.src = backcanvas.toDataURL("image/png");
   },500);
-
+  
+  setTimeout(function(){
+    savedData.src = backcanvas.toDataURL("image/png");
+    //alert("backCanvas.height:" + Number(backCanvas.height) +",newCanvas.hight:" + c.height + ",savedData.height:" + savedData.height + ",savedData.width:" + savedData.width);
+  },500);
+  
   var hammertime = Hammer(document.getElementById("gridbox"), {
     transform_always_block: true,
     transform_min_scale: 1,
@@ -226,7 +234,7 @@ function hammerInit() {
         break;
       case 'transform':
         rotation = last_rotation + ev.gesture.rotation;
-        scale = Math.max(0.6, Math.min(last_scale * ev.gesture.scale, 1.8));
+        scale = Math.max(0.85, Math.min(last_scale * ev.gesture.scale, 1.4));
         break;
     }
       // transform!
@@ -236,10 +244,10 @@ function hammerInit() {
       "scale("+scale+","+scale+") " +
       "rotate("+rotation+"deg) ";
     //console.log("translate3d("+posX+"px,"+posY+"px, 0) " +"scale3d("+scale+","+scale+", 0) " + "rotate("+rotation+"deg) ");
-    var x = 300; //canvas.width / 2;
-    var y = 400;//canvas.height / 2;
-    var width = 300;//image.width;
-    var height = 400; //image.height;
+    var x = Number(backCanvas.width); //canvas.width / 2;
+    var y = Number(backCanvas.height);//canvas.height / 2;
+    var width = Number(backCanvas.width);//image.width;
+    var height = Number(backCanvas.height); //image.height;
     ctx.clearRect (0,0,999,999);
     ctx.save();
     ctx.translate(posX,posY);
@@ -369,6 +377,10 @@ function postThePic(event) {
       showNavBar();
       //drowMout(Number(jsdata.data.mid));
       $('#picid').val(jsdata.data.uid);
+      //change share link's pic address//
+      changeHref("#flash_sina",mid);
+      changeHref("#flash_qq",mid);
+      changeHref("#flash_ren",mid);
       //console.log('mid='+ jsdata.data.mid );
     },
     error: function(xhr, type){
@@ -781,7 +793,17 @@ function drowMout(mountid) {
     anim.start();
     console.log("call _animStart");
 } //drowMout finish;
-
+function changeHref(selector,mid,similar){
+  var href=$(selector).attr("href"),
+      index=href.indexOf("&pic=")
+      str="php%3fmid%3d";
+  if(mid){
+    //console.log(encodeURI('http://client.17bi.net/luxgen/img.php?mid='));
+    href=href.replace(str,"php%3fmid%3d"+mid);
+  }
+  console.log('href:'+ href);
+  $(selector).attr("href",href);
+}
 
 
 var AppRouter = Backbone.Router.extend({  
@@ -807,6 +829,7 @@ var AppRouter = Backbone.Router.extend({
         console.log('homepage');
         showFrame('homepage');
         showNavBar();
+        _gaq.push(['_trackPageview', '/pv/homepage']);
     },  
     selectGender: function() {  
         console.log('selectGender');
@@ -818,6 +841,7 @@ var AppRouter = Backbone.Router.extend({
         $('.mountswich .nex').hide();
         $('.yourmount .mountstxt').hide();
         _smq.push(['custom','活动按钮','首页','解密你的掌纹山势']);
+        _gaq.push(['_trackPageview', '/pv/selectgender']);
     },
     selectGenderUser: function(user) {  
     	if(!user){ user = 'male'}
@@ -832,12 +856,17 @@ var AppRouter = Backbone.Router.extend({
         $(".gridbox").addClass("femalegrid");
         $(".default").addClass("femaledefault");
         _smq.push(['custom','活动按钮','互动页','选择性别-女']);
+        _gaq.push(['_trackPageview', '/pv/selectgender/female']);
 
-      }else{
+      }else if(user == 'male'){
         $(".gridbox").removeClass("femalegrid");
         $(".default").removeClass("femaledefault");
         _smq.push(['custom','活动按钮','互动页','选择性别-男']);
+        _gaq.push(['_trackPageview', '/pv/selectgender/male']);
+      }else{
+        
       }
+      
     },
     awardList: function() {  
         console.log('填写抽奖');
@@ -854,6 +883,7 @@ var AppRouter = Backbone.Router.extend({
         showNavBar('awardlink');
         selectInit();
         router.navigate('award');
+        _gaq.push(['_trackPageview', '/pv/profile']);
         //_smq.push(['custom','活动按钮','互动页','互动完成-参与抽奖']);
         //_smq.push(['custom','活动按钮','首页','获奖名单']);
     },
@@ -861,12 +891,14 @@ var AppRouter = Backbone.Router.extend({
         console.log('获奖名单');
         showFrame('userlist');
         showNavBar();
+        _gaq.push(['_trackPageview', '/pv/userlist']);
     },
     subminSuccess: function() {  
         console.log('subminsuccess');
         showSubFrame('awardbox','subminsuccess');
         showNavBar('subminsuccess');
         _smq.push(['custom','活动按钮','提交成功页','活动说明']);
+        _gaq.push(['_trackPageview', '/pv/profile/subminsuccess']);
 
     },
     shareGame: function() {  
@@ -874,12 +906,14 @@ var AppRouter = Backbone.Router.extend({
         showSubFrame('awardbox','share');
         showNavBar('sheargame');
         _smq.push(['custom','活动按钮','互动页','互动完成-即刻分享']);
+        _gaq.push(['_trackPageview', '/pv/share']);
     },  
     aboutGame: function() {  
         console.log('aboutGame');
         showFrame('aboutgame');
         showNavBar();
         _smq.push(['custom','活动按钮','首页','活动说明']);
+        _gaq.push(['_trackPageview', '/pv/aboutgame']);
     },  
     takePic : function(user) {  
     	if(!user){ user = 'male'};
@@ -887,9 +921,11 @@ var AppRouter = Backbone.Router.extend({
       console.log('takePic 性别为：' +user);
     	showSubFrame('takebox','take');
       showNavBar('takepic');
+      _gaq.push(['_trackPageview', '/pv/takepic']);
     },  
     retakePic : function(id) {  
-      console.log('渲染详情方法, id为: ' + id);  
+      console.log('渲染详情方法, id为: ' + id); 
+      //_gaq.push(['_trackPageview', '/pv/takepic'); 
     }, 
     yourMount : function(step) {
       //parent.location.reload();   
@@ -908,11 +944,12 @@ var AppRouter = Backbone.Router.extend({
           showNavBar('submintinfo');
           $('.mountswich a').hide();
           $('.mountswich .pre').show();
+          _gaq.push(['_trackPageview', '/pv/real']);
         }else{
           // router.navigate('yourmount/' + step , {  
           //   trigger: true  
           // });
-
+          _gaq.push(['_trackPageview', '/pv/rendering']);
           drowMout(step);
 
         }
@@ -935,12 +972,14 @@ $(document).ready(function() {
     $('#takePictureField').click();
     cleanCanvas();
     _smq.push(['custom','活动按钮','互动页','拍摄按钮']);
+    _gaq.push(['_trackEvent','btn','takepic','take']);
     //$('#input1').val($('#myfile').val());
   });
   $('.retakepic .takethepic').die('click').live('click',function(){
     $('#takePictureField').click();
     cleanCanvas();
     _smq.push(['custom','活动按钮','互动页','拍摄完成-重新拍摄']);
+    _gaq.push(['_trackEvent','btn','takepic','retake']);
   });
 	$("#takePictureField").on("change",gotPic);
   $("#takePictureField2").on("change",reGotPic);
@@ -948,11 +987,13 @@ $(document).ready(function() {
   $(".retake").die('click').live('click',function(){
     $('.mask').show();
     _smq.push(['custom','活动按钮','互动页','拍摄完成-使用']);
+    _gaq.push(['_trackEvent','btn','takepic','post']);
     postThePic();
   });
   $(".btn_post").die('click').live('click',function(){
     $('.mask').show();
     _smq.push(['custom','活动按钮','互动页','拍摄完成-使用']);
+    _gaq.push(['_trackEvent','btn','takepic','post']);
     postThePic();
   });
 
@@ -978,6 +1019,7 @@ $(document).ready(function() {
     //$('.carunit').removeClass('caranim');
     //$('.carlight').removeClass('carlightanim');
     _smq.push(['custom','活动按钮','互动页','您专属的掌纹山势图']);
+    _gaq.push(['_trackPageview', '/pv/real']);
     //console.log('next');
   });
 
@@ -991,6 +1033,7 @@ $(document).ready(function() {
     //$('.carlight').removeClass('carlightanim');
     console.log('您专属的掌纹山势图');
     _smq.push(['custom','活动按钮','互动页','您专属的掌纹山势图']);
+    _gaq.push(['_trackPageview', '/pv/real']);
   });
 
   $('.btn_youreal').die('click').live('click',function(){
@@ -1003,6 +1046,7 @@ $(document).ready(function() {
     //$('.carlight').removeClass('carlightanim');
     console.log('您专属的掌纹山势图');
     _smq.push(['custom','活动按钮','互动页','您专属的掌纹山势图']);
+    _gaq.push(['_trackPageview', '/pv/real']);
   });
 
 
@@ -1010,10 +1054,13 @@ $(document).ready(function() {
   $('.navbox .linkaward').die('click').live('click',function(){
     showNavBar('awardlink');
     _smq.push(['custom','活动按钮','互动页','互动完成-参与抽奖']);
+    _gaq.push(['_trackEvent','btn','jump','profile']);
   });
   $('.navbox .awardsubmint').die('click').live('click',function(){
-    _smq.push(['custom','活动按钮','填写信息页','确认提交']);
+
     postProfile();
+    _smq.push(['custom','活动按钮','填写信息页','确认提交']);
+    _gaq.push(['_trackEvent','btn','jump','submitprofile']);
     return false;
   });
   $('.sharelist a').die('click').live('click',function(){
@@ -1022,12 +1069,15 @@ $(document).ready(function() {
     switch($this.className) {
         case 'sina':
             _smq.push(['custom','活动按钮','分享页面','新浪微博']);
+            _gaq.push(['_trackEvent','btn','share','weibo']);
             break;
         case 'qq':
             _smq.push(['custom','活动按钮','分享页面','腾讯微博']);
+            _gaq.push(['_trackEvent','btn','share','qq']);
             break;
         case 'renren':
             _smq.push(['custom','活动按钮','分享页面','人人网']);
+            _gaq.push(['_trackEvent','btn','share','renren']);
             break;
     }
     //return false;
@@ -1043,10 +1093,12 @@ $(document).ready(function() {
         $('.mountswich .nex').hide();
         $('.yourmount .mountstxt').hide();
     _smq.push(['custom','活动按钮','互动页','互动完成-再试一次']); 
+    _gaq.push(['_trackEvent','btn','game','replay']);
     router.navigate('gender');
   });
   $('.navbox .sheargame').die('click').live('click',function(){
     _smq.push(['custom','活动按钮','分享页面','填写中奖信息']);
+    _gaq.push(['_trackEvent','btn','share','post']);
   });
   $('.book').die('click').live('click',function(){
     //_smq.push(['custom','活动按钮','导航栏','预约试驾']);
@@ -1056,16 +1108,25 @@ $(document).ready(function() {
     showNavBar();
     $('.mountswich .nex').hide();
     $('.yourmount .mountstxt').hide();
-    _smq.push(['custom','活动按钮','首页','解密你的掌纹山势']);
+    _smq.push(['custom','活动按钮','互动页拍摄','返回按钮']);
+    _gaq.push(['_trackEvent','btn','takepic','back']);
   });
   $('.btn_back').die('click').live('click',function(){
     showFrame('selectgender');
     showNavBar();
     $('.mountswich .nex').hide();
     $('.yourmount .mountstxt').hide();
-    _smq.push(['custom','活动按钮','首页','解密你的掌纹山势']);
+    _smq.push(['custom','活动按钮','互动页拍摄','返回按钮']);
+    _gaq.push(['_trackEvent','btn','takepic','back']);
   });
-
+  $('.link_home .link_home').die('click').live('click',function(){
+    _smq.push(['custom','活动按钮','首页','回到首页']);
+    _gaq.push(['_trackEvent','btn','jump','home']);
+  });
+  $('.link_home .book').die('click').live('click',function(){
+    _smq.push(['custom','活动按钮','首页','预约试驾']);
+    _gaq.push(['_trackPageview', '/pv/reserve']);
+  });
 
 });
 

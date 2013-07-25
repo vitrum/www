@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 	<head>
 	<meta name="viewport" content=" user-scalable=no" />
@@ -7,6 +7,19 @@
 	<link rel="stylesheet" href="css/style.css" media="all" type="text/css" />
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" /> 
 	<script type=""text/javascript"">
+	  //check pc and jump to pc//
+		function is_touch_device() {
+		  return !!('ontouchstart' in window) // works on most browsers 
+		      || !!('onmsgesturechange' in window); // works on ie10
+		};
+		if(Number(window.innerWidth)>1024 && !is_touch_device()){
+			self.location='pc.html';
+		}else if(Number(window.innerWidth)>640 && is_touch_device()){
+			//self.location='pad.html';
+		};
+	  //check pc and jump to pc//
+
+	  //ad//
 	  var _smq = _smq || [];
 	  _smq.push(['_setAccount', '36075ECE', new Date()]);
 	  _smq.push(['_setDirectoryIndex', '']);
@@ -17,6 +30,20 @@
 	  sm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdnmaster.com/sitemaster/sm.js';
 	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sm, s);
 	  })();
+
+	</script>
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-42336451-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
 	</script>
 	</head>
 <body>
@@ -24,7 +51,7 @@
 		<header>
 			<div class="link_home">
 				<a class="punch link_home" href="#/index">返回首页</a>
-				<a class="book" href="http://html.cigtest.com.cn/commeal/test/drive.html">预约试驾</a>
+				<a class="book" href="http://html.cigtest.com.cn/commeal/test/drive.html" target="_blank">预约试驾</a>
 			</div>
 			<h1 class="logo">LUXGEN 纳智捷</h1>
 		</header>
@@ -55,13 +82,13 @@
 							<!-- <img id="yourimage" /> -->
 						    <canvas id ="backcanvas" width="300" height="400"></canvas>
 						    <canvas id ="newCanvas" width="300" height="400"></canvas>
-						    <canvas id ="tempcanvas2" width="300" height="400"></canvas>
-  							<canvas id ="postThePicCanvas" class="piccanvas" width="230" height="230"></canvas>
+						    <!--<canvas id ="tempcanvas2" width="300" height="400"></canvas>-->
+  							<canvas id ="postThePicCanvas" class="piccanvas" width="190" height="190"></canvas>
 							<!-- <canvas id ="postThePicCanvas" class="piccanvas"></canvas> -->
 							<div class="gridbox" id="gridbox"></div>
 							<div class="default"></div>
 						</div>
-						<img id="savedate" />
+						<img id="savedate"/>
 						<!--<button type="submit">上传</button>-->
 						
 					</form>
@@ -137,11 +164,9 @@
 				<section class="subframe share">
 					<h2 class="title">分享至</h2>
 					<ul class="sharelist">
-						<li><a class="sina" href="http://service.weibo.com/share/share.php?title=%2523%25d6%25c7%25bb%25db%25d5%25c6%25ce%25d5%2bGive%2bMe%2b5%2523%25c4%25e3%25b5%25c4%25d5%25c6%25ce%25c6%25d4%25cc%25b2%25d8%25d4%25f5%25d1%25f9%25b5%25c4%25d6%25c7%25bb%25db%25c3%25d8%25c3%25dc%25a3%25bf%25ca%25c7%25c8%25cd%25c8%25e7%25bb%25aa%25c9%25bd%25bb%25b9%25ca%25c7%25ce%25c8%25d6%25d8%25c8%25e7%25cc%25a9%25c9%25bd%25a3%25bf%25ca%25c7%25c0%25d6%25b9%25db%25b5%25c4%25c9%25fa%25bb%25ee%25bc%25d2%25a3%25ac%25bb%25b9%25ca%25c7%25c9%25bd%25d6%25d0%25b5%25c4%25d1%25b0%25b5%25c0%25d5%25df%25a3%25bf%25c2%25ed%25c9%25cf%25b8%25fa%25ce%25d2%25d2%25bb%25c6%25f0%25b7%25a2%25cf%25d6%25c4%25e3%25b5%25c4%25cc%25ec%25d0%25d4%25c3%25d8%25c3%25dc%25a3%25ac%25be%25cd%25d3%25d0%25bb%25fa%25bb%25e1%25d3%25ae%25c4%25c9%25d6%25c7%25bd%25dd5%2bSedan%25c7%25e0%25b5%25ba%25d6%25ae%25c2%25c3%25a3%25ac%25c8%25c3%25d7%25ee%25d6%25c7%25bb%25db%25b5%25c4%25b3%25b5%25b4%25f8%25c4%25e3%25c7%25b0%25cd%25f9%25d7%25ee%25d0%25d2%25b8%25a3%25b5%25c4%25b3%25c7%25ca%25d0%25a3%25a1http%253a%252f%252fgiveme5.dfyl-luxgen.com&url=http://giveme5.dfyl-luxgen.com&source=bookmark&appkey=&pic=&ralateUid=" target="_blank">新浪微博</a></li>
-						<li><a class="qq" href="http://share.v.t.qq.com/index.php?c=share&a=index&url=http://giveme5.dfyl-luxgen.com&title=#智慧掌握 Give Me 5#你的掌纹蕴藏怎样的智慧秘密？是韧如华山还是稳重如泰山？是乐观的生活家，还是山中的寻道者？马上跟我一起发现你的天性秘密，就有机会赢纳智捷5 Sedan青岛之旅，让最智慧的车带你前往最幸福的城市！http://giveme5.dfyl-luxgen.com
-&pic=&appkey="  target="_blank">腾讯微博</a></li>
-						<li><a class="renren" href="http://widget.renren.com/dialog/share?resourceUrl=http://giveme5.dfyl-luxgen.com&srcUrl=http://giveme5.dfyl-luxgen.com&title=#智慧掌握 Give Me 5#你的掌纹蕴藏怎样的智慧秘密？是韧如华山还是稳重如泰山？是乐观的生活家，还是山中的寻道者？马上跟我一起发现你的天性秘密，就有机会赢纳智捷5 Sedan青岛之旅，让最智慧的车带你前往最幸福的城市！http://giveme5.dfyl-luxgen.com
-&description=纳智捷Luxgen&pic="  target="_blank">人人网</a></li>
+						<li><a class="sina"  id="flash_sina" href="http://service.weibo.com/share/share.php?title=%2523%25d6%25c7%25bb%25db%25d5%25c6%25ce%25d5%20Give%20Me%205%2523%25c4%25e3%25b5%25c4%25d5%25c6%25ce%25c6%25d4%25cc%25b2%25d8%25d4%25f5%25d1%25f9%25b5%25c4%25d6%25c7%25bb%25db%25c3%25d8%25c3%25dc%25a3%25bf%25ca%25c7%25c8%25cd%25c8%25e7%25bb%25aa%25c9%25bd%25bb%25b9%25ca%25c7%25ce%25c8%25d6%25d8%25c8%25e7%25cc%25a9%25c9%25bd%25a3%25bf%25ca%25c7%25c0%25d6%25b9%25db%25b5%25c4%25c9%25fa%25bb%25ee%25bc%25d2%25a3%25ac%25bb%25b9%25ca%25c7%25c9%25bd%25d6%25d0%25b5%25c4%25d1%25b0%25b5%25c0%25d5%25df%25a3%25bf%25c2%25ed%25c9%25cf%25b8%25fa%25ce%25d2%25d2%25bb%25c6%25f0%25b7%25a2%25cf%25d6%25c4%25e3%25b5%25c4%25cc%25ec%25d0%25d4%25c3%25d8%25c3%25dc%25a3%25ac%25be%25cd%25d3%25d0%25bb%25fa%25bb%25e1%25d3%25ae%25c4%25c9%25d6%25c7%25bd%25dd5%20Sedan%25c7%25e0%25b5%25ba%25d6%25ae%25c2%25c3%25a3%25ac%25c8%25c3%25d7%25ee%25d6%25c7%25bb%25db%25b5%25c4%25b3%25b5%25b4%25f8%25c4%25e3%25c7%25b0%25cd%25f9%25d7%25ee%25d0%25d2%25b8%25a3%25b5%25c4%25b3%25c7%25ca%25d0%25a3%25a1&url=http://giveme5.dfyl-luxgen.com&source=bookmark&appkey=&ralateUid=&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d" target="_blank">新浪微博</a></li>
+						<li><a class="qq" id="flash_qq" href="http://share.v.t.qq.com/index.php?c=share&a=index&url=http://giveme5.dfyl-luxgen.com&title=%23%E6%99%BA%E6%85%A7%E6%8E%8C%E6%8F%A1%20Give%20Me%205%23%E4%BD%A0%E7%9A%84%E6%8E%8C%E7%BA%B9%E8%95%B4%E8%97%8F%E6%80%8E%E6%A0%B7%E7%9A%84%E6%99%BA%E6%85%A7%E7%A7%98%E5%AF%86%EF%BC%9F%E6%98%AF%E9%9F%A7%E5%A6%82%E5%8D%8E%E5%B1%B1%E8%BF%98%E6%98%AF%E7%A8%B3%E9%87%8D%E5%A6%82%E6%B3%B0%E5%B1%B1%EF%BC%9F%E6%98%AF%E4%B9%90%E8%A7%82%E7%9A%84%E7%94%9F%E6%B4%BB%E5%AE%B6%EF%BC%8C%E8%BF%98%E6%98%AF%E5%B1%B1%E4%B8%AD%E7%9A%84%E5%AF%BB%E9%81%93%E8%80%85%EF%BC%9F%E9%A9%AC%E4%B8%8A%E8%B7%9F%E6%88%91%E4%B8%80%E8%B5%B7%E5%8F%91%E7%8E%B0%E4%BD%A0%E7%9A%84%E5%A4%A9%E6%80%A7%E7%A7%98%E5%AF%86%EF%BC%8C%E5%B0%B1%E6%9C%89%E6%9C%BA%E4%BC%9A%E8%B5%A2%E7%BA%B3%E6%99%BA%E6%8D%B75%20Sedan%E9%9D%92%E5%B2%9B%E4%B9%8B%E6%97%85%EF%BC%8C%E8%AE%A9%E6%9C%80%E6%99%BA%E6%85%A7%E7%9A%84%E8%BD%A6%E5%B8%A6%E4%BD%A0%E5%89%8D%E5%BE%80%E6%9C%80%E5%B9%B8%E7%A6%8F%E7%9A%84%E5%9F%8E%E5%B8%82%EF%BC%81&appkey=801cf76d3cfc44ada52ec13114e84a96&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d"  target="_blank">腾讯微博</a></li>
+						<li><a class="renren"  id="flash_ren" href="http://widget.renren.com/dialog/share?resourceUrl=http://mobile.dfyl-luxgen.com&srcUrl=http://giveme5.dfyl-luxgen.com&title=%23%E6%99%BA%E6%85%A7%E6%8E%8C%E6%8F%A1%20Give%20Me%205%23&description=%E4%BD%A0%E7%9A%84%E6%8E%8C%E7%BA%B9%E8%95%B4%E8%97%8F%E6%80%8E%E6%A0%B7%E7%9A%84%E6%99%BA%E6%85%A7%E7%A7%98%E5%AF%86%EF%BC%9F%E6%98%AF%E9%9F%A7%E5%A6%82%E5%8D%8E%E5%B1%B1%E8%BF%98%E6%98%AF%E7%A8%B3%E9%87%8D%E5%A6%82%E6%B3%B0%E5%B1%B1%EF%BC%9F%E6%98%AF%E4%B9%90%E8%A7%82%E7%9A%84%E7%94%9F%E6%B4%BB%E5%AE%B6%EF%BC%8C%E8%BF%98%E6%98%AF%E5%B1%B1%E4%B8%AD%E7%9A%84%E5%AF%BB%E9%81%93%E8%80%85%EF%BC%9F%E9%A9%AC%E4%B8%8A%E8%B7%9F%E6%88%91%E4%B8%80%E8%B5%B7%E5%8F%91%E7%8E%B0%E4%BD%A0%E7%9A%84%E5%A4%A9%E6%80%A7%E7%A7%98%E5%AF%86%EF%BC%8C%E5%B0%B1%E6%9C%89%E6%9C%BA%E4%BC%9A%E8%B5%A2%E7%BA%B3%E6%99%BA%E6%8D%B75%20Sedan%E9%9D%92%E5%B2%9B%E4%B9%8B%E6%97%85%EF%BC%8C%E8%AE%A9%E6%9C%80%E6%99%BA%E6%85%A7%E7%9A%84%E8%BD%A6%E5%B8%A6%E4%BD%A0%E5%89%8D%E5%BE%80%E6%9C%80%E5%B9%B8%E7%A6%8F%E7%9A%84%E5%9F%8E%E5%B8%82%EF%BC%81&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d"  target="_blank">人人网</a></li>
 					</ul>
 				</section>
 			</div>
@@ -186,11 +211,12 @@
 		</nav>
 	</div>
 	<div class="mask">
-		<div class="loading"></div>
+		<div class="loading">Loading...</div>
 	</div>
 	<div class="horizontal">
 		<div class="content">
 			建议竖屏使用获得更好体验!
+			<img class="bufferimg" src="image/ajax-loader.gif" width="0" height="0" />
 		</div>
 	</div>
 
@@ -207,5 +233,31 @@
 	<noscript>
 		建议启用JavaScript以获得更好体验!
 	</noscript>
+	<!--
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-42336451-1', 'dfyl-luxgen.com');
+  ga('send', 'pageview');
+
+</script>
+GA tracking code begin
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-42336451-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = 'http://www.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+GA tracking code end-->
+
+
+
 </body>
 </html>
