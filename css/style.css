@@ -375,13 +375,13 @@ text-align: center; color:rgba(200,200,200,0.4);}
   0% {top: 56px; left:340px;} 
   70% {top: 100px; left: 130px;}
   85% {top: 124px; left: 146px;}
-  100% {top: 143px; left: 120px;}
+  100% {top: 143px; left: 110px;}
 }
 @-webkit-keyframes caranimtion-27 {
   0% {top: -20px; left:260px;} 
   60% {top: 70px; left: 90px;}
   70% {top: 90px; left: 136px;}
-  100% {top: 126px; left: 70px;}
+  100% {top: 126px; left: 62px;}
 }
 @-webkit-keyframes caranimtion-28 {
   0% {top: -26px; left:-100px;} 
@@ -390,14 +390,14 @@ text-align: center; color:rgba(200,200,200,0.4);}
   100% {top:52px; left: 190px;}
 }
 @-webkit-keyframes caranimtion-29 {
-  0% {top: 20px; left:290px;} 
-  50% {top: 30px; left:120px;} 
+  0% {top: -50px; left:270px;} 
+  50% {top: 40px; left:120px;} 
   80% {top: 110px; left:150px;} 
-  100% {top: 140px; left: 90px;}
+  100% {top: 140px; left: 100px;}
 }
 @-webkit-keyframes caranimtion-30 {
-  0% {top: -20px; left:260px;} 
-  60% {top: 60px; left: 120px;}
+  0% {top: -10px; left:260px;} 
+  60% {top: 50px; left: 120px;}
   70% {top: 90px; left: 142px;}
   100% {top: 126px; left: 70px;}
 }
@@ -634,26 +634,27 @@ text-align: center; color:rgba(200,200,200,0.4);}
   100% {-webkit-mask-position:-10px 0px;}
 }
 @-webkit-keyframes lightanim-17 {
-  0% { -webkit-mask-position:-300px 0px;}
-  40% { -webkit-mask-position:-200px 0px;}
+  0% { -webkit-mask-position:-300px -100px;}
+  40% { -webkit-mask-position:-200px -100px;}
+  80% { -webkit-mask-position:-100px -100px;}
   100% {-webkit-mask-position:-10px 0px;}
 }
 @-webkit-keyframes lightanim-18 {
   0% { -webkit-mask-position:-300px -400px;}
   40% { -webkit-mask-position:-150px -200px;}
-  90% { -webkit-mask-position:-130px -110px;}
+  90% { -webkit-mask-position:-130px -140px;}
   100% {-webkit-mask-position:-100px -100px;}
 }
 @-webkit-keyframes lightanim-19 {
-  0% { -webkit-mask-position:-280px -260px;}
-
-  80% { -webkit-mask-position:-120px -90px;}
+  0% { -webkit-mask-position:-180px -200px;}
+  60% { -webkit-mask-position:-140px -150px;}
+  80% { -webkit-mask-position:-120px -130px;}
   100% {-webkit-mask-position:-100px -60px;}
 }
 @-webkit-keyframes lightanim-20 {
   0% { -webkit-mask-position:-280px -160px;}
-  78% { -webkit-mask-position:-70px -105px;}
-  92% { -webkit-mask-position:-60px -100px;}
+  70% { -webkit-mask-position:-70px -120px;}
+  80% { -webkit-mask-position:-70px -110px;}
   100% {-webkit-mask-position:0px -80px;}
 }
 @-webkit-keyframes lightanim-21 {
@@ -667,11 +668,11 @@ text-align: center; color:rgba(200,200,200,0.4);}
   100% {-webkit-mask-position:20px 0px;}
 }
 @-webkit-keyframes lightanim-23 {
-  0% { -webkit-mask-position:-300px 0px;}
-  65% { -webkit-mask-position:-150px 0px;}
-  75% { -webkit-mask-position:-148px 0px;}
-  95% { -webkit-mask-position:-80px 0px;}
-  100% {-webkit-mask-position:-10px 0px;}
+  0% { -webkit-mask-position:-300px -160px;}
+  65% { -webkit-mask-position:-150px -150px;}
+  75% { -webkit-mask-position:-120px -150px;}
+  95% { -webkit-mask-position:-80px -80px;}
+  100% {-webkit-mask-position:-10px -60px;}
 }
 @-webkit-keyframes lightanim-24 {
   0% { -webkit-mask-position:200px -300px;}
@@ -689,18 +690,19 @@ text-align: center; color:rgba(200,200,200,0.4);}
   0% { -webkit-mask-position:200px -300px;}
   70% {-webkit-mask-position:110px -140px;}
   85% {-webkit-mask-position:110px -130px;}
-  100% {-webkit-mask-position:80px -80px;}
+  100% {-webkit-mask-position:80px -105px;}
 }
 @-webkit-keyframes lightanim-27 {
-  0% { -webkit-mask-position:300px -200px;}
-  70% { -webkit-mask-position:100px -120px;}
-  85% { -webkit-mask-position:100px -110px;}
-  100% {-webkit-mask-position:60px -40px;}
+  0% { -webkit-mask-position:200px -250px;}
+  70% { -webkit-mask-position:150px -90px;}
+  85% { -webkit-mask-position:80px -80px;}
+  100% {-webkit-mask-position:60px -50px;}
 }
 @-webkit-keyframes lightanim-28 {
   0% { -webkit-mask-position:-280px -260px;}
-  70% { -webkit-mask-position:-130px -160px;}
-  80% { -webkit-mask-position:-130px -140px;}
+  70% { -webkit-mask-position:-100px -220px;}
+  80% { -webkit-mask-position:-80px -210px;}
+  95% { -webkit-mask-position:-60px -140px;}
   100% {-webkit-mask-position:-20px -120px;}
 }
 @-webkit-keyframes lightanim-29 {
@@ -708,11 +710,12 @@ text-align: center; color:rgba(200,200,200,0.4);}
   50% { -webkit-mask-position:100px -200px;}
   60% { -webkit-mask-position:100px -180px;}
   90% { -webkit-mask-position:20px -150px;}
-  100% {-webkit-mask-position:60px -80px;}
+  100% {-webkit-mask-position:60px -100px;}
 }
 @-webkit-keyframes lightanim-30 {
   0% { -webkit-mask-position:300px -200px;}
-  70% { -webkit-mask-position:100px -120px;}
+  60% { -webkit-mask-position:160px -150px;}
+  70% { -webkit-mask-position:160px -140px;}
   85% { -webkit-mask-position:100px -110px;}
   100% {-webkit-mask-position:60px -40px;}
 }
@@ -744,6 +747,8 @@ text-align: center; color:rgba(200,200,200,0.4);}
   .awardbox .share a { height: 50px; width: 249px; display: block; text-indent: -9999em;  background: url(../image/icon-share.png) 0 -40px no-repeat;}
   .awardbox .share a.qq { background-position: 0 -90px;}
   .awardbox .share a.renren { background-position: 0 -140px;}
+    .awardbox .share a.active {background-image: url(../image/icon-share-a.png);}
+
 
 /*about game*/
 .aboutgame .content {width: 100%;  background: #f4f4f4 url(../image/x2/bg-aboutgame.jpg) no-repeat top center; min-height: 1182px; padding: 0px; background-size: 320px 1182px; text-indent: -9999em; }

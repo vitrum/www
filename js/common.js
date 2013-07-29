@@ -362,13 +362,14 @@ function postThePic(event) {
       console.log(json);
       var jsdata = eval('('+json+')');  
       console.log('mid='+ jsdata.data.mid +",similar="+ jsdata.data.similar);
-      var mid = 1;
+      var mid = 1,similar=90;
       if (!jsdata.data.mid){
         alert("很抱歉，请确保将手掌整体置于拍摄区域内，请重试");
         $('.mask').hide();
         return false;
       }else{
-        mid =jsdata.data.mid;
+        mid = jsdata.data.mid;
+        similar = jsdata.data.similar;
       }
       router.navigate('yourmount/'+ mid , {  
         trigger: true  
@@ -378,9 +379,9 @@ function postThePic(event) {
       //drowMout(Number(jsdata.data.mid));
       $('#picid').val(jsdata.data.uid);
       //change share link's pic address//
-      changeHref("#flash_sina",mid);
-      changeHref("#flash_qq",mid);
-      changeHref("#flash_ren",mid);
+      changeHref("#flash_sina",mid,similar);
+      changeHref("#flash_qq",mid,similar);
+      changeHref("#flash_ren",mid,similar);
       //console.log('mid='+ jsdata.data.mid );
     },
     error: function(xhr, type){
@@ -553,7 +554,7 @@ function drawCarAnim(mid){
 }
 function drowRealMount(mountid) {
 
-  console.log('drowRealMount~' + mountid );
+  //console.log('drowRealMount~' + mountid );
 }// end of function drowCar() 
 
 function drowMout(mountid) {
@@ -632,7 +633,7 @@ function drowMout(mountid) {
           stroke: 'white',
           opacity:0.4
         });
-        console.log("lines-" + n +"-type:" + linesArr[n].type + ",strpid:" + (linesArr[n].strpid-1) + ",endpid:" + (linesArr[n].endpid-1) );
+        //console.log("lines-" + n +"-type:" + linesArr[n].type + ",strpid:" + (linesArr[n].strpid-1) + ",endpid:" + (linesArr[n].endpid-1) );
           if(linesArr[n].type=="off"){
             staticGroup.add(line);
           }else{
@@ -796,10 +797,18 @@ function drowMout(mountid) {
 function changeHref(selector,mid,similar){
   var href=$(selector).attr("href"),
       index=href.indexOf("&pic=")
-      str="php%3fmid%3d";
+      str="php%3fmid%3d%26similar%3d";
+  
   if(mid){
     //console.log(encodeURI('http://client.17bi.net/luxgen/img.php?mid='));
-    href=href.replace(str,"php%3fmid%3d"+mid);
+    
+    if(similar){
+      similar = similar.substr(0,similar.length-1);
+      console.log("similar:"+similar);
+      href=href.replace(str,"php%3fmid%3d"+mid+"%26similar%3d"+similar);
+    }else{
+      href=href.replace(str,"php%3fmid%3d"+mid);
+    }
   }
   console.log('href:'+ href);
   $(selector).attr("href",href);
@@ -952,6 +961,8 @@ var AppRouter = Backbone.Router.extend({
           // router.navigate('yourmount/' + step , {  
           //   trigger: true  
           // });
+          $('.mountstxt').hide();
+          $('.mountswich .pre').hide();
           _gaq.push(['_trackPageview', '/pv/rendering']);
           drowMout(step);
 
@@ -1070,7 +1081,8 @@ $(document).ready(function() {
     return false;
   });
   $('.showreal a').live('click',function(){
-    //$('.mountstxt').hide();
+    $('.mountstxt').hide();
+    $('.mountswich .pre').hide();
   });
   $('.sharelist a').die('click').live('click',function(){
     var $this = this;
