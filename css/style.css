@@ -832,8 +832,8 @@ text-align: center; color:rgba(200,200,200,0.4);}
   .selectgender .gender { background-image: url(../image/x2/icon-gender.png);background-size: 320px 174px; }
  .selectgender ul a {  background-image: url(../image/x2/icon-gender.png); background-size: 320px 174px;}
 
-  .awardbox .subminsuccess .title { background-image: url(../image/x2/icon-subminsuccess.png); background-size: 249px 115px;}
-  .awardbox .successinfobox { background-image: url(../image/x2/icon-subminsuccess.png);  background-size: 249px 115px;}
+  .awardbox .subminsuccess .title { background-image: url(../image/x2/icon-subminsuccess.png); background-size: 249px 140px;}
+  .awardbox .successinfobox { background-image: url(../image/x2/icon-subminsuccess.png);  background-size: 249px 140px;}
 
   .awardbox .share .title { background-image: url(../image/x2/icon-share.png);  background-size: 249px 186px;}
     .awardbox .share a { background-image: url(../image/x2/icon-share.png);   background-size: 249px 186px;}

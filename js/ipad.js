@@ -1,4 +1,16 @@
-﻿
+﻿/*
+ * Mega pixel image rendering library for iOS6 Safari
+ *
+ * Fixes iOS6 Safari's image file rendering issue for large size image (over mega-pixel),
+ * which causes unexpected subsampling when drawing it in canvas.
+ * By using this library, you can safely render the image with proper stretching.
+ * https://github.com/stomita/ios-imagefile-megapixel
+ * Copyright (c) 2012 Shinichi Tomita <shinichi.tomita@gmail.com>
+ * Released under the MIT license
+ */
+(function(){function detectSubsampling(img){var iw=img.naturalWidth,ih=img.naturalHeight;if(iw*ih>1024*1024){var canvas=document.createElement('canvas');canvas.width=canvas.height=1;var ctx=canvas.getContext('2d');ctx.drawImage(img,-iw+1,0);return ctx.getImageData(0,0,1,1).data[3]===0}else{return false}}function detectVerticalSquash(img,iw,ih){var canvas=document.createElement('canvas');canvas.width=1;canvas.height=ih;var ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);var data=ctx.getImageData(0,0,1,ih).data;var sy=0;var ey=ih;var py=ih;while(py>sy){var alpha=data[(py-1)*4+3];if(alpha===0){ey=py}else{sy=py}py=(ey+sy)>>1}var ratio=(py/ih);return(ratio===0)?1:ratio}function renderImageToDataURL(img,options,doSquash){var canvas=document.createElement('canvas');renderImageToCanvas(img,canvas,options,doSquash);return canvas.toDataURL("image/jpeg",options.quality||0.8)}function renderImageToCanvas(img,canvas,options,doSquash){var iw=img.naturalWidth,ih=img.naturalHeight;var width=options.width,height=options.height;var ctx=canvas.getContext('2d');ctx.save();transformCoordinate(canvas,width,height,options.orientation);var subsampled=detectSubsampling(img);if(subsampled){iw/=2;ih/=2}var d=1024;var tmpCanvas=document.createElement('canvas');tmpCanvas.width=tmpCanvas.height=d;var tmpCtx=tmpCanvas.getContext('2d');var vertSquashRatio=doSquash?detectVerticalSquash(img,iw,ih):1;var dw=Math.ceil(d*width/iw);var dh=Math.ceil(d*height/ih/vertSquashRatio);var sy=0;var dy=0;while(sy<ih){var sx=0;var dx=0;while(sx<iw){tmpCtx.clearRect(0,0,d,d);tmpCtx.drawImage(img,-sx,-sy);ctx.drawImage(tmpCanvas,0,0,d,d,dx,dy,dw,dh);sx+=d;dx+=dw}sy+=d;dy+=dh}ctx.restore();tmpCanvas=tmpCtx=null}function transformCoordinate(canvas,width,height,orientation){switch(orientation){case 5:case 6:case 7:case 8:canvas.width=height;canvas.height=width;break;default:canvas.width=width;canvas.height=height}var ctx=canvas.getContext('2d');switch(orientation){case 2:ctx.translate(width,0);ctx.scale(-1,1);break;case 3:ctx.translate(width,height);ctx.rotate(Math.PI);break;case 4:ctx.translate(0,height);ctx.scale(1,-1);break;case 5:ctx.rotate(0.5*Math.PI);ctx.scale(1,-1);break;case 6:ctx.rotate(0.5*Math.PI);ctx.translate(0,-height);break;case 7:ctx.rotate(0.5*Math.PI);ctx.translate(width,-height);ctx.scale(-1,1);break;case 8:ctx.rotate(-0.5*Math.PI);ctx.translate(-width,0);break;default:break}}function MegaPixImage(srcImage){if(srcImage instanceof Blob){var img=new Image();var URL=window.URL&&window.URL.createObjectURL?window.URL:window.webkitURL&&window.webkitURL.createObjectURL?window.webkitURL:null;if(!URL){throw Error("No createObjectURL function found to create blob url")}img.src=URL.createObjectURL(srcImage);this.blob=srcImage;srcImage=img}if(!srcImage.naturalWidth&&!srcImage.naturalHeight){var _this=this;srcImage.onload=function(){var listeners=_this.imageLoadListeners;if(listeners){_this.imageLoadListeners=null;for(var i=0,len=listeners.length;i<len;i++){listeners[i]()}}};this.imageLoadListeners=[]}this.srcImage=srcImage}MegaPixImage.prototype.render=function(target,options){if(this.imageLoadListeners){var _this=this;this.imageLoadListeners.push(function(){_this.render(target,options)});return}options=options||{};var imgWidth=this.srcImage.naturalWidth,imgHeight=this.srcImage.naturalHeight,width=options.width,height=options.height,maxWidth=options.maxWidth,maxHeight=options.maxHeight,doSquash=!this.blob||this.blob.type==='image/jpeg';if(width&&!height){height=(imgHeight*width/imgWidth)<<0}else if(height&&!width){width=(imgWidth*height/imgHeight)<<0}else{width=imgWidth;height=imgHeight}if(maxWidth&&width>maxWidth){width=maxWidth;height=(imgHeight*width/imgWidth)<<0}if(maxHeight&&height>maxHeight){height=maxHeight;width=(imgWidth*height/imgHeight)<<0}var opt={width:width,height:height};for(var k in options)opt[k]=options[k];var tagName=target.tagName.toLowerCase();if(tagName==='img'){target.src=renderImageToDataURL(this.srcImage,opt,doSquash)}else if(tagName==='canvas'){renderImageToCanvas(this.srcImage,target,opt,doSquash)}if(typeof this.onrender==='function'){this.onrender(target)}};if(typeof define==='function'&&define.amd){define([],function(){return MegaPixImage})}else{this.MegaPixImage=MegaPixImage}})();
+
+
 function cleanAnim(){
   $('.carunit').removeClass('caranim caranim-1 caranim-2 caranim-3 caranim-4 caranim-5 caranim-6 caranim-7 caranim-8 caranim-9 caranim-10 caranim-11 caranim-12 caranim-13 caranim-14 caranim-15 caranim-16 caranim-17 caranim-18 caranim-19 caranim-20 caranim-21 caranim-22 caranim-23 caranim-24 caranim-25 caranim-26 caranim-27 caranim-28 caranim-29 caranim-30');
 
@@ -635,24 +647,105 @@ function drowMout(mountid) {
     anim.start();
     console.log("call _animStart");
 } //drowMout finish;
-function changeHref(selector,mid,similar){
-  var href=$(selector).attr("href"),
-      index=href.indexOf("&pic=")
-      str="php%3fmid%3d";
-  if(mid){
-    //console.log(encodeURI('http://client.17bi.net/luxgen/img.php?mid='));
-    href=href.replace(str,"php%3fmid%3d"+mid);
+var pages=["home","hand","pro","win","intro"];
+function getIndex(current,array,size,type){
+  var index;
+  $.each(array,function(i){
+    if(current==array[i]){
+        index=i;
+    }
+  });
+  if(type==1){
+    index++;
+    index=index%size;
+  }else{
+    index--;
+    if(index<0){index+=size}
   }
-  console.log('href:'+ href);
-  $(selector).attr("href",href);
+  return index;
 }
+function pageTransition(){
+  var bodyDiv=$("body");
+  var $uid=bodyDiv.attr("uid"),
+      $sex=bodyDiv.attr("sex"),
+      $similar=bodyDiv.attr("similar"),
+      $mid=bodyDiv.attr("mid");
+  if($uid){bodyDiv.attr("uid",$uid);}
+  if($sex){bodyDiv.attr("sex",$sex);}
+  if($similar){bodyDiv.attr("similar",$similar);}
+  if($mid){bodyDiv.attr("mid",$mid);}
 
+  var hash=window.location.hash.replace("#",""),
+      sub=hash.indexOf("_"),
+      url=hash;
+      subPanel=hash;
+
+  if(sub>0){
+    var hashArray=hash.split("_");
+    hash=hashArray[0];   
+  }else{
+    if(hash=="hand"){
+      subPanel="hand_type";
+    }else if(hash=="win"){
+      subPanel="win_list";
+    }
+  }
+  if(!hash||hash==""){hash="home";}
+  if(hash=="hand"||hash=="win"){
+    $(".subPanel").hide(0);
+    $("."+subPanel).show(0);
+  }
+  if(hash=="intro"){
+    $(".body").css({"height":"1200px"});
+    $(".panel").css({"height":"1200px"});
+  }
+  if(url!="win_list"&&url!="win_awards"){
+    $(".panel").hide(0);
+    $(".p_"+hash).show(1000);
+  }else{
+    $(".p_win").show();
+  }
+  if(hash=="intro"||hash=="win"||hash=="pro"){
+    $(".footer").addClass("wite");
+  }else{
+    $(".footer").removeClass("wite");
+  }
+  $(".nav_main a").removeClass("current");
+  $("#nav_"+hash).addClass("current");
+  $(".pagination_number a").removeClass("current");
+  $("#page_"+hash).addClass("current");
+  var i=getIndex(hash,pages,5,1),
+      next=pages[i];
+  $(".pagination_next").attr("href","#"+next);
+}
+function winOrderSilder(type){
+  var silders=$(".win_txt"),
+      length=silders.length;
+      currentId=$(".win_txt.current"),
+      current=parseInt(currentId.attr("id").replace("txt_",""));
+  if(type==1){
+    current++;
+    current=current%length;
+  }else{
+    current--;
+    if(current<0){current=current+length;}
+  }
+  currentId.hide().removeClass("current");
+  $("#"+silders[current].id).fadeIn(0).addClass("current");
+}
 
 $(document).ready(function() {
   var $height=parseInt(document.documentElement.clientHeight);
   $(".body").css({"height":$height});
   $(".panel").css({"height":$height});
-
+  window.onhashchange=function(){
+    pageTransition();
+  }
+  window.onload=function(){
+    pageTransition();
+  }
+  $regTelPhone = /^1[3458]\d{9}$/; //手机号
+  $blank = /^(|\s+)$/; //空格
 
 
 

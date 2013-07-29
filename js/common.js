@@ -795,13 +795,26 @@ function drowMout(mountid) {
     console.log("call _animStart");
 } //drowMout finish;
 function changeHref(selector,mid,similar){
-  var href=$(selector).attr("href"),
-      index=href.indexOf("&pic=")
+  var href='',
+  $href=['http://service.weibo.com/share/share.php?title=%23%e6%99%ba%e6%85%a7%e6%8e%8c%e6%8f%a1%20Give%20Me%205%23%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%e6%98%af%e6%88%91%e6%99%ba%e6%85%a7%e7%9a%84%e7%a7%98%e5%af%86%ef%bc%8c%e5%8e%9f%e6%9d%a5%e6%88%91%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%83%8f%e5%b1%b1%e8%84%89%e4%b8%80%e6%a0%b7%ef%bc%8c%e8%a2%ab%e8%b5%8b%e4%ba%88%e5%a4%a9%e6%80%a7%e6%99%ba%e6%85%a7%ef%bc%8c%e4%bd%a0%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%8f%88%e8%95%b4%e8%97%8f%e6%80%8e%e6%a0%b7%e7%9a%84%e6%99%ba%e6%85%a7%e5%a4%a9%e5%9c%b0%ef%bc%9f%e9%a9%ac%e4%b8%8a%e8%b7%9f%e6%88%91%e4%b8%80%e8%b5%b7%e8%a7%a3%e5%af%86%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%ef%bc%8c%e5%b0%b1%e6%9c%89%e6%9c%ba%e4%bc%9a%e8%b5%a2%e7%ba%b3%e6%99%ba%e6%8d%b75%20Sedan%e9%9d%92%e5%b2%9b%e4%b9%8b%e6%97%85%ef%bc%8c%e8%ae%a9%e6%9c%80%e6%99%ba%e6%85%a7%e7%9a%84%e8%bd%a6%e5%b8%a6%e4%bd%a0%e5%89%8d%e5%be%80%e6%9c%80%e5%b9%b8%e7%a6%8f%e7%9a%84%e5%9f%8e%e5%b8%82%ef%bc%81&url=http://giveme5.dfyl-luxgen.com&source=bookmark&appkey=&ralateUid=&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d%26similar%3d','http://share.v.t.qq.com/index.php?c=share&a=index&url=http://giveme5.dfyl-luxgen.com&title=%23%e6%99%ba%e6%85%a7%e6%8e%8c%e6%8f%a1%20Give%20Me%205%23%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%e6%98%af%e6%88%91%e6%99%ba%e6%85%a7%e7%9a%84%e7%a7%98%e5%af%86%ef%bc%8c%e5%8e%9f%e6%9d%a5%e6%88%91%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%83%8f%e5%b1%b1%e8%84%89%e4%b8%80%e6%a0%b7%ef%bc%8c%e8%a2%ab%e8%b5%8b%e4%ba%88%e5%a4%a9%e6%80%a7%e6%99%ba%e6%85%a7%ef%bc%8c%e4%bd%a0%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%8f%88%e8%95%b4%e8%97%8f%e6%80%8e%e6%a0%b7%e7%9a%84%e6%99%ba%e6%85%a7%e5%a4%a9%e5%9c%b0%ef%bc%9f%e9%a9%ac%e4%b8%8a%e8%b7%9f%e6%88%91%e4%b8%80%e8%b5%b7%e8%a7%a3%e5%af%86%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%ef%bc%8c%e5%b0%b1%e6%9c%89%e6%9c%ba%e4%bc%9a%e8%b5%a2%e7%ba%b3%e6%99%ba%e6%8d%b75%20Sedan%e9%9d%92%e5%b2%9b%e4%b9%8b%e6%97%85%ef%bc%8c%e8%ae%a9%e6%9c%80%e6%99%ba%e6%85%a7%e7%9a%84%e8%bd%a6%e5%b8%a6%e4%bd%a0%e5%89%8d%e5%be%80%e6%9c%80%e5%b9%b8%e7%a6%8f%e7%9a%84%e5%9f%8e%e5%b8%82%ef%bc%81&appkey=801cf76d3cfc44ada52ec13114e84a96&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d%26similar%3d','http://widget.renren.com/dialog/share?resourceUrl=http://mobile.dfyl-luxgen.com&srcUrl=http://giveme5.dfyl-luxgen.com&title=%23%E6%99%BA%E6%85%A7%E6%8E%8C%E6%8F%A1%20Give%20Me%205%23&description=%23%e6%99%ba%e6%85%a7%e6%8e%8c%e6%8f%a1%20Give%20Me%205%23%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%e6%98%af%e6%88%91%e6%99%ba%e6%85%a7%e7%9a%84%e7%a7%98%e5%af%86%ef%bc%8c%e5%8e%9f%e6%9d%a5%e6%88%91%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%83%8f%e5%b1%b1%e8%84%89%e4%b8%80%e6%a0%b7%ef%bc%8c%e8%a2%ab%e8%b5%8b%e4%ba%88%e5%a4%a9%e6%80%a7%e6%99%ba%e6%85%a7%ef%bc%8c%e4%bd%a0%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%8f%88%e8%95%b4%e8%97%8f%e6%80%8e%e6%a0%b7%e7%9a%84%e6%99%ba%e6%85%a7%e5%a4%a9%e5%9c%b0%ef%bc%9f%e9%a9%ac%e4%b8%8a%e8%b7%9f%e6%88%91%e4%b8%80%e8%b5%b7%e8%a7%a3%e5%af%86%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%ef%bc%8c%e5%b0%b1%e6%9c%89%e6%9c%ba%e4%bc%9a%e8%b5%a2%e7%ba%b3%e6%99%ba%e6%8d%b75%20Sedan%e9%9d%92%e5%b2%9b%e4%b9%8b%e6%97%85%ef%bc%8c%e8%ae%a9%e6%9c%80%e6%99%ba%e6%85%a7%e7%9a%84%e8%bd%a6%e5%b8%a6%e4%bd%a0%e5%89%8d%e5%be%80%e6%9c%80%e5%b9%b8%e7%a6%8f%e7%9a%84%e5%9f%8e%e5%b8%82%ef%bc%81&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d%26similar%3d'],
+      index=href.indexOf("&pic="),
       str="php%3fmid%3d%26similar%3d";
-  
+
+  //href=$(selector).attr("href")
   if(mid){
     //console.log(encodeURI('http://client.17bi.net/luxgen/img.php?mid='));
-    
+    switch(selector) {
+        case '#flash_sina':
+            href = $href[0];
+            break;
+        case '#flash_qq':
+            href = $href[1];
+            break;
+        case '#flash_ren':
+            href = $href[2];
+            break;
+    }
+    //console.log(href);
     if(similar){
       similar = similar.substr(0,similar.length-1);
       console.log("similar:"+similar);
