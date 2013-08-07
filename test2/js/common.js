@@ -384,32 +384,10 @@ function drowCar(mountid) {
       $('.yourmount .text').css('background-image', 'url(image/text/00'+ mountid +'.png)');
       $('.yourmount .name').css('background-image', 'url(image/text/00'+ mountid +'.png)');
   //}, 2100);
+
+
 }// end of function drowCar() 
 
-function drawCarAnim(mid){
-  console.log("drowCar anim in new way");
-  var scale = 2;
-  var i = mid - 1;
-  var pointArr = mounts[i].carway;
-  var animCode ="";
-  var animLCode ="";
-  var n = 0;
-  for (var p in pointArr) {
-    var k = p;
-    if(k=="0"){ 
-      animCode ="move('.carunit').x("+pointArr[k].x+").y("+pointArr[k].y+").duration('0s')"
-    }
-    else{
-      animCode = animCode + ".then().x("+pointArr[k].x+").y("+pointArr[k].y+").duration('"+pointArr[k].time+"s')"
-    }
-    n++;
-  }
-  for (var u=0; u<n-1; u++) {
-    animCode = animCode +".pop()";
-  }
-  animCode = animCode + ".end();";
-  eval(animCode);
-}
 function drowRealMount(mountid) {
 
   console.log('drowRealMount~' + mountid );
@@ -422,9 +400,9 @@ function drowMout(mountid) {
     width: 320,
     height: 200
   });
-  //need remove this code, this only for test.
-  if(mountid>20){mountid = Math.max(1,mountid-20);};
-  //need remove this code, this only for test.
+  //
+  if(mountid>15){mountid = 1};
+  //
   $('.rendering .status').show();
   var staticLayer = new Kinetic.Layer();
   var staticGroup = new Kinetic.Group({
@@ -617,9 +595,8 @@ function drowMout(mountid) {
       //showSubFrame('yourmount','real');
       showNavBar('yourmount');
         // setTimeout(function () {
-           console.log("call drowCar~~~~new way~~");
-           alert("???");
-             drawCarAnim(mountid);
+        //   console.log("call drowCar~~~~~~");
+             drowCar(mountid);
         // }, 2000);
       
       //router.navigate('yourmount/real');

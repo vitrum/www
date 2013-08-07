@@ -1,157 +1,7 @@
-  var pages=["home","hand","pro","win","intro"];
-  var mountain=[
-    {
-      "id":"1",
-      "name":"龙虎山",
-      "intro":"生性活泼，外向开朗，每天都充满活力，难能可贵的是你总保有一颗乐观的心。你总有滔滔不绝的开心事想要与亲友们分享，永远有一个想去的旅行目的地，纳智捷 5 Sedan最适合为你补充电量，让活力强劲十足！"
-    },
-    {
-      "id":"2",
-      "name":"武陵山",
-      "intro":"工作中，你注重细节，重视实效，对于繁杂琐事耐性细心。生活中，你善于体谅他人，会贴心地了解他人的需要，喜欢和谐的人际关系，并常常展露你细腻的情感。如同纳智捷 5 Sedan，在曲折处显真情，细节中见智慧。"
-    },
-    {
-      "id":"3",
-      "name":"金佛山",
-      "intro":"智慧纹映射出你的秘密，你拥有非常灵活的头脑，喜欢在不同身份中游移转换，你最适合驾驭纳智捷 5 Sedan在雄险怪奇的岩石中寻求刺激，可是小心别让变幻莫测成为你最爱的游戏！"
-    },
-    {
-      "id":"4",
-      "name":"齐云山",
-      "intro":"常有人赞叹你的强大毅力，不妥协的态度和睿智的眼光。而你最在意的是自己是否主导前行的方向。强大的意志力和周全的思考，常常能帮助你在事业和家庭中扮演良好的形象，如智慧的纳智捷 5 Sedan一样，一路安全呵护。"
-    },
-    {
-      "id":"5",
-      "name":"天山",
-      "intro":"你的性格开放、自由、不愿被拘束，喜欢用最痛快的方式表达自己，对于责任却可以一担在身，从容应对。你适合驾驶纳智捷 5 Sedan在苍劲雄浑的自然里，发现与生俱来的勇气与智慧。"
-    },
-    {
-      "id":"6",
-      "name":"丹霞山",
-      "intro":"你拥有诗意而丰富的内心，无论是生活还是处事都有自己的哲学，喜欢追求美感的你最适合与纳智捷 5 Sedan一同在山与水的天然博物馆中，感受内在的平衡。"
-    },
-    {
-      "id":"7",
-      "name":"太姥山",
-      "intro":"你谦虚而缄默，不经常表现出自我的一面，有耐心、处事灵活，很容易与他人相处。你喜欢观察周围的人和物，并有自己的独特见解。无论工作生活，你都是一枚融洽分子，像纳智捷 5 Sedan一样为大家增添开心与欢乐！"
-    },
-    {
-      "id":"8",
-      "name":"武夷山",
-      "intro":"你的脑中总有许多想法，有的天马行空，有的神秘莫测，有的惊艳旁人。源源不断的奇思妙想和丰富的想象力帮助你创造出异于常人的作品，或让你做出不寻常的举动。带着你的梦想驾驭纳智捷 5 Sedan自由驰骋吧！"
-    },
-    {
-      "id":"9",
-      "name":"骊山",
-      "intro":"对于问题的答案，你总是会探寻更多的可能性。思维开阔，富有好奇心和洞察力，常常有出色的长远眼光。在日常事务中，你通常灵活多变，有很好的忍耐力和适应性。如同纳智捷 5 Sedan对不同道路的适应一样，智慧而沉稳。"
-    },
-    {
-      "id":"10",
-      "name":"神农顶",
-      "intro":"你具有强烈的自我意识，独立的性格、不拘于陈规，性情刚烈不服输，具有不屈不饶的精神。你最适合驾驶纳智捷 5 Sedan，经过人迹罕至的原始森林，体会神农架亘古不朽的魅力。"
-    },
-    {
-      "id":"11",
-      "name":"阿里山",
-      "intro":"性格独立，喜欢冒险和富有想象力的活动。你灵活易变、思维开阔，对有创见而合理的解决方法感兴趣。工作中的狠角色，家庭中的领导者。相信纳智捷 5 Sedan会是你智慧的得力搭档！"
-    },
-    {
-      "id":"12",
-      "name":"庐山",
-      "intro":"在别人看来的巨大压力，却被你视为莫大的动力。总能保持良好心态的你总有源源不竭的旺盛精力，助你不断超越自己。你的激情同纳智捷 5 Sedan的澎湃动力不谋而合，相得益彰。"
-    },
-    {
-      "id":"13",
-      "name":"玉龙雪山",
-      "intro":"你拥有神秘的气质，而你在爱情中也喜欢捉迷藏，虽然你的潇洒倜傥能迷倒众生，但不要因此错失了解爱的真谛与意义。纳智捷 5 Sedan最适合你去了解如何驾驭人生的去处。"
-    },
-    {
-      "id":"14",
-      "name":"长白山",
-      "intro":"你是天生的谋略家，具有独特的思想、伟大的远见和梦想。你天生精于理论对于复杂而综合的概念灵活运用，通常能看清局势中的利弊。纳智捷 5 Sedan更像是你人生旅途的智慧帮手，承载你一路向前。"
-    },
-    {
-      "id":"15",
-      "name":"喜马拉雅山",
-      "intro":"你天性向往自由，钟爱大自然的秀美，喜欢到山野中呼吸新鲜空气。无拘无束的个性和崇尚纯净的心灵，让你在纷繁的日常生活中始终保持一颗平常心。驾着纳智捷 5 Sedan上路吧，给心灵一次自由旅行！"
-    },
-    {
-      "id":"16",
-      "name":"青城山",
-      "intro":"你重感情，善交际，笃信“若我以诚待人，人亦将以诚待我”。你的人生信条使你结交了许多良师益友，让你总能在困境中得到帮助， 纳智捷 5 Sedan会如最信赖的朋友，与你一起，驶向属于你最正确的方向。"
-    },
-    {
-      "id":"17",
-      "name":"泰山",
-      "intro":"处变不惊，稳如泰山。大风大浪中最能展现你从容不迫的一面，发现事物的本质，看清问题的根源，镇定自若地泰然处之。正如智慧安全的纳智捷 5 Sedan一般，自信沉稳，深得亲友和同侪的信赖"
-    },
-    {
-      "id":"18",
-      "name":"普陀山",
-      "intro":"你骨子里透出的善良和质朴，给人深刻印象。待人真诚的你到哪儿都有一群至交好友围绕，开心时有人分享，遇到困难时更有众多援手，最适合驾驭纳智捷 5 Sedan与好友一起分享爱与友情。"
-    },
-    {
-      "id":"19",
-      "name":"五台山",
-      "intro":"你对人有很强的洞察力，善于观察和沟通，富有责任感，始终坚持自己的价值观。对于事业有清晰的远景，并有自我计划且行事果断坚定。与亲朋好友一同乘坐纳智捷 5 Sedan相谈甚欢，对你而言是件十分开心的事。"
-    },
-    {
-      "id":"20",
-      "name":"嵩山",
-      "intro":"你足智多谋、有独立见解，也常在工作中发挥你的聪明才智，你乐于为了推进项目的进行，或改变现状而攻克难题。对于家庭，大多数时间你喜欢扮演观察者和执行者的角色，如驾驶纳智捷 5 Sedan带着全家人出游。"
-    },
-    {
-      "id":"21",
-      "name":"黄山",
-      "intro":"因你超越常人的阅历与智慧，及与生俱来的精英风范，你总是职场上的风云人物，更是全家人的主心骨。与全家人一同驾驶纳智捷 5 Sedan在假日出游，尽享一路美景和欢声笑语，是你最让人艳羡的温馨幸福。"
-    },
-    {
-      "id":"22",
-      "name":"恒山",
-      "intro":"有人说你安静，有人说你内敛，有人说你沉稳，其实你只是专注于心中的方向，将所有精力倾注于最重要的事情上，不在意周遭的纷扰，矢志于不断前行。纳智捷 5 Sedan会是你前行路上最智慧最忠诚的旅伴。"
-    },
-    {
-      "id":"23",
-      "name":"衡山",
-      "intro":"行事低调，作风严谨，工作中的你独立思考、深入研究，颇得领导赏识，同事们不仅对你相当钦佩，更是敬重有加。生活中的你亲切随和，在家庭中的角色也相当称职。你就是驾着纳智捷 5 Sedan驶过，让路人侧目的那个人。"
-    },
-    {
-      "id":"24",
-      "name":"雁荡山",
-      "intro":"喜欢享受生活的你，拥有非常淡定的特质，都市的节奏并不影响你的脚步，坦然而笃定的心态，是因为你更加清楚生活的本质，最适合与纳智捷 5 Sedan一起驾驭生活的乐趣和感受！"
-    },
-    {
-      "id":"25",
-      "name":"昆仑山",
-      "intro":"在人生的路上，你是充满智慧和胸怀的王者。你的领袖风范不怒自威，让旁人的尊敬油然而生。你拥有宽广的视野和辽阔的远见，运筹帷幄一切了然于胸。让纳智捷 5 Sedan成为你智慧的伙伴，不断助推你的人生进程！"
-    },
-    {
-      "id":"26",
-      "name":"峨眉山",
-      "intro":"无论何时何地，你总会发出人群中最爽朗的笑声。乐观的性格和天生的好脾气，让你在工作和生活中总是充满冲劲，你是业务中的主力干将，也是家庭里的和蔼家长。你和智慧的纳智捷 5 Sedan一路相伴，满载工作和生活。"
-    },
-    {
-      "id":"27",
-      "name":"九华山",
-      "intro":"天生的完美主义者，你往往会强烈地要求个人自由和能力，在你独创的思维中，不可动摇的信仰会促使你最终达成目的。纳智捷 5 Sedan一定会是你成功路上的智慧之选。"
-    },
-    {
-      "id":"28",
-      "name":"武当山",
-      "intro":"热爱运动，崇尚健康自然的你爱好广泛，喜欢旅游到处走走看看。对未知领域充满好奇，并乐于探索发现新奇事物。你喜欢安排满满的行程，不让时间无聊虚度。你很适合自驾出游，让纳智捷 5 Sedan的智慧安全为你一路呵护。"
-    },
-    {
-      "id":"29",
-      "name":"玉山",
-      "intro":"外表平静、缄默，而内心却专心致志于问题的核心。在工作中你苛求、精细，努力寻找各种解决方案。有时你稍显固执，因为只有具条理的分析才能使你信服。你适合驾驭纳智捷 5 Sedan来一场疯狂的旅行，给人生多一点感性！"
-    },
-    {
-      "id":"30",
-      "name":"华山",
-      "intro":"你富有韧性，不怕冒险，勇往向前。工作能力强，往往是行业中出类拔萃的那一群人，常因机遇而选择白手起家，开创自己的事业。你适合驾驶纳智捷 5 Sedan在蜿蜒险峻的山路上，尽情释放你的冒险因子。"
-    },
-  ];
+/*mousewheel*/
+(function(a){function d(b){var c=b||window.event,d=[].slice.call(arguments,1),e=0,f=!0,g=0,h=0;return b=a.event.fix(c),b.type="mousewheel",c.wheelDelta&&(e=c.wheelDelta/120),c.detail&&(e=-c.detail/3),h=e,c.axis!==undefined&&c.axis===c.HORIZONTAL_AXIS&&(h=0,g=-1*e),c.wheelDeltaY!==undefined&&(h=c.wheelDeltaY/120),c.wheelDeltaX!==undefined&&(g=-1*c.wheelDeltaX/120),d.unshift(b,e,g,h),(a.event.dispatch||a.event.handle).apply(this,d)}var b=["DOMMouseScroll","mousewheel"];if(a.event.fixHooks)for(var c=b.length;c;)a.event.fixHooks[b[--c]]=a.event.mouseHooks;a.event.special.mousewheel={setup:function(){if(this.addEventListener)for(var a=b.length;a;)this.addEventListener(b[--a],d,!1);else this.onmousewheel=d},teardown:function(){if(this.removeEventListener)for(var a=b.length;a;)this.removeEventListener(b[--a],d,!1);else this.onmousewheel=null}},a.fn.extend({mousewheel:function(a){return a?this.bind("mousewheel",a):this.trigger("mousewheel")},unmousewheel:function(a){return this.unbind("mousewheel",a)}})})(jQuery);
 
+var pages=["home","hand","pro","win","intro"];
 var citys=[
   {province:"请选择",city:"请选择"},
   {province:"北京",city:["东城","西城","崇文","宣武","朝阳","丰台","石景山","海淀","门头沟","房山","通州","顺义","昌平","大兴","平谷","怀柔","密云","延庆"]},
@@ -191,45 +41,57 @@ var citys=[
   {province:"其它",city:["北美洲","南美洲","亚洲","非洲","欧洲","大洋洲"]}
 ];
 
-function showShare(uid,mid,similar,sex){
-  $("#hand_img1 img").attr("src","mountain/"+mid+"l.png");
-  $("#hand_img2 img").attr("src","mountain/"+mid+"r.png");
-  var bodyDiv=$("body");
-  bodyDiv.attr("uid",uid);
-  bodyDiv.attr("sex",sex);
-  bodyDiv.attr("similar",similar);
-  bodyDiv.attr("mid",mid);
-  $("#hand_name").html(mountain[mid-1]["name"]);
-  $("#hand_intro").html(mountain[mid-1]["intro"]);
-  $("#hand_similar").html(similar);
-  $(".p_hand .container").fadeOut(0);
-  $(".hand_share").fadeIn(0);
-  similar=parseInt(similar);
-  changeHref("#flash_sina",mid,similar,3);
-  changeHref("#flash_qq",mid,similar,4);
-  changeHref("#flash_ren",mid,similar,5);
-  changeHref("#share_sina",mid,similar,0);
-  changeHref("#share_qq",mid,similar,1);
-  changeHref("#share_ren",mid,similar,2);
-  window.location.href="#hand_share";
+
+function fixedTitle() {
+  document.title="LUXGEN 纳智捷5 Sedan";
 }
-function changeHref(selector,mid,similar,type){
-  var $href=["http://service.weibo.com/share/share.php?title=%23%e6%99%ba%e6%85%a7%e6%8e%8c%e6%8f%a1%20Give%20Me%205%23%e4%bd%a0%e7%9a%84%e6%8e%8c%e7%ba%b9%e8%95%b4%e8%97%8f%e6%80%8e%e6%a0%b7%e7%9a%84%e6%99%ba%e6%85%a7%e7%a7%98%e5%af%86%ef%bc%9f%e6%98%af%e9%9f%a7%e5%a6%82%e5%8d%8e%e5%b1%b1%e8%bf%98%e6%98%af%e7%a8%b3%e9%87%8d%e5%a6%82%e6%b3%b0%e5%b1%b1%ef%bc%9f%e6%98%af%e4%b9%90%e8%a7%82%e7%9a%84%e7%94%9f%e6%b4%bb%e5%ae%b6%ef%bc%8c%e8%bf%98%e6%98%af%e5%b1%b1%e4%b8%ad%e7%9a%84%e5%af%bb%e9%81%93%e8%80%85%ef%bc%9f%e9%a9%ac%e4%b8%8a%e8%b7%9f%e6%88%91%e4%b8%80%e8%b5%b7%e5%8f%91%e7%8e%b0%e4%bd%a0%e7%9a%84%e5%a4%a9%e6%80%a7%e7%a7%98%e5%af%86%ef%bc%8c%e5%b0%b1%e6%9c%89%e6%9c%ba%e4%bc%9a%e8%b5%a2%e7%ba%b3%e6%99%ba%e6%8d%b75%20Sedan%e9%9d%92%e5%b2%9b%e4%b9%8b%e6%97%85%ef%bc%8c%e8%ae%a9%e6%9c%80%e6%99%ba%e6%85%a7%e7%9a%84%e8%bd%a6%e5%b8%a6%e4%bd%a0%e5%89%8d%e5%be%80%e6%9c%80%e5%b9%b8%e7%a6%8f%e7%9a%84%e5%9f%8e%e5%b8%82!&url=http://giveme5.dfyl-luxgen.com&source=bookmark&appkey=1995346682&ralateUid=&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d%26similar%3d", "http://share.v.t.qq.com/index.php?c=share&a=index&url=http://giveme5.dfyl-luxgen.com&title=%23%e6%99%ba%e6%85%a7%e6%8e%8c%e6%8f%a1%20Give%20Me%205%23%e4%bd%a0%e7%9a%84%e6%8e%8c%e7%ba%b9%e8%95%b4%e8%97%8f%e6%80%8e%e6%a0%b7%e7%9a%84%e6%99%ba%e6%85%a7%e7%a7%98%e5%af%86%ef%bc%9f%e6%98%af%e9%9f%a7%e5%a6%82%e5%8d%8e%e5%b1%b1%e8%bf%98%e6%98%af%e7%a8%b3%e9%87%8d%e5%a6%82%e6%b3%b0%e5%b1%b1%ef%bc%9f%e6%98%af%e4%b9%90%e8%a7%82%e7%9a%84%e7%94%9f%e6%b4%bb%e5%ae%b6%ef%bc%8c%e8%bf%98%e6%98%af%e5%b1%b1%e4%b8%ad%e7%9a%84%e5%af%bb%e9%81%93%e8%80%85%ef%bc%9f%e9%a9%ac%e4%b8%8a%e8%b7%9f%e6%88%91%e4%b8%80%e8%b5%b7%e5%8f%91%e7%8e%b0%e4%bd%a0%e7%9a%84%e5%a4%a9%e6%80%a7%e7%a7%98%e5%af%86%ef%bc%8c%e5%b0%b1%e6%9c%89%e6%9c%ba%e4%bc%9a%e8%b5%a2%e7%ba%b3%e6%99%ba%e6%8d%b75%20Sedan%e9%9d%92%e5%b2%9b%e4%b9%8b%e6%97%85%ef%bc%8c%e8%ae%a9%e6%9c%80%e6%99%ba%e6%85%a7%e7%9a%84%e8%bd%a6%e5%b8%a6%e4%bd%a0%e5%89%8d%e5%be%80%e6%9c%80%e5%b9%b8%e7%a6%8f%e7%9a%84%e5%9f%8e%e5%b8%82!&appkey=801cf76d3cfc44ada52ec13114e84a96&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d%26similar%3d","http://widget.renren.com/dialog/share?resourceUrl=http://mobile.dfyl-luxgen.com&srcUrl=http://giveme5.dfyl-luxgen.com&title=%23%e6%99%ba%e6%85%a7%e6%8e%8c%e6%8f%a1%20Give%20Me%205%23&description=%e4%bd%a0%e7%9a%84%e6%8e%8c%e7%ba%b9%e8%95%b4%e8%97%8f%e6%80%8e%e6%a0%b7%e7%9a%84%e6%99%ba%e6%85%a7%e7%a7%98%e5%af%86%ef%bc%9f%e6%98%af%e9%9f%a7%e5%a6%82%e5%8d%8e%e5%b1%b1%e8%bf%98%e6%98%af%e7%a8%b3%e9%87%8d%e5%a6%82%e6%b3%b0%e5%b1%b1%ef%bc%9f%e6%98%af%e4%b9%90%e8%a7%82%e7%9a%84%e7%94%9f%e6%b4%bb%e5%ae%b6%ef%bc%8c%e8%bf%98%e6%98%af%e5%b1%b1%e4%b8%ad%e7%9a%84%e5%af%bb%e9%81%93%e8%80%85%ef%bc%9f%e9%a9%ac%e4%b8%8a%e8%b7%9f%e6%88%91%e4%b8%80%e8%b5%b7%e5%8f%91%e7%8e%b0%e4%bd%a0%e7%9a%84%e5%a4%a9%e6%80%a7%e7%a7%98%e5%af%86%ef%bc%8c%e5%b0%b1%e6%9c%89%e6%9c%ba%e4%bc%9a%e8%b5%a2%e7%ba%b3%e6%99%ba%e6%8d%b75%20Sedan%e9%9d%92%e5%b2%9b%e4%b9%8b%e6%97%85%ef%bc%8c%e8%ae%a9%e6%9c%80%e6%99%ba%e6%85%a7%e7%9a%84%e8%bd%a6%e5%b8%a6%e4%bd%a0%e5%89%8d%e5%be%80%e6%9c%80%e5%b9%b8%e7%a6%8f%e7%9a%84%e5%9f%8e%e5%b8%82!&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d%26similar%3d","http://service.weibo.com/share/share.php?title=%23%e6%99%ba%e6%85%a7%e6%8e%8c%e6%8f%a1%20Give%20Me%205%23%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%e6%98%af%e6%88%91%e6%99%ba%e6%85%a7%e7%9a%84%e7%a7%98%e5%af%86%ef%bc%8c%e5%8e%9f%e6%9d%a5%e6%88%91%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%83%8f%e5%b1%b1%e8%84%89%e4%b8%80%e6%a0%b7%ef%bc%8c%e8%a2%ab%e8%b5%8b%e4%ba%88%e5%a4%a9%e6%80%a7%e6%99%ba%e6%85%a7%ef%bc%8c%e4%bd%a0%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%8f%88%e8%95%b4%e8%97%8f%e6%80%8e%e6%a0%b7%e7%9a%84%e6%99%ba%e6%85%a7%e5%a4%a9%e5%9c%b0%ef%bc%9f%e9%a9%ac%e4%b8%8a%e8%b7%9f%e6%88%91%e4%b8%80%e8%b5%b7%e8%a7%a3%e5%af%86%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%ef%bc%8c%e5%b0%b1%e6%9c%89%e6%9c%ba%e4%bc%9a%e8%b5%a2%e7%ba%b3%e6%99%ba%e6%8d%b75%20Sedan%e9%9d%92%e5%b2%9b%e4%b9%8b%e6%97%85%ef%bc%8c%e8%ae%a9%e6%9c%80%e6%99%ba%e6%85%a7%e7%9a%84%e8%bd%a6%e5%b8%a6%e4%bd%a0%e5%89%8d%e5%be%80%e6%9c%80%e5%b9%b8%e7%a6%8f%e7%9a%84%e5%9f%8e%e5%b8%82%ef%bc%81&url=http://giveme5.dfyl-luxgen.com&source=bookmark&appkey=1995346682&ralateUid=&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d%26similar%3d", "http://share.v.t.qq.com/index.php?c=share&a=index&url=http://giveme5.dfyl-luxgen.com&title=%23%e6%99%ba%e6%85%a7%e6%8e%8c%e6%8f%a1%20Give%20Me%205%23%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%e6%98%af%e6%88%91%e6%99%ba%e6%85%a7%e7%9a%84%e7%a7%98%e5%af%86%ef%bc%8c%e5%8e%9f%e6%9d%a5%e6%88%91%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%83%8f%e5%b1%b1%e8%84%89%e4%b8%80%e6%a0%b7%ef%bc%8c%e8%a2%ab%e8%b5%8b%e4%ba%88%e5%a4%a9%e6%80%a7%e6%99%ba%e6%85%a7%ef%bc%8c%e4%bd%a0%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%8f%88%e8%95%b4%e8%97%8f%e6%80%8e%e6%a0%b7%e7%9a%84%e6%99%ba%e6%85%a7%e5%a4%a9%e5%9c%b0%ef%bc%9f%e9%a9%ac%e4%b8%8a%e8%b7%9f%e6%88%91%e4%b8%80%e8%b5%b7%e8%a7%a3%e5%af%86%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%ef%bc%8c%e5%b0%b1%e6%9c%89%e6%9c%ba%e4%bc%9a%e8%b5%a2%e7%ba%b3%e6%99%ba%e6%8d%b75%20Sedan%e9%9d%92%e5%b2%9b%e4%b9%8b%e6%97%85%ef%bc%8c%e8%ae%a9%e6%9c%80%e6%99%ba%e6%85%a7%e7%9a%84%e8%bd%a6%e5%b8%a6%e4%bd%a0%e5%89%8d%e5%be%80%e6%9c%80%e5%b9%b8%e7%a6%8f%e7%9a%84%e5%9f%8e%e5%b8%82%ef%bc%81&appkey=801cf76d3cfc44ada52ec13114e84a96&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d%26similar%3d", "http://widget.renren.com/dialog/share?resourceUrl=http://mobile.dfyl-luxgen.com&srcUrl=http://giveme5.dfyl-luxgen.com&title=%23%e6%99%ba%e6%85%a7%e6%8e%8c%e6%8f%a1%20Give%20Me%205%23&description=%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%e6%98%af%e6%88%91%e6%99%ba%e6%85%a7%e7%9a%84%e7%a7%98%e5%af%86%ef%bc%8c%e5%8e%9f%e6%9d%a5%e6%88%91%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%83%8f%e5%b1%b1%e8%84%89%e4%b8%80%e6%a0%b7%ef%bc%8c%e8%a2%ab%e8%b5%8b%e4%ba%88%e5%a4%a9%e6%80%a7%e6%99%ba%e6%85%a7%ef%bc%8c%e4%bd%a0%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%8f%88%e8%95%b4%e8%97%8f%e6%80%8e%e6%a0%b7%e7%9a%84%e6%99%ba%e6%85%a7%e5%a4%a9%e5%9c%b0%ef%bc%9f%e9%a9%ac%e4%b8%8a%e8%b7%9f%e6%88%91%e4%b8%80%e8%b5%b7%e8%a7%a3%e5%af%86%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%ef%bc%8c%e5%b0%b1%e6%9c%89%e6%9c%ba%e4%bc%9a%e8%b5%a2%e7%ba%b3%e6%99%ba%e6%8d%b75%20Sedan%e9%9d%92%e5%b2%9b%e4%b9%8b%e6%97%85%ef%bc%8c%e8%ae%a9%e6%9c%80%e6%99%ba%e6%85%a7%e7%9a%84%e8%bd%a6%e5%b8%a6%e4%bd%a0%e5%89%8d%e5%be%80%e6%9c%80%e5%b9%b8%e7%a6%8f%e7%9a%84%e5%9f%8e%e5%b8%82%ef%bc%81"];
-  var href=$href[type],
+
+function showShare(uid,mid,similar,sex){
+  $.ajax({
+    type:"POST",
+    url:"text.php?mid="+mid+"&similar="+similar,
+    data: {},
+    success:function(json){
+      $("#hand_img img").attr("src",json);
+      //console.log(json);
+      var bodyDiv=$("body");
+      bodyDiv.attr("uid",uid);
+      bodyDiv.attr("sex",sex);
+      //console.log('similar:'+similar);
+      bodyDiv.attr("similar",similar);
+      bodyDiv.attr("mid",mid);
+      $("#hand_similar").html(similar);
+      $(".p_hand .container").fadeOut(0);
+      $(".hand_share").fadeIn(0);
+
+      //similar=parseInt(similar);
+
+      changeHref("#flash_sina",mid,similar);
+      changeHref("#flash_qq",mid,similar);
+      changeHref("#flash_ren",mid,similar);
+      window.location.href="#hand_share";
+    }
+  });
+  //$("#hand_img img").attr("src","text/"+mid+"a.jpg");
+
+}
+function changeHref(selector,mid,similar){
+  var href=$(selector).attr("href"),
       index=href.indexOf("&pic="),
       pic="&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d";
-  href=href.slice(0,index);
-  if(type>=3){
-    if(mid){
-      if(similar){
-        pic+=mid+"%26similar%3d"+similar;
-      }else{
-        pic+=mid;
-      }
+      href=href.slice(0,index);
+  similar=parseInt(similar);
+  $.ajax({
+    type:"POST",
+    url:"img-pc.php?mid="+mid+"&similar="+similar,
+    data: {},
+    success:function(json){
+      pic="&pic="+json;
+      href+=pic;
+      $(selector).attr("href",href);
     }
-  }
-  href+=pic;
-  $(selector).attr("href",href);
+  });
+  
 }
 function shareTo(platform){
   var uid=$("body").attr("uid");
@@ -271,10 +133,6 @@ function pageTransition(){
       $sex=bodyDiv.attr("sex"),
       $similar=bodyDiv.attr("similar"),
       $mid=bodyDiv.attr("mid");
-  if($uid){bodyDiv.attr("uid",$uid);}
-  if($sex){bodyDiv.attr("sex",$sex);}
-  if($similar){bodyDiv.attr("similar",$similar);}
-  if($mid){bodyDiv.attr("mid",$mid);}
   renderHeight();
   var hash=window.location.hash.replace("#",""),
       sub=hash.indexOf("_"),
@@ -287,38 +145,59 @@ function pageTransition(){
     if(hash=="hand"){
       subPanel="hand_swf";
     }else if(hash=="win"){
-      subPanel="win_list";
+      subPanel="win_awards";
     }
   }
   if(!hash||hash==""){hash="home";}
+  //console.log(hash);
+  if(hash=="home"){
+    //console.log('scroll to ' + divOffset[0]);
+    $('.body').animate({scrollTop: divOffset[0]}, 400, function() {});
+  }
   if(hash=="hand"||hash=="win"){
     $(".subPanel").fadeOut(0);
     $("."+subPanel).fadeIn(0);
   }
+  if(hash=="hand"){
+      renderHand();
+      $('.body').animate({scrollTop: divOffset[1]}, 400, function() {});
+      //console.log('scroll to ' + divOffset[1]);
+  }
+  if(hash=="win"){
+    $('.body').animate({scrollTop: divOffset[3]}, 400, function() {});
+    addSwfWin();
+    //console.log('scroll to ' + divOffset[3]);
+  }
+  if(hash=="pro"){
+    $('.body').animate({scrollTop: divOffset[2]}, 400, function() {});
+    addSwfPro();
+    //console.log('scroll to ' + divOffset[2]);
+  }
   if(hash=="intro"){
-    $(".body").css({"height":"1200px"});
-    $(".panel").css({"height":"1200px"});
+    $('.body').animate({scrollTop: divOffset[4]}, 400, function() {});
+    addSwfIntro();
+    //console.log('scroll to ' + divOffset[4]);
   }
   if(url!="win_list"&&url!="win_awards"){
-    $(".panel").fadeOut(0);
+    //$(".panel").fadeOut(0);
     $(".p_"+hash).fadeIn(1000);
   }else{
     $(".p_win").show();
   }
   if(url=="hand_share"){
-    var bodyDiv=$("body"),
-        $uid=bodyDiv.attr("uid",uid),
-        $sex=bodyDiv.attr("sex",sex);
-        $similar=bodyDiv.attr("similar",similar);
-        $mid=bodyDiv.attr("mid",mid);
-    showShare($uid,$mid,$similar,$sex);
+   /*var bodyDiv=$("body"),
+        $uid=bodyDiv.attr("uid"),
+        $sex=bodyDiv.attr("sex");
+        $similar=bodyDiv.attr("similar");
+        $mid=bodyDiv.attr("mid");
+    showShare($uid,$mid,$similar,$sex);*/
   }
   if(hash=="intro"||hash=="win"||hash=="pro"){
     $(".footer").addClass("wite");
   }else{
     $(".footer").removeClass("wite");
   }
-
+  if(hash=="hand"){countJoin();}
   $(".nav_main a").removeClass("current");
   $("#nav_"+hash).addClass("current");
   $(".pagination_number a").removeClass("current");
@@ -326,9 +205,12 @@ function pageTransition(){
   var i=getIndex(hash,pages,5,1),
       next=pages[i];
   $(".pagination_next").attr("href","#"+next);
+  $('.home_share').fadeOut();
+  fixedTitle();
 }
 function autoRefresh(){
-  window.location.reload();
+  window.location.href="pc2.html";
+  //pageTransition();
 }
 function getIndex(current,array,size,type){
   var index;
@@ -347,37 +229,228 @@ function getIndex(current,array,size,type){
   return index;
 }
 function renderHeight(){
-  var $height=parseInt(document.documentElement.clientHeight),
-      $width=parseInt(document.documentElement.clientWidth);
-  if($height<734){
-    $height=800;
+  // var $height=parseInt(document.documentElement.clientHeight),
+  //     $width=parseInt(document.documentElement.clientWidth);
+  var $height = $(window).height()
+      $width = $(window).width();
+  if($height<100){
+    $height=640;
   }
+  
   if($width<1024){
     $width=1024;
+    //$(".home_links").addClass("home_over");
     $(".nav_main").css({"width":$width*0.60,"left":"200px"});
     $(".nav_sub").css({"width":$width*0.22, "right":"0px"});
+  }
+  if($width<1500){
+    $(".home_links").addClass("home_over");
+    $("#hand_btn1").attr("width","112");
+    $("#hand_btn1").attr("height","112");
+    $("#hand_btn1 object").attr("width","112");
+    $("#hand_btn1 object").attr("height","112");
+    $(".p_hand .hand_btn1").css({"width":"112px","height":"112px"});
+
+    $("#hand_btn2").attr("width","208");
+    $("#hand_btn2").attr("height","112");
+    $("#hand_btn2 object").attr("width","208");
+    $("#hand_btn2 object").attr("height","112");
+    $(".p_hand .hand_btn2").css({"width":"208px","height":"112px"});
+
+    $("#hand_btn3").attr("width","344");
+    $("#hand_btn3").attr("height","112");
+    $("#hand_btn3 object").attr("width","344");
+    $("#hand_btn3 object").attr("height","112");
+    $(".p_hand .hand_btn3").css({"width":"344px","height":"112px"});
+
+    $("#hand_btn4").attr("width","208");
+    $("#hand_btn4").attr("height","112");
+    $("#hand_btn4 object").attr("width","208");
+    $("#hand_btn4 object").attr("height","112");
+
+    $("#hand_btn5").attr("width","208");
+    $("#hand_btn5").attr("height","112");
+    $("#hand_btn5 object").attr("width","208");
+    $("#hand_btn5 object").attr("height","112");
+
+    $("#hand_btn6").attr("width","208");
+    $("#hand_btn6").attr("height","112");
+    $("#hand_btn6 object").attr("width","208");
+    $("#hand_btn6 object").attr("height","112");
+
+    $("#FlashIDInrto").attr("width","649.6");
+    $("#FlashIDInrto").attr("height","545.6");
+    $("#FlashIDInrto object").attr("width","649.6");
+    $("#FlashIDInrto object").attr("height","545.6");
+    $(".intro_left").css({"height":"546px","margin-top":"-270px"});
+  }else{
+    $("#FlashIDCar").attr("width","861");
+    $("#FlashIDCar").attr("height","528");
+    $("#FlashIDCar object").attr("width","861");
+    $("#FlashIDCar object").attr("height","528");
+    $(".winbox_car").css({"width":"861px","height":"528px"});
   }
   $("body").css({"width":$width});
   $(".body").css({"height":$height, "width":$width});
   $(".panel").css({"height":$height, "width":$width});
+  $(".home_share").css({"height":$height, "width":$width});
+  fixedTitle();
 }
+
+function parallaxScroll(){
+  var $height=parseInt(document.documentElement.clientHeight);
+
+  var divScale = new Array(), divOffsetNew = new Array();
+  divScale[2] = Number($height)/300;
+  divScale[3] = Number($height)/200;
+  divScale[4] = Number($height)/700;
+
+  divOffsetNew[2] = $('.p_pro').offset().top;
+  divOffsetNew[3] = $('.p_win').offset().top;
+  divOffsetNew[4] = $('.p_intro').offset().top;
+
+  var scrolled = $('.body').scrollTop();
+  $('.pro_btns').css('margin-left','-'+$('.p_pro').offset().top+'px');
+  $('.win_btns').css('left',Number($('.p_win').offset().top) + 300 +'px');
+  if( Number($('.p_win').offset().top)< 400){
+    $('.winbox').css('top',-Number($('.p_win').offset().top)*2 + 220 +'px');
+  }
+  
+  $('.intro_fight').css('right', -Number($('.p_intro').offset().top) +'px');
+  //$('.winbox_car').css('right', Number($('.p_win').offset().top) + 20 +'px');
+  //$('#parallax-bg3').css('top',( divOffset[2]-(0-(divOffsetNew[2]/divScale[2])) )+'px');
+  //console.log("scrolled:"+scrolled +",bg3.old-top:"+(Number(divOffset[2])+500) +',bg3.new-top:'+$('.p_pro').offset().top + ', my set:' + ( divOffset[2]-(0-(divOffsetNew[2]/divScale[2])) ));
+  //console.log('intro_fight right:' + (-Number($('.p_intro').offset().top)));
+}
+function parallaxBoxInit(){
+  $('.pro_btns').css('margin-left',-800+'px');
+  $('.win_btns').css('left',-800+'px');
+  $('.winbox').css('top',-200+'px');
+  //$('.winbox_car').css('right',-800+'px');
+  //$('.intro_left').css('right',-800+'px');
+  $('.intro_fight').css('right',800+'px');
+}
+function pageReTransition(){
+  var hash=window.location.hash.replace("#","");
+  var scrolled = $('.body').scrollTop();
+  //console.log('pageReTransition:' + hash +"," + $('.p_'+hash ).offset().top +",scrolled:" +scrolled);
+  $('.body').animate({scrollTop: (Number($('.p_'+hash ).offset().top) +  Number(scrolled)) }, 400, function() {});
+}
+function parallaxInit(){
+
+  setTimeout(function(){
+    divOffset[0] = $('.p_home').offset().top;
+    divOffset[1] = $('.p_hand').offset().top;
+    divOffset[2] = $('.p_pro').offset().top;
+    divOffset[3] = $('.p_win').offset().top;
+    divOffset[4] = $('.p_intro').offset().top;
+  },500);
+
+}
+var divOffset = [0,800,1600,2400,3200,4000];
+
+function countJoin(){
+  $.ajax({
+    type:"POST",
+    url:"post.php?op=update",
+    data: {},
+    success:function(json){
+      return false;
+    }
+  });
+}
+
+  //$("#btn_draw").click(function(){
+  function postProfile() {
+    //console.log('postProfile');
+    fixedTitle();
+    var $body=$("body"),
+        self=$(this),
+        uid=$body.attr("uid"),
+        sex=$body.attr("sex"),
+        name=$("#formName").val(),
+        mobile=$("#formMobile").val(),
+        province=$("#formProvince").val(),
+        city=$("#formCity").val();
+    if(!uid||uid==""){
+      alert("该用户不存在");
+    }else if(!sex||sex==""){
+      alert("用户性别不确定");
+    }else if(!name||name==""||$blank.test(name)){
+      alert("请填写姓名");
+      $(".form_li input").removeClass("error");
+      $("#formName").addClass("error").focus();
+    }else if(!mobile||mobile==""||!$regTelPhone.test(mobile)){
+      alert("请填写正确的手机号码");
+      $(".form_li input").removeClass("error");
+      $("#formMobile").addClass("error").focus();
+    }else if(!province||province==""||province=="请选择"){
+      alert("请选择省份");
+      $(".form_li input").removeClass("error");
+      $("#formProvince").addClass("error").focus();
+    }else if(!city||city==""||city=="请选择"){
+      alert("请选择城市");
+      $(".form_li input").removeClass("error");
+      $("#formCity").addClass("error").focus();
+    }else{
+      $(".form_li input").removeClass("error");  
+      var tempUserName = name.replace(/[^\u4E00-\u9FA5]/g,'');
+      if(tempUserName !== name ){
+        alert("请输入正确的中文姓名");
+        $(".form_li input").removeClass("error");
+        $("#formName").addClass("error").focus();
+      }else{    
+        $.ajax({
+          type:"POST",
+          url:"post.php?op=profile",
+          data: {uid:uid,name:name,mobile:mobile,province:province,sex:sex,city:city},
+          success:function(json){
+            json=$.parseJSON(json);
+            if(json.status=="success"){
+              $("#formName").val("");
+              $("#formMobile").val("");
+              $("#formProvince").val("");
+              $("#formCity").html("<option>请选择</option>");
+              window.location.href="#hand_send";
+              _gaq.push(['_trackPageview','/pv/profile/subminsuccess']);
+            }
+          }
+        });
+      }
+    }
+  };
+
 $(function(){
+  
   renderHeight();
+  parallaxInit();
+  parallaxBoxInit();
+  
   $(window).resize(function(){
     renderHeight();
+    parallaxInit();
+    pageReTransition();
   });
-  $regTelPhone = /^1[3458]\d{9}$/; //手机号
+
+  
+  
+  $('.body').bind('scroll',function(e){
+    parallaxScroll();
+  });
+
+  $regTelPhone = /^1[3|4|5|8][0-9]\d{4,8}$/; //手机号
   $blank = /^(|\s+)$/; //空格
-  $("#formName").blur(function(){
+  /*$("#formName").blur(function(){
    var self=$(this),
         $val=self.val();
     if(!$val||$val==""||$blank.test($val)){
+      //self.val($val.slice(0,4));
       self.focus().addClass("error");
     }else{
       self.removeClass("error");
     }
-  });
-  $("#formMobile").blur(function(){
+  });*/
+  /*$("#formMobile").blur(function(){
     var self=$(this),
         $val=self.val();
     if(!$val||$val==""||$blank.test($val)||!$regTelPhone.test($val)){
@@ -385,7 +458,7 @@ $(function(){
     }else{
       self.removeClass("error");
     }
-  });
+  });*/
   $.each(citys,function(i){
     $("#formProvince").append("<option pindex='"+i+"'>"+citys[i]["province"]+"</option>");
     $("#formCity").html("<option cindex='0'>请选择</option>");
@@ -407,51 +480,13 @@ $(function(){
       });
   });
 
-  $("#btn_draw").click(function(){
-    var $body=$("body"),
-        self=$(this),
-        uid=$body.attr("uid"),
-        sex=$body.attr("sex"),
-        name=$("#formName").val(),
-        mobile=$("#formMobile").val(),
-        province=$("#formProvince").val(),
-        city=$("#formCity").val();
-    if(!uid||uid==""){
-      alert("该用户不存在");
-    }else if(!sex||sex==""){
-      alert("用户性别不确定");
-    }else if(!name||name==""||$blank.test(name)){
-      alert("请填写姓名");
-      $("#formName").addClass("error").focus();
-    }else if(!mobile||mobile==""||!$regTelPhone.test(mobile)){
-      alert("请填写手机号码");
-      $("#formMobile").addClass("error").focus();
-    }else if(!province||province==""||province=="请选择"){
-      alert("请选择省份");
-      $("#formProvince").addClass("error").focus();
-    }else if(!city||city==""||city=="请选择"){
-      alert("请选择城市");
-      $("#formCity").addClass("error").focus();
-    }else{
-      $(".form_li input").removeClass("error");      
-      $.ajax({
-        type:"POST",
-        url:"post.php?op=profile",
-        data: {uid:uid,name:name,mobile:mobile,province:province,sex:sex,city:city},
-        success:function(json){
-          json=$.parseJSON(json);
-          if(json.status=="success"){
-            $("#formName").val("");
-            $("#formMobile").val("");
-            $("#formProvince").val("");
-            $("#formCity").html("<option>请选择</option>");
-            window.location.href="#hand_send";
-            _gaq.push(['_trackPageview','/pv/profile/subminsuccess']);
-          }
-        }
-      });
-    }
-  });
+
+  window.onhashchange=function(){
+    pageTransition();
+  }
+  window.onload=function(){
+    pageTransition();
+  }
   $.ajax({
     type:"POST",
     url:"post.php?op=all",
@@ -464,13 +499,93 @@ $(function(){
         $.each(total,function(i){
           $("#text_total").append("<b class='text_img"+total[i]+"'>"+total[i]+"</b>");
         });
+        $(".panel_load").fadeOut();
+        $(".home_links").fadeIn();
+        renderHome();
+        renderHand();
+        addSwfIntro();
+        addSwfWin();
+        addSwfPro();
       }
     }
   });
-  window.onhashchange=function(){
-    pageTransition();
-  }
-  window.onload=function(){
-    pageTransition();
-  }
+  $("#nav_share").click(function(){
+    $(".home_share").fadeIn(300);
+    fixedTitle();
+  });
+  $('.hand_draw .hand_close').click(function(){
+    $('.subPanel').hide();
+    $('.hand_share').show(); 
+    fixedTitle();
+  });
+  $('.hand_shareTo .hand_close').click(function(){
+    $('.subPanel').hide();
+    $('.hand_share').show();
+    fixedTitle();
+  });
+  
+  $(".content").mCustomScrollbar({
+          set_height:"75%",
+          mouseWheel:true
+        });
 });
+
+function renderHome(){
+  //$(".home_swf").empty();
+  //var html='<object id="homeSwf" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%"><param name="movie" value="flash/home.swf"><param name="quality" value="high"><param name="wmode" value="transparent"><param name="swfversion" value="8.0.0.0"><!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 --><param name="expressinstall" value="Scripts/expressInstall.swf"><!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 --><!--[if !IE]>--><object type="application/x-shockwave-flash" data="flash/home.swf" width="100%" height="100%"><!--<![endif]--><param name="quality" value="high"><param name="wmode" value="transparent"><param name="swfversion" value="8.0.0.0"><param name="expressinstall" value="Scripts/expressInstall.swf"><!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 --><div><h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4><p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" width="112" height="33" /></a></p></div><!--[if !IE]>--></object><!--<![endif]--></object>';
+  //$(".home_swf").html(html);
+  //$(".home_swf").show();
+  setTimeout(function(){
+    $(".loading_mask").fadeOut();
+  },800);
+  fixedTitle();
+}
+
+function renderHand(){
+  //$("#hand_swf").empty();
+  var html='<object id="handSwf" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%"><param name="movie" value="flash/palmPrint.swf"><param name="quality" value="high"><param name="wmode" value="transparent"><param name="swfversion" value="8.0.0.0"><!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 --><param name="expressinstall" value="Scripts/expressInstall.swf"><!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 --><!--[if !IE]>--><object type="application/x-shockwave-flash" data="flash/palmPrint.swf" width="100%" height="100%"><!--<![endif]--><param name="quality" value="high"><param name="wmode" value="transparent"><param name="swfversion" value="8.0.0.0"><param name="expressinstall" value="Scripts/expressInstall.swf"><!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 --><div><h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4><p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" width="112" height="33" /></a></p></div><!--[if !IE]>--></object><!--<![endif]--></object>';
+  $("#hand_swf").html(html);
+  fixedTitle();
+}
+
+
+function addSwfIntro(){
+  $(".intro_left").empty();
+  var $height = $(window).height()
+      $width = $(window).width();
+  var newFlashWidth, newFlashHeight;
+  if($width > 1200){
+    newFlashWidth = 812;
+    newFlashHeight = 682;
+  }else{
+    newFlashWidth = 660;
+    newFlashHeight = 554;
+    $('.intro_left').css('left','-276px');
+  }
+  var html='<object id="FlashIDInrto" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="'+newFlashWidth+'" height="'+newFlashHeight+'"><param name="movie" value="flash/p_intro.swf"><param name="quality" value="high"><param name="wmode" value="transparent"><param name="swfversion" value="8.0.0.0"><!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 --><param name="expressinstall" value="Scripts/expressInstall.swf"><!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 --><!--[if !IE]>--><object type="application/x-shockwave-flash" data="flash/p_intro.swf" width="'+newFlashWidth+'" height="'+newFlashHeight+'"><!--<![endif]--><param name="quality" value="high"><param name="wmode" value="transparent"><param name="swfversion" value="8.0.0.0"><param name="expressinstall" value="Scripts/expressInstall.swf"><!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 --><div><h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4><p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" width="112" height="33" /></a></p></div><!--[if !IE]>--></object><!--<![endif]--></object>';
+  $(".intro_left").html(html);
+  fixedTitle();
+}
+function addSwfWin(){
+  $(".winbox_car").empty();
+  var html='<object id="FlashIDCar" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="574" height="352"><param name="movie" value="flash/p_win.swf"><param name="quality" value="high"><param name="wmode" value="transparent"><param name="swfversion" value="8.0.0.0"><!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 --><param name="expressinstall" value="Scripts/expressInstall.swf"><!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 --><!--[if !IE]>--><object type="application/x-shockwave-flash" data="flash/p_win.swf" width="574" height="352"><!--<![endif]--><param name="quality" value="high"><param name="wmode" value="transparent"><param name="swfversion" value="8.0.0.0"><param name="expressinstall" value="Scripts/expressInstall.swf"><!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 --><div><h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4><p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" width="112" height="33" /></a></p></div><!--[if !IE]>--></object><!--<![endif]--></object>';
+  $(".winbox_car").html(html);
+  var $width = $(window).width();
+  if($width<1024){
+    $width=1024;
+  }
+  if($width>=1500){
+    $("#FlashIDCar").attr("width","861");
+    $("#FlashIDCar").attr("height","528");
+    $("#FlashIDCar object").attr("width","861");
+    $("#FlashIDCar object").attr("height","528");
+    $(".winbox_car").css({"width":"861px","height":"528px"});
+  }
+  fixedTitle();
+}
+function addSwfPro(){
+  $(".carinswf").empty();
+  var html='<object id="FlashIDPro" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%"><param name="movie" value="flash/p_pro.swf"><param name="quality" value="high"><param name="wmode" value="transparent"><param name="swfversion" value="8.0.0.0"><!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 --><param name="expressinstall" value="Scripts/expressInstall.swf"><!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 --><!--[if !IE]>--><object type="application/x-shockwave-flash" data="flash/p_pro.swf" width="100%" height="100%"><!--<![endif]--><param name="quality" value="high"><param name="wmode" value="transparent"><param name="swfversion" value="8.0.0.0"><param name="expressinstall" value="Scripts/expressInstall.swf"><!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 --><div><h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4><p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" width="112" height="33" /></a></p></div><!--[if !IE]>--></object><!--<![endif]--></object>';
+  $(".carinswf").html(html);
+  fixedTitle();
+}

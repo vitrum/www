@@ -16,6 +16,9 @@
  */(function(exports){var current=window.getComputedStyle||window.currentStyle,map={top:"px",bottom:"px",left:"px",right:"px",width:"px",height:"px","font-size":"px",margin:"px","margin-top":"px","margin-bottom":"px","margin-left":"px","margin-right":"px",padding:"px","padding-top":"px","padding-bottom":"px","padding-left":"px","padding-right":"px"};exports.move=function(selector){return new Move(move.select(selector))},exports.move.version="0.0.3",move.defaults={duration:500},move.ease={"in":"ease-in",out:"ease-out","in-out":"ease-in-out",snap:"cubic-bezier(0,1,.5,1)",linear:"cubic-bezier(0.250, 0.250, 0.750, 0.750)","ease-in-quad":"cubic-bezier(0.550, 0.085, 0.680, 0.530)","ease-in-cubic":"cubic-bezier(0.550, 0.055, 0.675, 0.190)","ease-in-quart":"cubic-bezier(0.895, 0.030, 0.685, 0.220)","ease-in-quint":"cubic-bezier(0.755, 0.050, 0.855, 0.060)","ease-in-sine":"cubic-bezier(0.470, 0.000, 0.745, 0.715)","ease-in-expo":"cubic-bezier(0.950, 0.050, 0.795, 0.035)","ease-in-circ":"cubic-bezier(0.600, 0.040, 0.980, 0.335)","ease-in-back":"cubic-bezier(0.600, -0.280, 0.735, 0.045)","ease-out-quad":"cubic-bezier(0.250, 0.460, 0.450, 0.940)","ease-out-cubic":"cubic-bezier(0.215, 0.610, 0.355, 1.000)","ease-out-quart":"cubic-bezier(0.165, 0.840, 0.440, 1.000)","ease-out-quint":"cubic-bezier(0.230, 1.000, 0.320, 1.000)","ease-out-sine":"cubic-bezier(0.390, 0.575, 0.565, 1.000)","ease-out-expo":"cubic-bezier(0.190, 1.000, 0.220, 1.000)","ease-out-circ":"cubic-bezier(0.075, 0.820, 0.165, 1.000)","ease-out-back":"cubic-bezier(0.175, 0.885, 0.320, 1.275)","ease-out-quad":"cubic-bezier(0.455, 0.030, 0.515, 0.955)","ease-out-cubic":"cubic-bezier(0.645, 0.045, 0.355, 1.000)","ease-in-out-quart":"cubic-bezier(0.770, 0.000, 0.175, 1.000)","ease-in-out-quint":"cubic-bezier(0.860, 0.000, 0.070, 1.000)","ease-in-out-sine":"cubic-bezier(0.445, 0.050, 0.550, 0.950)","ease-in-out-expo":"cubic-bezier(1.000, 0.000, 0.000, 1.000)","ease-in-out-circ":"cubic-bezier(0.785, 0.135, 0.150, 0.860)","ease-in-out-back":"cubic-bezier(0.680, -0.550, 0.265, 1.550)"},move.select=function(selector){if("string"!=typeof selector)return selector;return document.getElementById(selector)||document.querySelectorAll(selector)[0]};function EventEmitter(){this.callbacks={}}EventEmitter.prototype.on=function(event,fn){(this.callbacks[event]=this.callbacks[event]||[]).push(fn);return this},EventEmitter.prototype.emit=function(event){var args=Array.prototype.slice.call(arguments,1),callbacks=this.callbacks[event],len;if(callbacks){len=callbacks.length;for(var i=0;i<len;++i)callbacks[i].apply(this,args)}return this},exports.Move=function Move(el){if(!(this instanceof Move))return new Move(el);EventEmitter.call(this),this.el=el,this._props={},this._rotate=0,this._transitionProps=[],this._transforms=[],this.duration(move.defaults.duration)},Move.prototype=new EventEmitter,Move.prototype.constructor=Move,Move.prototype.transform=function(transform){this._transforms.push(transform);return this},Move.prototype.skew=function(x,y){y=y||0;return this.transform("skew("+x+"deg, "+y+"deg)")},Move.prototype.skewX=function(n){return this.transform("skewX("+n+"deg)")},Move.prototype.skewY=function(n){return this.transform("skewY("+n+"deg)")},Move.prototype.translate=Move.prototype.to=function(x,y){y=y||0;return this.transform("translate("+x+"px, "+y+"px)")},Move.prototype.translateX=Move.prototype.x=function(n){return this.transform("translateX("+n+"px)")},Move.prototype.translateY=Move.prototype.y=function(n){return this.transform("translateY("+n+"px)")},Move.prototype.scale=function(x,y){y=null==y?x:y;return this.transform("scale("+x+", "+y+")")},Move.prototype.scaleX=function(n){return this.transform("scaleX("+n+")")},Move.prototype.scaleY=function(n){return this.transform("scaleY("+n+")")},Move.prototype.rotate=function(n){return this.transform("rotate("+n+"deg)")},Move.prototype.ease=function(fn){fn=move.ease[fn]||fn||"ease";return this.setVendorProperty("transition-timing-function",fn)},Move.prototype.animate=function(name,props){for(var i in props)props.hasOwnProperty(i)&&this.setVendorProperty("animation-"+i,props[i]);return this.setVendorProperty("animation-name",name)},Move.prototype.duration=function(n){n=this._duration="string"==typeof n?parseFloat(n)*1e3:n;return this.setVendorProperty("transition-duration",n+"ms")},Move.prototype.delay=function(n){n="string"==typeof n?parseFloat(n)*1e3:n;return this.setVendorProperty("transition-delay",n+"ms")},Move.prototype.setProperty=function(prop,val){this._props[prop]=val;return this},Move.prototype.setVendorProperty=function(prop,val){this.setProperty("-webkit-"+prop,val),this.setProperty("-moz-"+prop,val),this.setProperty("-ms-"+prop,val),this.setProperty("-o-"+prop,val);return this},Move.prototype.set=function(prop,val){this.transition(prop),"number"==typeof val&&map[prop]&&(val+=map[prop]),this._props[prop]=val;return this},Move.prototype.add=function(prop,val){if(!!current){var self=this;return this.on("start",function(){var curr=parseInt(self.current(prop),10);self.set(prop,curr+val+"px")})}},Move.prototype.sub=function(prop,val){if(!!current){var self=this;return this.on("start",function(){var curr=parseInt(self.current(prop),10);self.set(prop,curr-val+"px")})}},Move.prototype.current=function(prop){return current(this.el).getPropertyValue(prop)},Move.prototype.transition=function(prop){if(!this._transitionProps.indexOf(prop))return this;this._transitionProps.push(prop);return this},Move.prototype.applyProperties=function(){var props=this._props,el=this.el;for(var prop in props)props.hasOwnProperty(prop)&&el.style.setProperty(prop,props[prop],"");return this},Move.prototype.move=Move.prototype.select=function(selector){this.el=move.select(selector);return this},Move.prototype.then=function(fn){if(fn instanceof Move)this.on("end",function(){fn.end()});else if("function"==typeof fn)this.on("end",fn);else{var clone=new Move(this.el);clone._transforms=this._transforms.slice(0),this.then(clone),clone.parent=this;return clone}return this},Move.prototype.pop=function(){return this.parent},Move.prototype.end=function(fn){var self=this;this.emit("start"),this._transforms.length&&this.setVendorProperty("transform",this._transforms.join(" ")),this.setVendorProperty("transition-properties",this._transitionProps.join(", ")),this.applyProperties(),fn&&this.then(fn),setTimeout(function(){self.emit("end")},this._duration);return this}})(this);
 
 
+function vpHeight() {
+return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+}
 
 function selectInit() {
 
@@ -81,7 +84,13 @@ function selectInit() {
            }
            
        });
+       //showNavBar('awardlink');
   });
+  //showNavBar('awardlink');
+  //alert($('.navbox .awardlink').offset().top);
+
+
+
 }
 function cleanAnim(){
   $('.carunit').removeClass('caranim caranim-1 caranim-2 caranim-3 caranim-4 caranim-5 caranim-6 caranim-7 caranim-8 caranim-9 caranim-10 caranim-11 caranim-12 caranim-13 caranim-14 caranim-15 caranim-16 caranim-17 caranim-18 caranim-19 caranim-20 caranim-21 caranim-22 caranim-23 caranim-24 caranim-25 caranim-26 caranim-27 caranim-28 caranim-29 caranim-30');
@@ -167,7 +176,7 @@ function showNavBar(barname) {
   $('.navbox .' + barname ).show();
   if(!barname){ 
     $('.navbox').hide();
-    $('.navbar').hide();
+    //$('.navbar').hide();
   }
   //check nav bar prostion;
 }
@@ -393,7 +402,7 @@ function postThePic(event) {
 }// end of function postThePic(event)
 function postProfile() {
 
-
+    
     var userName  = $('#uname').val()
     ,   userPhone = $('#phone').val()
     ,   userProvince  = $('#province').val()
@@ -404,14 +413,21 @@ function postProfile() {
       alert("请完整填写信息！")
       return false;
     }
-    
+    var tempUserName = userName.replace(/[^\u4E00-\u9FA5]/g,'');
+    if(tempUserName !== userName ){
+      alert("请输入正确的中文姓名"); 
+      return false;
+    }
+
     if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(userPhone))){ 
         alert("不是完整的11位手机号或者正确的手机号前七位"); 
         return false; 
     } 
-
+    if(!userSex){userSex = "male";}
     var postData = '&name='+ userName +'&mobile=' + userPhone +'&province=' + userProvince +'&city=' + userCity +'&sex=' + userSex +'&uid=' + userId;
     console.log(postData);
+
+    $('.mask').show();
     $.ajax({type:'POST',url:'post.php?op=profile',data:postData,
       success:function(json){
         var jsdata = eval('('+json+')');  
@@ -420,11 +436,15 @@ function postProfile() {
           showSubFrame('awardbox','subminsuccess');
           showNavBar('subminsuccess');
           router.navigate('subminsuccess');
+          $('.mask').hide();
         }
         //console.log('mid='+ jsdata.data.mid );
       },
       error: function(xhr, type){
-        console.log('Ajax error!')
+          showSubFrame('awardbox','subminsuccess');
+          showNavBar('subminsuccess');
+          router.navigate('subminsuccess');
+          $('.mask').hide();
       }
     })
 }
@@ -796,7 +816,7 @@ function drowMout(mountid) {
 } //drowMout finish;
 function changeHref(selector,mid,similar){
   var href='',
-  $href=['http://service.weibo.com/share/share.php?title=%23%e6%99%ba%e6%85%a7%e6%8e%8c%e6%8f%a1%20Give%20Me%205%23%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%e6%98%af%e6%88%91%e6%99%ba%e6%85%a7%e7%9a%84%e7%a7%98%e5%af%86%ef%bc%8c%e5%8e%9f%e6%9d%a5%e6%88%91%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%83%8f%e5%b1%b1%e8%84%89%e4%b8%80%e6%a0%b7%ef%bc%8c%e8%a2%ab%e8%b5%8b%e4%ba%88%e5%a4%a9%e6%80%a7%e6%99%ba%e6%85%a7%ef%bc%8c%e4%bd%a0%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%8f%88%e8%95%b4%e8%97%8f%e6%80%8e%e6%a0%b7%e7%9a%84%e6%99%ba%e6%85%a7%e5%a4%a9%e5%9c%b0%ef%bc%9f%e9%a9%ac%e4%b8%8a%e8%b7%9f%e6%88%91%e4%b8%80%e8%b5%b7%e8%a7%a3%e5%af%86%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%ef%bc%8c%e5%b0%b1%e6%9c%89%e6%9c%ba%e4%bc%9a%e8%b5%a2%e7%ba%b3%e6%99%ba%e6%8d%b75%20Sedan%e9%9d%92%e5%b2%9b%e4%b9%8b%e6%97%85%ef%bc%8c%e8%ae%a9%e6%9c%80%e6%99%ba%e6%85%a7%e7%9a%84%e8%bd%a6%e5%b8%a6%e4%bd%a0%e5%89%8d%e5%be%80%e6%9c%80%e5%b9%b8%e7%a6%8f%e7%9a%84%e5%9f%8e%e5%b8%82%ef%bc%81&url=http://giveme5.dfyl-luxgen.com&source=bookmark&appkey=&ralateUid=&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d%26similar%3d','http://share.v.t.qq.com/index.php?c=share&a=index&url=http://giveme5.dfyl-luxgen.com&title=%23%e6%99%ba%e6%85%a7%e6%8e%8c%e6%8f%a1%20Give%20Me%205%23%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%e6%98%af%e6%88%91%e6%99%ba%e6%85%a7%e7%9a%84%e7%a7%98%e5%af%86%ef%bc%8c%e5%8e%9f%e6%9d%a5%e6%88%91%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%83%8f%e5%b1%b1%e8%84%89%e4%b8%80%e6%a0%b7%ef%bc%8c%e8%a2%ab%e8%b5%8b%e4%ba%88%e5%a4%a9%e6%80%a7%e6%99%ba%e6%85%a7%ef%bc%8c%e4%bd%a0%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%8f%88%e8%95%b4%e8%97%8f%e6%80%8e%e6%a0%b7%e7%9a%84%e6%99%ba%e6%85%a7%e5%a4%a9%e5%9c%b0%ef%bc%9f%e9%a9%ac%e4%b8%8a%e8%b7%9f%e6%88%91%e4%b8%80%e8%b5%b7%e8%a7%a3%e5%af%86%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%ef%bc%8c%e5%b0%b1%e6%9c%89%e6%9c%ba%e4%bc%9a%e8%b5%a2%e7%ba%b3%e6%99%ba%e6%8d%b75%20Sedan%e9%9d%92%e5%b2%9b%e4%b9%8b%e6%97%85%ef%bc%8c%e8%ae%a9%e6%9c%80%e6%99%ba%e6%85%a7%e7%9a%84%e8%bd%a6%e5%b8%a6%e4%bd%a0%e5%89%8d%e5%be%80%e6%9c%80%e5%b9%b8%e7%a6%8f%e7%9a%84%e5%9f%8e%e5%b8%82%ef%bc%81&appkey=801cf76d3cfc44ada52ec13114e84a96&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d%26similar%3d','http://widget.renren.com/dialog/share?resourceUrl=http://mobile.dfyl-luxgen.com&srcUrl=http://giveme5.dfyl-luxgen.com&title=%23%E6%99%BA%E6%85%A7%E6%8E%8C%E6%8F%A1%20Give%20Me%205%23&description=%23%e6%99%ba%e6%85%a7%e6%8e%8c%e6%8f%a1%20Give%20Me%205%23%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%e6%98%af%e6%88%91%e6%99%ba%e6%85%a7%e7%9a%84%e7%a7%98%e5%af%86%ef%bc%8c%e5%8e%9f%e6%9d%a5%e6%88%91%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%83%8f%e5%b1%b1%e8%84%89%e4%b8%80%e6%a0%b7%ef%bc%8c%e8%a2%ab%e8%b5%8b%e4%ba%88%e5%a4%a9%e6%80%a7%e6%99%ba%e6%85%a7%ef%bc%8c%e4%bd%a0%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%8f%88%e8%95%b4%e8%97%8f%e6%80%8e%e6%a0%b7%e7%9a%84%e6%99%ba%e6%85%a7%e5%a4%a9%e5%9c%b0%ef%bc%9f%e9%a9%ac%e4%b8%8a%e8%b7%9f%e6%88%91%e4%b8%80%e8%b5%b7%e8%a7%a3%e5%af%86%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%ef%bc%8c%e5%b0%b1%e6%9c%89%e6%9c%ba%e4%bc%9a%e8%b5%a2%e7%ba%b3%e6%99%ba%e6%8d%b75%20Sedan%e9%9d%92%e5%b2%9b%e4%b9%8b%e6%97%85%ef%bc%8c%e8%ae%a9%e6%9c%80%e6%99%ba%e6%85%a7%e7%9a%84%e8%bd%a6%e5%b8%a6%e4%bd%a0%e5%89%8d%e5%be%80%e6%9c%80%e5%b9%b8%e7%a6%8f%e7%9a%84%e5%9f%8e%e5%b8%82%ef%bc%81&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d%26similar%3d'],
+  $href=['http://service.weibo.com/share/share.php?title=%23%e6%99%ba%e6%85%a7%e6%8e%8c%e6%8f%a1%20Give%20Me%205%23%20%e5%8e%9f%e6%9d%a5%e6%88%91%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%83%8f%e5%b1%b1%e8%84%89%e4%b8%80%e6%a0%b7%ef%bc%8c%e8%95%b4%e5%90%ab%e7%a5%9e%e7%a7%98%e6%99%ba%e6%85%a7%ef%bc%81%e4%bd%a0%e7%9a%84%e6%8e%8c%e7%ba%b9%e8%97%8f%e7%9d%80%e6%80%8e%e6%a0%b7%e7%9a%84%e6%99%ba%e6%85%a7%e5%a4%a9%e5%9c%b0%ef%bc%9f%e9%a9%ac%e4%b8%8a%e8%b7%9f%e6%88%91%e4%b8%80%e8%b5%b7%e8%a7%a3%e5%af%86%e4%bd%a0%e7%8b%ac%e6%9c%89%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%ef%bc%8c%e5%b0%b1%e6%9c%89%e6%9c%ba%e4%bc%9a%e8%b5%a2%e7%ba%b3%e6%99%ba%e6%8d%b75%20Sedan%e9%9d%92%e5%b2%9b%e4%b9%8b%e6%97%85%ef%bc%8c%e6%9c%80%e6%99%ba%e6%85%a7%e7%9a%84%e8%bd%a6%e5%b8%a6%e4%bd%a0%e5%89%8d%e5%be%80%e6%9c%80%e5%b9%b8%e7%a6%8f%e7%9a%84%e5%9f%8e%e5%b8%82%ef%bc%81&url=http://giveme5.dfyl-luxgen.com&source=bookmark&appkey=&ralateUid=&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d%26similar%3d','http://share.v.t.qq.com/index.php?c=share&a=index&url=http://giveme5.dfyl-luxgen.com&title=%23%e6%99%ba%e6%85%a7%e6%8e%8c%e6%8f%a1%20Give%20Me%205%23%20%e5%8e%9f%e6%9d%a5%e6%88%91%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%83%8f%e5%b1%b1%e8%84%89%e4%b8%80%e6%a0%b7%ef%bc%8c%e8%95%b4%e5%90%ab%e7%a5%9e%e7%a7%98%e6%99%ba%e6%85%a7%ef%bc%81%e4%bd%a0%e7%9a%84%e6%8e%8c%e7%ba%b9%e8%97%8f%e7%9d%80%e6%80%8e%e6%a0%b7%e7%9a%84%e6%99%ba%e6%85%a7%e5%a4%a9%e5%9c%b0%ef%bc%9f%e9%a9%ac%e4%b8%8a%e8%b7%9f%e6%88%91%e4%b8%80%e8%b5%b7%e8%a7%a3%e5%af%86%e4%bd%a0%e7%8b%ac%e6%9c%89%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%ef%bc%8c%e5%b0%b1%e6%9c%89%e6%9c%ba%e4%bc%9a%e8%b5%a2%e7%ba%b3%e6%99%ba%e6%8d%b75%20Sedan%e9%9d%92%e5%b2%9b%e4%b9%8b%e6%97%85%ef%bc%8c%e6%9c%80%e6%99%ba%e6%85%a7%e7%9a%84%e8%bd%a6%e5%b8%a6%e4%bd%a0%e5%89%8d%e5%be%80%e6%9c%80%e5%b9%b8%e7%a6%8f%e7%9a%84%e5%9f%8e%e5%b8%82%ef%bc%81&appkey=801cf76d3cfc44ada52ec13114e84a96&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d%26similar%3d','http://widget.renren.com/dialog/share?resourceUrl=http://mobile.dfyl-luxgen.com&srcUrl=http://giveme5.dfyl-luxgen.com&title=%23%E6%99%BA%E6%85%A7%E6%8E%8C%E6%8F%A1%20Give%20Me%205%23&description=%23%e6%99%ba%e6%85%a7%e6%8e%8c%e6%8f%a1%20Give%20Me%205%23%20%e5%8e%9f%e6%9d%a5%e6%88%91%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%83%8f%e5%b1%b1%e8%84%89%e4%b8%80%e6%a0%b7%ef%bc%8c%e8%95%b4%e5%90%ab%e7%a5%9e%e7%a7%98%e6%99%ba%e6%85%a7%ef%bc%81%e4%bd%a0%e7%9a%84%e6%8e%8c%e7%ba%b9%e8%97%8f%e7%9d%80%e6%80%8e%e6%a0%b7%e7%9a%84%e6%99%ba%e6%85%a7%e5%a4%a9%e5%9c%b0%ef%bc%9f%e9%a9%ac%e4%b8%8a%e8%b7%9f%e6%88%91%e4%b8%80%e8%b5%b7%e8%a7%a3%e5%af%86%e4%bd%a0%e7%8b%ac%e6%9c%89%e7%9a%84%e6%8e%8c%e7%ba%b9%e5%b1%b1%e5%8a%bf%ef%bc%8c%e5%b0%b1%e6%9c%89%e6%9c%ba%e4%bc%9a%e8%b5%a2%e7%ba%b3%e6%99%ba%e6%8d%b75%20Sedan%e9%9d%92%e5%b2%9b%e4%b9%8b%e6%97%85%ef%bc%8c%e6%9c%80%e6%99%ba%e6%85%a7%e7%9a%84%e8%bd%a6%e5%b8%a6%e4%bd%a0%e5%89%8d%e5%be%80%e6%9c%80%e5%b9%b8%e7%a6%8f%e7%9a%84%e5%9f%8e%e5%b8%82%ef%bc%81&pic=http%3a%2f%2fclient.17bi.net%2fluxgen%2fimg.php%3fmid%3d%26similar%3d'],
       index=href.indexOf("&pic="),
       str="php%3fmid%3d%26similar%3d";
 
@@ -903,7 +923,7 @@ var AppRouter = Backbone.Router.extend({
         //   return false;
         // }
         showSubFrame('awardbox','inputfrom');
-        showNavBar('awardlink');
+        showNavBar();
         selectInit();
         router.navigate('award');
         _gaq.push(['_trackPageview', '/pv/profile']);
@@ -913,7 +933,7 @@ var AppRouter = Backbone.Router.extend({
     userList: function() {  
         console.log('获奖名单');
         showFrame('userlist');
-        showNavBar();
+        //showNavBar();
         _gaq.push(['_trackPageview', '/pv/userlist']);
     },
     subminSuccess: function() {  
@@ -922,7 +942,7 @@ var AppRouter = Backbone.Router.extend({
         showNavBar('subminsuccess');
         _smq.push(['custom','活动按钮','提交成功页','活动说明']);
         _gaq.push(['_trackPageview', '/pv/profile/subminsuccess']);
-
+        $('.mask').hide();
     },
     shareGame: function() {  
         console.log('shearGame');
@@ -1082,11 +1102,17 @@ $(document).ready(function() {
 
 
   $('.navbox .linkaward').die('click').live('click',function(){
-    showNavBar('awardlink');
     _smq.push(['custom','活动按钮','互动页','互动完成-参与抽奖']);
     _gaq.push(['_trackEvent','btn','jump','profile']);
   });
   $('.navbox .awardsubmint').die('click').live('click',function(){
+
+    postProfile();
+    _smq.push(['custom','活动按钮','填写信息页','确认提交']);
+    _gaq.push(['_trackEvent','btn','jump','submitprofile']);
+    return false;
+  });
+  $('.navbox2 .awardsubmint').die('click').live('click',function(){
 
     postProfile();
     _smq.push(['custom','活动按钮','填写信息页','确认提交']);
@@ -1162,6 +1188,67 @@ $(document).ready(function() {
     _gaq.push(['_trackPageview', '/pv/reserve']);
   });
 
+var mobileOS;    // will either be iOS, Android or unknown
+var mobileOSver; // this is a string, use Number(mobileOSver) to convert
+
+function getOS( )
+{
+  var ua = navigator.userAgent;
+  var uaindex;
+
+  // determine OS
+  if ( ua.match(/iPad/i) || ua.match(/iPhone/i) )
+  {
+    mobileOS = 'iOS';
+    uaindex  = ua.indexOf( 'OS ' );
+  }
+  else if ( ua.match(/Android/i) )
+  {
+    mobileOS = 'Android';
+    uaindex  = ua.indexOf( 'Android ' );
+  }
+  else
+  {
+    mobileOS = 'unknown';
+  }
+
+  // determine version
+  if ( mobileOS === 'iOS'  &&  uaindex > -1 )
+  {
+    mobileOSver = ua.substr( uaindex + 3, 3 ).replace( '_', '.' );
+  }
+  else if ( mobileOS === 'Android'  &&  uaindex > -1 )
+  {
+    mobileOSver = ua.substr( uaindex + 8, 3 );
+  }
+  else
+  {
+    mobileOSver = 'unknown';
+  }
+}
+  getOS();
+  setTimeout(function(){
+    // $('.navbar').hide();
+    // $('.navbox').show();
+    // $('.navbox .awardlink').show();
+    //alert('mobileOS:'+mobileOS);
+    var tmpHeight = Number(vpHeight())-46 ;
+    if ( mobileOS != 'iOS'){
+      tmpHeight = tmpHeight - 46;
+    }
+    $('.navbox2').css('top', tmpHeight+ 'px');
+  },800);
+
+  $('.homepage .title').on('click',function(){
+    showFrame('selectgender');
+    showNavBar();
+    router.navigate('selectgender');
+  });
+/*
+   if(isWeiboAppWebview()){
+     $('.appviewmask').show();
+   }
+*/
 });
 
 

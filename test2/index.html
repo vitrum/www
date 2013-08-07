@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta name="viewport" content=" user-scalable=no" />
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>::LUXGEN::</title>
+	<link rel="stylesheet" href="css/style.css" media="all" type="text/css" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" /> 
+	<script type=""text/javascript"">
+	  var _smq = _smq || [];
+	  _smq.push(['_setAccount', '36075ECE', new Date()]);
+	  _smq.push(['_setDirectoryIndex', '']);
+	  _smq.push(['pageview']);
+
+	  (function() {
+	  var sm = document.createElement('script'); sm.type = 'text/javascript'; sm.async = true;
+	  sm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdnmaster.com/sitemaster/sm.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sm, s);
+	  })();
+	</script>
+	</head>
+<body>
+	<div class="page">
+		<header>
+			<div class="link_home">
+				<a class="punch link_home" href="#/index">返回首页</a>
+				<a class="book" href="http://">预约试驾</a>
+			</div>
+			<h1 class="logo">LUXGEN 纳智捷</h1>
+		</header>
+		<div class="frame homepage">
+			<div class="content">
+				<div class="title">title</div>
+				<ul class="menu">
+					<li class="selectgender"><a class="punch selectgender" href="#/gender">selectgender</a></li>
+					<li class="awardlist"><a class="punch awardlist" href="#/userlist">userlist</a></li>
+					<li class="aboutgame"><a class="punch aboutgame" href="#/aboutgame">aboutgame</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="frame selectgender">
+			<div class="content">
+				<div class="gender">您的性别</div>
+				<ul>
+					<li><a class="punch male"  href="#/gender/male">male</a></li>
+					<li><a class="punch female"  href="#/gender/female">female</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="frame takebox">
+			<div class="content">
+				<section class="subframe take">
+					<form action="upload.php?action=upfile" method="post" name="UForm" enctype="multipart/form-data">
+						<div class="imagebox">
+							<!-- <img id="yourimage" /> -->
+						    <canvas id ="backcanvas" width="300" height="400"></canvas>
+						    <canvas id ="newCanvas" width="300" height="400"></canvas>
+  							<canvas id ="postThePicCanvas" class="piccanvas" width="230" height="230"></canvas>
+							<!-- <canvas id ="postThePicCanvas" class="piccanvas"></canvas> -->
+							<div class="gridbox" id="gridbox"></div>
+						</div>
+						<img id="savedate" />
+						<!--<button type="submit">上传</button>-->
+						
+					</form>
+				</section>
+			</div>
+		</div>
+		<div class="frame yourmount">
+			<div class="content">
+				<section class="subframe rendering">
+					<div class="status">
+						<p class="txt">掌纹山势渲染中...</p>
+						<p class="loading">LOADING <b>0%</b></p>
+					</div>
+					<div class="mountstxt"><div class="text"></div></div>
+					<div id="container"></div>
+					<div class="caranimbox"><div class="carunit"></div><div class="carlight"></div></div>
+					
+					<!--
+					<div id="buttons" style="position: absolute; width: 100%; height: auto; z-index: 300;">
+				      <input type="button" id="start" value="Start">
+				      <input type="button" id="stop" value="Reset">
+				    </div>
+					-->
+				</section>
+				<section class="subframe real">
+					<div class="realmount">
+						<h4 class="title"></h3>
+						<div class="text"></div>
+						<img src="" class="mountpic" />
+						<h3 class="name"></h3>
+					</div>
+				</section>
+				<nav class="mountswich">
+					<a class="pre">pre</a>
+					<a class="nex">nex</a>
+				</nav>
+			</div>
+		</div>
+		<div class="frame awardbox">
+			<div class="content">
+				<section class="subframe inputfrom">
+					<h2 class="title">参与抽奖</h2>
+					<div class="subinfobox">
+						<p>马上填写资料，</p>
+						<p>就有机会赢得智慧天地启程之旅！</p>
+						<p class="info">*请务必留下您的真实信息，</p>
+						<p class="info">以便您中奖时，我们能及时联络。</p>
+					</div>
+					<div class="subform">
+						<form id="userprofile" name="creator">
+							<ul>
+								<li><label class="forname">姓名</label><input type="text" name="uname" id="uname"  maxlength="22" /></li>
+								<li><label class="forphone">手机</label><input type="number" name="phone" id="phone"  maxlength="20" /><input type="hidden" name="gender" id="gender" /><input type="hidden" name="picid" id="picid" /></li>
+								<li>
+									<label class="forcity">城市</label>
+									<select  name="province" id="province">
+									</select>
+									<select name="city" id="city">
+									</select>
+								</li>
+							</ul>
+						</form>
+					</div>
+				</section>
+				<section class="subframe subminsuccess">
+					<h2 class="title">提交成功！</h2>
+					<div class="successinfobox">
+						<p>获奖通知将在活动结束后的</p>
+						<p>2周内发出，您也可以再网站上</p>
+						<p>持续关注“获奖名单”</p>
+					</div>
+				</section>
+				<section class="subframe share">
+					<h2 class="title">分享至</h2>
+					<ul class="sharelist">
+						<li><a class="sina" href="http://service.weibo.com/share/share.php?title=纳智捷Luxgen纳智捷Luxgen&url=http://mobile.dfyl-luxgen.com&source=bookmark&appkey=&pic=&ralateUid=" target="_blank">新浪微博</a></li>
+						<li><a class="qq" href="http://share.v.t.qq.com/index.php?c=share&a=index&url=http://mobile.dfyl-luxgen.com&title=纳智捷Luxgen&pic=&appkey="  target="_blank">腾讯微博</a></li>
+						<li><a class="renren" href="http://widget.renren.com/dialog/share?resourceUrl=http://mobile.dfyl-luxgen.com&srcUrl=http://mobile.dfyl-luxgen.com&title=纳智捷Luxgen&description=纳智捷Luxgen&pic="  target="_blank">人人网</a></li>
+					</ul>
+				</section>
+			</div>
+		</div>
+		<div class="frame aboutgame">
+			<div class="content">
+				活动说明
+
+			</div>
+		</div>
+		<div class="frame userlist">
+			<div class="content">
+				获奖名单
+
+			</div>
+		</div>
+	
+		<nav class="navbox">
+			<div class="navbar takepic"><!--<a class="takepic_btn" id="takeThePic">拍摄</a>--><input type="button" class="takethepic" value="拍摄"><input type="file" accept="image/*" capture="camera" id="takePictureField" name="photo" ></div>
+			<div class="navbar retakepic"><input type="button" class="retake" value="使用"><input type="button" class="takethepic" value="重新拍摄"><input type="file" accept="image/*" capture="camera" id="takePictureField2" name="photo" ></div>
+			<div class="navbar yourmount"><input type="button" class="youreal" value="您的专属掌纹山脉图"></div>
+			<div class="navbar showreal">
+				<a class="navlink youreal linkshare" href="#/share">即刻分享</a>
+				<a class="navlink youreal linkaward" href="#/award">参与抽奖</a>
+				<a class="navlink youreal replay" href="#/gender">再来一次</a>
+			</div>
+			<div class="navbar awardlink"><a class="navlink awardsubmint" href="#/subminsuccess">确认提交</a></div>
+			<div class="navbar subminsuccess"><a class="navlink subminsuccess" href="#/aboutgame">活动说明</a></div>
+			<div class="navbar aboutgame"><a class="navlink aboutgame">活动说明</a></div>
+			<div class="navbar sheargame"><a class="navlink sheargame" href="#/award">填写中奖信息</a></div>
+			
+		</nav>
+	</div>
+	<div class="mask">
+		<div class="loading"></div>
+	</div>
+	<div class="horizontal">
+			<div class="content">
+				建议竖屏使用获得更好体验!
+			</div>
+		</div>
+
+	<script type="text/javascript" src="js/lib/zepto.min.js"></script>
+	<script type="text/javascript" src="js/lib/underscore-min.js"></script>
+	<script type="text/javascript" src="js/lib/backbone-min.js"></script>
+	<script type="text/javascript" src="js/lib/hammer.min.js"></script>
+	<script type="text/javascript" src="js/lib/kinetic.js"></script>
+	<script type="text/javascript" src="js/lib/binaryajax.js"></script>
+	<script type="text/javascript" src="js/lib/exif.js"></script>
+	<script type="text/javascript" charset="utf-8" src="data/mount.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/common.js"></script>
+</body>
+</html>

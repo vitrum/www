@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>::LUXGEN::</title>
+    <link rel="stylesheet" href="css/style.css" media="all" type="text/css" />
+    <style>
+    body{ max-height: 320px;}
+        #pinchzoom {
+            -webkit-transform: translate3d(0,0,0);
+            overflow: hidden;
+
+        }
+        #pinchzoom img { width: 100%; height: 100%; max-width: 400px; max-height: 400px;}
+        canvas {
+            border: 1px solid black;
+
+        }
+        img {border: 1px solid red;}
+        .imagebox {position: relative; width: 320px; height: 460px;border: 1px solid green; overflow: hidden;}
+        .gridbox { top:0;left: 0; position: absolute; width: 320px; height: 460px; background: #3c3c3c; opacity: 0.3; z-index: 999; background: url(image/mask-hand.png)  center -80px no-repeat;}
+        #takePictureField { display: block; width: auto; height: auto;}
+    </style>
+</head>
+
+<body>
+    <div style="padding:60px">
+      <label>multiple</label>
+      <input type="file"  multiple="multiple" />
+    </div>
+
+    <div style="padding:60px">
+      <label>camera</label>
+      <input type="file" accept="image/*" capture="camera" id="takePictureField3" name="photo" style="opacity: 1;" />
+    </div>
+
+    <div style="padding:60px"><button>change camera to multiple</button></div>
+
+
+  <script type="text/javascript" src="js/lib/zepto.min.js"></script>
+  <script>
+    $('button').on('click',function(){
+      var inputType = $('#takePictureField3').attr('multiple');
+      alert(inputType);
+      if (!inputType){
+        $('#takePictureField3').removeAttr('capture').attr('multiple', 'multiple');
+      }else{
+        $('#takePictureField3').removeAttr('multiple').attr('capture', 'camera');
+      }
+      
+    });
+  </script>
+</body>
+</html>
